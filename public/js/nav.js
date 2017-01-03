@@ -1,9 +1,7 @@
+/* global $ */
 $().ready(function() {
 	var $nav = $('#leftNav'),
-		$content = $('#content'),
-		tips = {
-			certifiedDeveloper: ['general', 'iam', 's3', 'sqs', 'sns', 'swf', 'dynamo', 'vpc', 'eb', 'sdk', 'ebs']
-		};
+		$content = $('#content');
 
 	$nav.find('a').on('click', function() {
 		var $link = $(this),
