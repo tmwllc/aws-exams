@@ -1,54 +1,51 @@
-<h1>EBS, EC2 and ELB Tips</h1>
+<h3>EBS, EC2 and ELB Tips</h3>
 
-To enable encryption at rest (?) on EC2, need to configure encryption when creating the EBS volume.
+<p>To enable encryption at rest on EC2, need to configure encryption when creating the EBS volume.</p>
 
-EC2 instance types:
-T - cheap
-D - density
-R - RAM
-G - graphics
-I - IOPS (input/output operations per second)
-M - main choice for general purpose
-t2 - low cost, general purpose. used for web servers, small dbs.
-m4 - general purpose. used for app servers.
-m3 - general purpose, used for app servers.
-c4 - compute optimized, cpu intensive apps/dbs.
-c3 - compute optimized, cpu intensive apps/dbs.
-r3 - memory optimized, memory intensive apps/dbs
-g2 - graphics/general purpose gpu. video encoding, machine learning, 3d app streaming
-i2 - high speed storage, nosql dbs, data warehousing
-d2 - dense storage. used for file servers, data warehousing, hadoop
-EC2 Instances:
-On Demand (paid by hour, no contract)
-Spot (bid price, if price is at/below bid, instance comes up, if price rises, instance terminated). If you terminate, you pay for partial hour. If AWS terminates, you don't pay for partial hour.
-Reserved (1-3 year contract, cheaper price due to contract)
-Reserved instances can be moved from one availability zone to another.
+<p>EC2 instance levels:</p>
+<ul>
+  <li>T - cheap</li>
+  <li>D - density</li>
+  <li>R - RAM</li>
+  <li>G - graphics</li>
+  <li>I - IOPS (input/output operations per second)</li>
+  <li>M - main choice for general purpose</li>
+</ul>
 
-To find public/private IP of EC2 instance, ssh into box and run: curl http://169.254.169.254/latest/meta-data/.
+<p>Instance types:</p>
+<ul>
+  <li>t2 - low cost, general purpose. used for web servers, small dbs.</li>
+  <li>m4 - general purpose. used for app servers.</li>
+  <li>m3 - general purpose, used for app servers.</li>
+  <li>c4 - compute optimized, cpu intensive apps/dbs.</li>
+  <li>c3 - compute optimized, cpu intensive apps/dbs.</li>
+  <li>r3 - memory optimized, memory intensive apps/dbs</li>
+  <li>g2 - graphics/general purpose gpu. video encoding, machine learning, 3d app streaming</li>
+  <li>i2 - high speed storage, nosql dbs, data warehousing</li>
+  <li>d2 - dense storage. used for file servers, data warehousing, hadoop</li>
+</ul>
 
-EBS Storage:
-General purpose SSD (GP2) (up to 10,000 IOPS)
-Provisioned IOPS SSD (I01) (more than 10,000 IOPS)
-Magnetic - cheap, infrequently accessed storage
-Cannot mount an EBS volume to multiple EC2 instances. Think of volumes as a hard drive, can't connect it to multiple computers. If you need shared storage, use EFS (block level) or S3 (flat files).
+<p>EC2 Instances:</p>
+<ul>
+  <li>On Demand (paid by hour, no contract)</li>
+  <li>Spot (bid price, if price is at/below bid, instance comes up, if price rises, instance terminated). If you terminate, you pay for partial hour. If AWS terminates, you don't pay for partial hour.</li>
+  <li>Reserved (1-3 year contract, cheaper price due to contract)</li>
+  <li>Reserved instances can be moved from one availability zone to another.</li>
+</ul>
 
-EBS backed instances can be stopped and restarted, unlike instance-store backed instances.
+<p>To find public/private IP of EC2 instance, ssh into box and run: curl http://169.254.169.254/latest/meta-data/.</p>
 
-ELBs are charged by the hour and per GB.
-Free Services: CloudFormation, Elastic Beanstalk, Autoscaling, Opsworks (but resources they provision are not free).
+<h3>EBS Storage:</h3>
+<ul>
+  <li>General purpose SSD (GP2) (up to 10,000 IOPS)</li>
+  <li>Provisioned IOPS SSD (I01) (more than 10,000 IOPS)</li>
+  <li>Magnetic - cheap, infrequently accessed storage</li>
+</ul>
+<p>Cannot mount an EBS volume to multiple EC2 instances. Think of volumes as a hard drive, can't connect it to multiple computers. If you need shared storage, use EFS (block level) or S3 (flat files).</p>
 
-ELB supported protocols: http, https, tcp, ssl.
-ELP supported ports: EC2-VPC: 1-65535
+<p>EBS backed instances can be stopped and restarted, unlike instance-store backed instances.</p>
 
-SDKs: https://aws.amazon.com/tools/
-Android, iOS, JavaScript
-Java
-.Net
-NodeJs
-PHP
-Python
-Ruby
-Go
-C++ (in developer preview?)
-SDK Default region: Us-east-1
-Some sdks have default regions (java) others don't (nodejs)
+<p>ELBs are charged by the hour and per GB.</p>
+
+<p>ELB supported protocols: http, https, tcp, ssl.</p>
+<p>ELB supported ports: EC2-VPC: 1-65535</p>

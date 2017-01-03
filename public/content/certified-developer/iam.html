@@ -1,38 +1,35 @@
 <h1>IAM Tips</h1>
 
-Allows you to manage users and their level of access to the AWS console.
+<p>Allows you to manage users and their level of access to the AWS console. IAM is global, you do not select a region for it. Should always enable MFA for root account, and then never login to root account unless you have to.</p>
 
-IAM is global, you do not select a region for it.
+<p>Root account user is created when AWS account is created and has complete admin access. All new users created thereafter have NO permissions and must be given them.</p>
 
-Should always enable MFA for root account, and then never login to root account unless you have to.
+<p>New users are assigned an access key id and secret access keys when created. These are used for interacting with AWS via command line tools, but cannot be used to sign in to AWS console. Only get secret access key at user creation, can not get them later. If they are lost, you can deactivate old key and create new one.</p>
 
-Root account user is created when AWS account is created and has complete admin access. All new users created thereafter have NO permissions and must be given them.
+<h3>IAM Consists of:</h3>
+<ul>
+  <li>Users</li>
+  <li>Groups (way to group users and apply policies to them collectively)</li>
+  <li>Roles</li>
+  <li>Policy Documents (JSON format file defining what permissions are allowed)</li>
+</ul>
 
-New users are assigned an access key id and secret access keys when created. These are used for interacting with AWS via command line tools, but cannot be used to sign in to AWS console. Only get secret access key at user creation, can not get them later. If they are lost, you can deactivate old key and create new one.
+<p>When authenticating with Active Directory, you use SAML. Authenticate against AD first, then you receive a SAML assertion from the AD server. Browser then posts the SAML assertion to the AWS SAML end point and the AssumeRoleWithSAML request is used to request temporary security credentials, with which you can log in to AWS.</p>
 
-IAM Consists of:
-Users
-Groups (way to group users and apply policies to them collectively)
-Roles
-Policy Documents (JSON format file defining what permissions are allowed)
+<p>SAML sign-in endpoint is https://signin.aws.amazon.com/saml</p>
 
-When authenticating with Active Directory, you use SAML. Authenticate against AD first, then you receive a SAML assertion from the AD server. Browser then posts the SAML assertion to the AWS SAML end point and the AssumeRoleWithSAML request is used to request temporary security credentials, with which you can log in to AWS.
-
-SAML sign-in endpoint is https://signin.aws.amazon.com/saml
-
-Web Identity Federation:
-Authenticate with third party provider (Facebook, Google, Amazon) and receive an access token which expires in 5016 seconds.
-Using access token, go to AWS and obtain temporary security credentials by making an AssumeRoleWithWebIdentity request.
-Log in using temporary security credentials.
+<h3>Web Identity Federation:</h3>
+<p>Authenticate with third party provider (Facebook, Google, Amazon) and receive an access token which expires in 5016 seconds. Using access token, go to AWS and obtain temporary security credentials by making an AssumeRoleWithWebIdentity request. Log in using temporary security credentials.</p>
 
 <h3>Web Identity Providers</h3>
-Authenticate with identity provider (like facebook, google, etc)
-Provider will send back web identity token
-Make AssumeRoleWithWebIdentityRequest to AWS Security Token Service. Request consists of the token, app id of provider, and Amazon Resource Name (ARN) of the role.
-Amazon issues temporary security credentials. Credentials are valid for between 15 minutes and 1 hour, with 1 hour being the default.
-Temporary credentials:
-AccessKeyId
-SecretAccessKey
-Expiration (time limit)
-AssumeRoleID
-SubjectFromWebIdentity Token (the unique ID that appears in an IAM policy variable for this identity provider)
+<p>Authenticate with identity provider (like facebook, google, etc). Provider will send back web identity token. Make AssumeRoleWithWebIdentityRequest to AWS Security Token Service. Request consists of the token, app id of provider, and Amazon Resource Name (ARN) of the role. Amazon issues temporary security credentials. Credentials are valid for between 15 minutes and 1 hour, with 1 hour being the default.</p>
+
+<h4>Temporary credentials:</h4>
+<ul>
+  <li>AccessKeyId</li>
+  <li>SecretAccessKey</li>
+  <li>Expiration (time limit)</li>
+  <li>AssumeRoleID</li>
+</ul>
+
+<p>SubjectFromWebIdentity Token (the unique ID that appears in an IAM policy variable for this identity provider).</p>
