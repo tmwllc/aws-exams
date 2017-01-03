@@ -1,3 +1,11 @@
+html {
+	font-family: sans-serif;
+}
+
 #content section {
 	display: none;
+}
+
+#content section {
+	max-width: 750px;
 }
