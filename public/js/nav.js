@@ -1,18 +1,30 @@
 /* global $ */
-$().ready(function() {
-	var $nav = $('#leftNav'),
-		$content = $('#content');
 
-	$nav.find('a').on('click', function() {
-		var $link = $(this),
-			folder = $('body').attr('data-certification'),
-			tip = $link.attr('data-tip-name'),
-			contentPath = 'content/' + folder + '/' + tip + '.html',
-			$thisContent = $('#tips-' + tip);
-		$content.find('section').hide();
-		$thisContent.empty()
-			.load(contentPath)
-			.show();
-		return false;
-	});
+function showContent(id) {
+  var folder = $('body').attr('data-certification'),
+    contentPath = 'content/' + folder + '/' + id + '.html',
+    $thisContent = $('#tips-' + id),
+    $link = $('#tip-link-' + id);
+
+  $('#leftNav').removeClass('active');
+  $link.addClass('active');
+  $thisContent.empty()
+    .load(contentPath)
+    .show();
+}
+
+$().ready(function() {
+  var $nav = $('#leftNav'),
+    $content = $('#content'),
+    hash = window.location.hash.replace('#', '');
+
+  // if we have something in the location hash, attempt to make it visible on page load
+  if (hash) {
+    showContent(hash.replace('tips-', ''));
+  }
+
+  $nav.find('a').on('click', function() {
+    $content.find('section').hide();
+    showContent($(this).attr('data-tip-name'));
+  });
 });

@@ -1,34 +1,34 @@
 {
   "requireCurlyBraces": [
-	"if",
-	"else",
-	"for",
-	"while",
-	"do",
-	"try",
-	"catch"
+    "if",
+    "else",
+    "for",
+    "while",
+    "do",
+    "try",
+    "catch"
   ],
   "requireSpaceAfterKeywords": [
-	"if",
-	"else",
-	"for",
-	"while",
-	"do",
-	"switch",
-	"case",
-	"return",
-	"try",
-	"catch",
-	"typeof"
+    "if",
+    "else",
+    "for",
+    "while",
+    "do",
+    "switch",
+    "case",
+    "return",
+    "try",
+    "catch",
+    "typeof"
   ],
   "requireSpaceBeforeBlockStatements": true,
   "requireParenthesesAroundIIFE": true,
   "requireSpacesInConditionalExpression": true,
   "disallowSpacesInNamedFunctionExpression": {
-	"beforeOpeningRoundBrace": true
+    "beforeOpeningRoundBrace": true
   },
   "disallowSpacesInFunctionDeclaration": {
-	"beforeOpeningRoundBrace": true
+    "beforeOpeningRoundBrace": true
   },
   "requireSpaceBetweenArguments": true,
   "requireMultipleVarDecl": "onevar",
@@ -42,24 +42,24 @@
   "disallowSpaceAfterPrefixUnaryOperators": true,
   "disallowSpaceBeforePostfixUnaryOperators": true,
   "disallowSpaceBeforeBinaryOperators": [
-	","
+    ","
   ],
   "requireSpacesInForStatement": true,
   "requireSpacesInAnonymousFunctionExpression": {
-	"beforeOpeningCurlyBrace": true
+    "beforeOpeningCurlyBrace": true
   },
   "requireSpaceBeforeBinaryOperators": true,
   "requireSpaceAfterBinaryOperators": true,
   "disallowKeywords": [
-	"with",
-	"continue"
+    "with",
+    "continue"
   ],
-  "validateIndentation": "\t",
+  "validateIndentation": 2,
   "disallowMixedSpacesAndTabs": true,
   "disallowTrailingWhitespace": true,
   "disallowTrailingComma": true,
   "disallowKeywordsOnNewLine": [
-	"else"
+    "else"
   ],
   "requireLineFeedAtFileEnd": true,
   "requireCapitalizedConstructors": true,
