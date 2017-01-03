@@ -24,3 +24,15 @@ Web Identity Federation:
 Authenticate with third party provider (Facebook, Google, Amazon) and receive an access token which expires in 5016 seconds.
 Using access token, go to AWS and obtain temporary security credentials by making an AssumeRoleWithWebIdentity request.
 Log in using temporary security credentials.
+
+<h3>Web Identity Providers</h3>
+Authenticate with identity provider (like facebook, google, etc)
+Provider will send back web identity token
+Make AssumeRoleWithWebIdentityRequest to AWS Security Token Service. Request consists of the token, app id of provider, and Amazon Resource Name (ARN) of the role.
+Amazon issues temporary security credentials. Credentials are valid for between 15 minutes and 1 hour, with 1 hour being the default.
+Temporary credentials:
+AccessKeyId
+SecretAccessKey
+Expiration (time limit)
+AssumeRoleID
+SubjectFromWebIdentity Token (the unique ID that appears in an IAM policy variable for this identity provider)

@@ -1,89 +1,94 @@
 <h1>DynamoDB Tips</h1>
 
-Uses optimistic concurrency model, and conditional writes for consistency.
+<p>Uses optimistic concurrency model, and conditional writes for consistency.</p>
 
-Stored on SSD
-Spread across 3 geographically distinct data centers (not availability zones)
+<p>Stored on SSD</p>
+<p>Spread across 3 geographically distinct data centers (not availability zones)</p>
 
-Read models:
-Eventual consistency - Consistency across all copies of data is usually reached within 1 second. Best read performance.
-Strongly consistent reads - Returns a result that reflects all writes that received a successful response prior to the read. Not as good read performance.
+<h3>Read models:</h3>
+<ul>
+  <li>Eventual consistency - Consistency across all copies of data is usually reached within 1 second. Best read performance.</li>
+  <li>Strongly consistent reads - Returns a result that reflects all writes that received a successful response prior to the read. Not as good read performance.</li>
+</ul>
 
-Tables
-Items (like a row in SQL)
-Attributes (like a column in SQL)
+<p>Tables</p>
+<p>Items (like a row in SQL)</p>
+<p>Attributes (like a column in SQL)</p>
 
-Can nest attributes, up to 35 levels deep.
+<p>Can nest attributes, up to 35 levels deep.
 
-Pricing:
-Write throughput $0.0065/hour for every 10 units
-Read throughput $0.0065/hour for every 50 units
-First 25 GB free. $0.25/GB per month beyond 25GB.
+<h3>Pricing:</h3>
+<ul>
+  <li>Write throughput $0.0065/hour for every 10 units</li>
+  <li>Read throughput $0.0065/hour for every 50 units</li>
+  <li>First 25 GB free. $0.25/GB per month beyond 25GB.</li>
+</ul>
 
-Primary Keys:
-Single Attribute (like a unique ID)
-Partition Key (aka Hash Key) composed of one attribute.
-No two items can have the same partition key.
-Composite (think unique id and date range)
-Partition Key and Sort Key (hash and range) composed of two attributes
-Multiple items can have same partition key, but must have different sort keys.
-Sort Key and Range Key are the same thing.
-Partition Key and Hash Key are the same thing.
+<h3>Primary Keys:</h3>
+<h4>Single Attribute (like a unique ID)</h4>
+<ul>
+  <li>Partition Key (aka Hash Key) composed of one attribute.</li>
+  <li>No two items can have the same partition key.</li>
+</ul>
 
-Dynamo uses the partition key's value as input to an internal hash function. Output from hash function determines the partition(this is simply the physical location in which the data is stored). All items with the same partition key are stored together, in sorted order by sort key value.
+<h3>Composite (think unique id and date range)</h3>
+<ul>
+  <li>Partition Key and Sort Key (hash and range) composed of two attributes</li>
+  <li>Multiple items can have same partition key, but must have different sort keys.</li>
+</ul>
+<p>Sort Key and Range Key are the same thing.</p>
+<p>Partition Key and Hash Key are the same thing.</p>
 
-Indexes:
-Local Secondary Index - same partition key as main primary key, but different sort key. Can only be created at time of table creation. Cannot be removed/modified afterward.
-Global Secondary Index - Different partition key (from main primary key) and different sort key. Can be created at table creation, or added later.
-Can have up to 5 of each type of index per table.
+<p>Dynamo uses the partition key's value as input to an internal hash function. Output from hash function determines the partition(this is simply the physical location in which the data is stored). All items with the same partition key are stored together, in sorted order by sort key value.</p>
 
-Streams:
-Used to capture any modification to tables. Streams are stored for 24 hours. 24 hours is the max. Can configure a trigger based on this stream to fire a lambda.
-New item: stream captures image of entire item including all attributes
-Updated item: stream captures before/after image of any modified attributes
-Deleted item: stream captures image of entire item before deletion.
-Query vs Scan
-Query:
-Finds items in table using only primary key. Must provide partition attribute name and a distinct value to search.
-Can optionally provide a sort key name/value and use a comparison operator to refine results. Example, find all posts by a forum user between two dates.
-Returns all attributes for items with the specified primary key(s). Can use ProjectionExpression parameter to return only some attributes.
-Results are always sorted by sort key (if you provided one). If data type of sort key is number, it returns in ascending order. Otherwise if it's text, it sorts in ASCII character code order. By default it's ascending, but can be reversed using ScanIndexForward parameter set to false. ScanIndexForward name is counterintuitive, because it's only used on Query, not on Scan.
-By default queries are eventually consistent, but can be changed to strongly consistent.
-Scan:
-Examines every item in table. Basically just returns the entire table, with all attributes.
-Can use ProjectionExpression to limit return attributes to desired fields.
-Query is far more efficient because Scan returns the entire table, then filters them to provide desired results. On a large table, a single Scan operation can use up the entire throughput of the table.
+<h3>Indexes:</h3>
+<ul>
+  <li>Local Secondary Index - same partition key as main primary key, but different sort key. Can only be created at time of table creation. Cannot be removed/modified afterward.</li>
+  <li>Global Secondary Index - Different partition key (from main primary key) and different sort key. Can be created at table creation, or added later.</li>
+  <li>Can have up to 5 of each type of index per table.</li>
+</ul>
 
-Calculating provisioned throughput:
-(Size of read rounded to nearest 4kb chunk / 4kb) x # of items = read throughput
-Divide by 2 if eventually consistent.
-Unit of read provisioned throughput
-All reads are rounded up to increments of 4kb
-Eventually consistent reads (default) consist of 2 reads per second
-Strongly consistent reads consist of 1 read per second
-Example: App requires you to read 10 items per second with eventual consistency, each one is 5KB. Round 5KB up to nearest 4KB (8) and divide by 4 (2), multiply by number of items (10) to get 20. Divide by 2 since we're using eventual consistency to get final number (10).
-Unit of write provisioned throughput
-All writes are 1kb in size
-All writes consist of 1 write per second
-Example: App requires you to write 12 items of 100KB per item per second. Multiply 12 x 100 to get 1200. Simple.
-If you exceed throughput (for table or global secondary indexes), you'll get 400 error with status of ProvisionedThroughputExceededException.
+<h3>Streams:</h3>
+<p>Used to capture any modification to tables. Streams are stored for 24 hours. 24 hours is the max. Can configure a trigger based on this stream to fire a lambda.</p>
+<ul>
+  <li>New item: stream captures image of entire item including all attributes</li>
+  <li>Updated item: stream captures before/after image of any modified attributes</li>
+  <li>Deleted item: stream captures image of entire item before deletion.</li>
+</ul>
+<h3>Query vs Scan</h3>
+<p>Query:</p>
+<ul>
+  <li>Finds items in table using only primary key. Must provide partition attribute name and a distinct value to search.</li>
+  <li>Can optionally provide a sort key name/value and use a comparison operator to refine results. Example, find all posts by a forum user between two dates.</li>
+  <li>Returns all attributes for items with the specified primary key(s). Can use ProjectionExpression parameter to return only some attributes.</li>
+  <li>Results are always sorted by sort key (if you provided one). If data type of sort key is number, it returns in ascending order. Otherwise if it's text, it sorts in ASCII character code order. By default it's ascending, but can be reversed using ScanIndexForward parameter set to false. ScanIndexForward name is counterintuitive, because it's only used on Query, not on Scan.</li>
+  <li>By default queries are eventually consistent, but can be changed to strongly consistent.</li>
+</ul>
+<p>Scan:</p>
+<ul>
+  <li>Examines every item in table. Basically just returns the entire table, with all attributes.</li>
+  <li>Can use ProjectionExpression to limit return attributes to desired fields.</li>
+</ul>
+<p>Query is far more efficient because Scan returns the entire table, then filters them to provide desired results. On a large table, a single Scan operation can use up the entire throughput of the table.</p>
 
-Web Identity Providers
-Authenticate with identity provider (like facebook, google, etc)
-Provider will send back web identity token
-Make AssumeRoleWithWebIdentityRequest to AWS Security Token Service. Request consists of the token, app id of provider, and Amazon Resource Name (ARN) of the role.
-Amazon issues temporary security credentials. Credentials are valid for between 15 minutes and 1 hour, with 1 hour being the default.
-Temporary credentials:
-AccessKeyId
-SecretAccessKey
-Expiration (time limit)
-AssumeRoleID
-SubjectFromWebIdentity Token (the unique ID that appears in an IAM policy variable for this identity provider)
-Conditional Writes:
-They are idempotent, since they will only update when conditions are met.
+<h3>Calculating provisioned throughput:</h3>
+<ul>
+  <li>(Size of read rounded to nearest 4kb chunk / 4kb) x # of items = read throughput</li>
+  <li>Divide by 2 if eventually consistent.</li>
+</ul>
+<h4>Read Throughput</h4>
+<p>Eventually consistent reads (default) consist of 2 reads per second. Strongly consistent reads consist of 1 read per second</p>
+<p>Example: App requires you to read 10 items per second with eventual consistency, each one is 5KB. Round 5KB up to nearest 4KB (8) and divide by 4 (2), multiply by number of items (10) to get 20. Divide by 2 since we're using eventual consistency to get final number (10).</p>
+<h4>Write Throughput</h4>
+<p>All writes are 1kb in size. All writes consist of 1 write per second.</p>
+<p>Example: App requires you to write 12 items of 100KB per item per second. Multiply 12 x 100 to get 1200. Simple.</p>
+<p>If you exceed throughput (for table or global secondary indexes), you'll get 400 error with status of ProvisionedThroughputExceededException.</p>
 
-Atomic Counters
-UpdateItem operation to increment or decrement value of an existing attribute without interfering with other write requests. All write requests are applied in the order in which they were received. This is opposite of idempotent. This is fine for a website counter, but not suitable for banking or anything where the number should is critical.
+<h3>Conditional Writes:</h3>
+<p>They are idempotent, since they will only update when conditions are met.</p>
 
-Batch Operations
-BatchGetItem request can retrieve up to 1MB of data or 100 items. Can retrieve items from multiple tables.
+<h3>Atomic Counters</h3>
+<p>UpdateItem operation to increment or decrement value of an existing attribute without interfering with other write requests. All write requests are applied in the order in which they were received. This is opposite of idempotent. This is fine for a website counter, but not suitable for banking or anything where the number should is critical.</p>
+
+<h3>Batch Operations</h3>
+<p>BatchGetItem request can retrieve up to 1MB of data or 100 items. Can retrieve items from multiple tables.</p>
