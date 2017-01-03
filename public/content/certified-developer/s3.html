@@ -1,0 +1,68 @@
+<h1>S3 Tips</h1>
+
+Data is spread across multiple devices and multiple facilities, which ensures data reliability.
+
+Typical link to bucket: http://s3-us-east-1.amazonaws.com/bucketName
+
+0 bytes to 5TB size limit.
+Unlimited storage.
+Files stored in buckets (like a folder/directory)
+Bucket names are universal, so must be unique across all global users.
+
+Read after write consistency for PUTS of new objects
+Eventual consistency for overwrite PUTS and DELETES
+New objects are immediately readable. But, if you update/delete an object, it can take time to propagate.
+
+Max file size that can be uploaded with PUT operation is 5GB. For files larger than 5GB use multi-part upload API.
+
+S3 is a key/value store and is object based:
+key (name of object)
+value (data, sequence of bytes)
+version id (for versioning)
+metadata (data about the data being stored)
+subresources (not relevant to course)
+access control lists
+99.99% availability
+99.999999999% durability (11 x 9s)
+Can withstand the loss of 2 facilities concurrently and still have access to data.
+
+Features:
+tiered storage available
+lifecycle management
+versioning (allows reverting to previous version, or restoring in case of delete)
+encryption (AES 256)
+secure data using access control list and/or bucket policies
+
+S3 - normal 99.99% available
+S3 - IA (infrequently accessed) data is accessed less frequently, but requires rapid access (unlike Glacier). Costs less than standard S3, but charges a retrieval fee.
+RRS - Reduced Redundancy Storage - 99.99% durability/availability. Data that can be recreated, like thumbnails. Cheaper than regular S3.
+Glacier - 3-5 hours to restore an object. Used for archival. Cheapest of all storage types.
+
+Charged for:
+Storage (more storage is cheaper)
+Requests
+Data transfer pricing
+S3 Bucket link vs S3 Website link:
+http://tw-cloudguru-website.s3-website-us-west-2.amazonaws.com (website, always http)
+http://s3-us-west-2.amazonaws.com/bucket-name
+
+Enable CORS in S3:
+Add CORS.xml file to hosting bucket, configure the AllowedOrigin node to point to desired domain which should be able to access files in this bucket.
+
+Versioning
+Versioning can only be turned on, never turned off. It can be suspended, but not turned off.
+To restore a deleted file when versioning is on, show versions, then delete the "delete marker".
+Versioning allows MFA delete capability. So users must authenticate with separate provider in order to delete.
+
+Lifecycle
+Lifecycle can be used with/without versioning. Can be applied to current and previous versions.
+Following actions can be done:
+Transition to standard infrequent access (128kb and 30 day minimum wait)
+Archive to glacier (30 days after archive to Infrequent)
+Permanently delete (if versioning is on, this just puts a delete marker on it, doesn't actually delete it)
+Cannot move objects to Reduced Redundancy Storage via lifecycle.
+
+Transfer Acceleration
+Uses CloudFront edge network to accelerate S3 uploads. Uses distinct url to upload to an edge location (ideally one closer to you). This will incur an additional fee (per upload).
+
+Can use pre-signed URL to share S3 bucket with someone. If a website is using your S3 images without permission, a possible solution is to remove public access and use signed URLs with expiry dates.

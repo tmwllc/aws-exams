@@ -1,0 +1,26 @@
+<h1>IAM Tips</h1>
+
+Allows you to manage users and their level of access to the AWS console.
+
+IAM is global, you do not select a region for it.
+
+Should always enable MFA for root account, and then never login to root account unless you have to.
+
+Root account user is created when AWS account is created and has complete admin access. All new users created thereafter have NO permissions and must be given them.
+
+New users are assigned an access key id and secret access keys when created. These are used for interacting with AWS via command line tools, but cannot be used to sign in to AWS console. Only get secret access key at user creation, can not get them later. If they are lost, you can deactivate old key and create new one.
+
+IAM Consists of:
+Users
+Groups (way to group users and apply policies to them collectively)
+Roles
+Policy Documents (JSON format file defining what permissions are allowed)
+
+When authenticating with Active Directory, you use SAML. Authenticate against AD first, then you receive a SAML assertion from the AD server. Browser then posts the SAML assertion to the AWS SAML end point and the AssumeRoleWithSAML request is used to request temporary security credentials, with which you can log in to AWS.
+
+SAML sign-in endpoint is https://signin.aws.amazon.com/saml
+
+Web Identity Federation:
+Authenticate with third party provider (Facebook, Google, Amazon) and receive an access token which expires in 5016 seconds.
+Using access token, go to AWS and obtain temporary security credentials by making an AssumeRoleWithWebIdentity request.
+Log in using temporary security credentials.

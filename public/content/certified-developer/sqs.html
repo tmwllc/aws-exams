@@ -1,0 +1,29 @@
+<h1>SQS Tips</h1>
+
+SQS was the first service on AWS.
+
+Single request can be 1-10 messages, with a maximum total payload of 256KB.
+
+Messages can contain up to 256KB of text in any format.
+
+Billed at 64KB chunks. 4 chunks per max message size (256KB). So, one message of 256KB will be billed as four requests.
+
+Does not guarantee first in, first out. Messages are not necessarily delivered in the same order in which they are received. If you require order, you can place sequencing info in messages so that they can be reordered when the queue returns them.
+
+Messages can be delivered multiple times and in any order. If some messages are higher priority than others, then create 2 queues. One for high priority, one for lower priority.
+
+Visibility Timeout:
+30 seconds by default. Max timeout is 12 hours. If timeout is too short, you can extend it by using the ChangeMessageVisibilty action to specify a new value.
+
+Provides "at least once" delivery of all messages in queue. Most of the time, it will be delivered exactly once. Systems should be designed so that processing a message more than once does not create any errors or inconsistencies.
+
+SQS asynchronously pulls messages from the queue.
+
+EC2 instances pull from SQS and perform actions, then on success deletes from SQS. If EC2 instance fails to perform action, it will not delete from SQS queue. This will lead to it automatically being retried when EC2 pulls messages again.
+
+Long Polling:
+Waits up to 20 seconds before returning a result. If nothing is in queue, it won't return until timeout (20 seconds max). This prevents EC2 instance from repeatedly polling for messages every couple of seconds. If a message arrives before timeout, it will return immediately. This will save money. To enable long polling, set ReceiveMessageWaitTimeSeconds to a number > 0. Questions may ask what will help alleviate CPU burn cycles. The answer is to set the ReceiveMessageWaitTimeSeconds to a larger number.
+
+Can be coupled with SNS. Create an SNS topic, then create and subscribe multiple SQS queues to the topic. When a message is sent to the SNS topic, it will be fanned out to all the SQS queues, which may perform different actions.
+
+Max retention period is 14 days.

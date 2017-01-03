@@ -1,0 +1,43 @@
+<h1>SNS Tips</h1>
+
+Delivers messages to clients using push, so clients do not need to poll for them. This is the opposite of SQS, which requires clients to poll for messages over and over.
+
+Can push notifications directly to mobile devices, but can also deliver them by SMS text message or email, to SQS queues or to any HTTP endpoint.
+
+Messages are stored redundantly across multiple availability zones.
+
+Topics:
+Allows you to group multiple recipients using topics. A topic is an access point for allowing recipients to dynamically subscripe for identical copies of the same notification. One topic can support deliveries to multiple endpoint types. For example, group together iOS, Android and SMS recipients. Publishing to a topic will deliver appropriately formatted copies to each subscriber.
+
+Pricing:
+Pay as you go model, no upfront costs.
+$.50 per 1 million SNS requests.
+$.06 per 100,000 notification deliveries over HTTP
+$.75 per 100 notification deliveries over SMS
+$2.00 per 100,000 notification deliveries over email
+Deliveries message using JSON format.
+
+Protocols:
+HTTP
+HTTPS
+Email
+Email-JSON
+SQS
+Application
+Lambda
+Messages can be customized for each protocol
+
+Subscriptions will not start sending messages until subscriptions are confirmed. When setting up a topic, if the subscription is not confirmed, it will expire in 3 days.
+
+Messages will contain several key value pairs:
+Type: Notification
+MessagesId: guid
+TopicArn
+Subject
+Message
+Timestamp
+SignatureVersion
+Signature: encrypted value
+SigningCertURL
+UnsubscribeURL
+MessageAttributes: [{}]

@@ -1,0 +1,22 @@
+<h1>SWF Tips</h1>
+
+Worker:
+Interact with SWF to get tasks, process received tasks and returns the results.
+
+Decider:
+Controls the coordination of tasks, i.e., their ordering, concurrency and scheduling according to the application logic.
+
+SWF brokers the workflow between workers and deciders. It assures that a task is assigned only once and is never duplicated. Because SWF maintains application's state durably, workers and deciders don't have to keep track of execution state.
+
+With SQS, tasks can be assigned multiple times and can be duplicated and may be performed twice.
+
+Domains:
+Isolate a set of types, executions and task lists from orders with the same accoun. Can register a domain by using AWS console or by using the RegisterDomain action in SWF API. Parameters are specified in JSON.
+
+Maximum workflow is 1 year and value is always measured in seconds.
+
+SWF vs SQS:
+SWF presents a task oriented API, whereas SQS offers a message oriented API.
+SWF tasks are assigned only once and never duplicated. SQS requires handling of duplicagted messages and may also need to ensure a message is processed only once.
+SWF keeps track of all tasks and events in application. With SQS you need to implement your own app level tracking, especially if app uses multiple queues.
+Test may ask when its appropriate to use SWF or SQS. If it involves human interaction, use SWF.If it mentions domains, workers or deciders, it's talking about SWF.
