@@ -1,26 +1,25 @@
 <h1>General Tips</h1>
 
-Cannot have multiple SSL certs on a single ELB.
+<p>Cannot have multiple SSL certs on a single ELB.</p>
 
-There are 12 AWS regions.
+<p>There are 12 AWS regions.</p>
 
-Amazon Elastic MapReduce (Amazon EMR) is a web service that enables businesses, researchers, data analysts, and developers to easily and cost-effectively process vast amounts of data.
+<p>Amazon Elastic MapReduce (Amazon EMR) is a web service that enables businesses, researchers, data analysts, and developers to easily and cost-effectively process vast amounts of data.</p>
 
 <p>Free Services: CloudFormation, Elastic Beanstalk, Autoscaling, Opsworks (but resources they provision are not free).</p>
 
-Sample question:
+<p><a href="https://d0.awsstatic.com/training-and-certification/docs/AWS_certified_developer_associate_examsample.pdf">Sample question:</a></p>
 
-https://d0.awsstatic.com/training-and-certification/docs/AWS_certified_developer_associate_examsample.pdf
-AWS Certified Developer Associate Level Which of the ...
-d0.awsstatic.com
-AWS Certified Developer – Associate Level Sample Exam Questions 1 Which of the following statements about SQS is true? A. Messages will be delivered exactly once ...
+<h4>A corporate web application is deployed within an Amazon VPC, and is connected to the corporate data center via IPSec VPN. The application must authenticate against the on-premise LDAP server. Once authenticated, logged - in users can only access an S3  keyspace specific to the user.</h4>
 
-A corporate web application is deployed within an Amazon VPC, and is connected to the corporate data center via IPSec VPN. The application must authenticate against the on-premise LDAP server. Once authenticated, logged - in users can only access an S3  keyspace specific to the user.
-
-Possible solutions:
-The application authenticates against LDAP, and retrieves the name of an IAM role associated with the user. The application then calls the IAM Security Token Service to assume that IAM Role. The application can use the temporary credentials to access the appropriate S3 bucket.
-Develop an identity broker which authenticates against LDAP, and then calls IAM Security Token Service to get IAM federated user credentials. The application calls the identity broker to get IAM federated user credentials with access to the appropriate S3 bucket.
-Invalid solutions:
-The application authenticates against LDAP. The application then calls the IAM Security Service to login to IAM using the LDAP credentials. The application can use the IAM temporary credentials to access the appropriate S3 bucket. (temporary credentials come from STS, not IAM)
-The application authenticates against IAM Security Token Service using the LDAP credentials. The application uses those temporary AWS security credentials to access the appropriate S3 bucket. (Does not authenticate against LDAP)
-Develop an identity broker which authenticates against IAM Security Token Service to assume an IAM Role to get temporary AWS security credentials. The application calls the identity broker to get AWS temporary security credentials with access to the appropriate S3 bucket. (Does not authenticate against LDAP)
+<p>Possible solutions:</p>
+<ul>
+  <li>The application authenticates against LDAP, and retrieves the name of an IAM role associated with the user. The application then calls the IAM Security Token Service to assume that IAM Role. The application can use the temporary credentials to access the appropriate S3 bucket.</li>
+  <li>Develop an identity broker which authenticates against LDAP, and then calls IAM Security Token Service to get IAM federated user credentials. The application calls the identity broker to get IAM federated user credentials with access to the appropriate S3 bucket.</li>
+</ul>
+<p>Invalid solutions:</p>
+<ul>
+  <li>The application authenticates against LDAP. The application then calls the IAM Security Service to login to IAM using the LDAP credentials. The application can use the IAM temporary credentials to access the appropriate S3 bucket. (temporary credentials come from STS, not IAM)</li>
+  <li>The application authenticates against IAM Security Token Service using the LDAP credentials. The application uses those temporary AWS security credentials to access the appropriate S3 bucket. (Does not authenticate against LDAP)</li>
+  <li>Develop an identity broker which authenticates against IAM Security Token Service to assume an IAM Role to get temporary AWS security credentials. The application calls the identity broker to get AWS temporary security credentials with access to the appropriate S3 bucket. (Does not authenticate against LDAP)</li>
+</ul>
