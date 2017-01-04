@@ -1,5 +1,6 @@
-/* global $ */
+'use strict';
 
+/* global $ */
 function showContent(id) {
   var folder = $('body').attr('data-certification'),
     contentPath = 'content/' + folder + '/' + id + '.html',
