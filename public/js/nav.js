@@ -1,5 +1,7 @@
 'use strict';
 
+var ACTIVE_CLASS = 'active';
+
 /* global $ */
 function showContent(id) {
   var folder = $('body').attr('data-certification'),
@@ -7,11 +9,25 @@ function showContent(id) {
     $thisContent = $('#tips-' + id),
     $link = $('#tip-link-' + id);
 
-  $('#leftNav').removeClass('active');
-  $link.addClass('active');
+  $('#leftNav').removeClass(ACTIVE_CLASS);
+  $link.addClass(ACTIVE_CLASS);
   $thisContent.empty()
     .load(contentPath)
     .show();
+}
+
+function loadTopNav() {
+  var $header = $('#topHeader'),
+    certification = $('body').attr('data-certification'),
+    $activeNavLink;
+  $header.load('content/nav/topNav.html', function() {
+    if (certification) {
+      $activeNavLink = $header.find($('#tn-' + certification));
+      if ($activeNavLink.length) {
+        $activeNavLink.addClass(ACTIVE_CLASS);
+      }
+    }
+  });
 }
 
 $().ready(function() {
@@ -23,6 +39,8 @@ $().ready(function() {
   if (hash) {
     showContent(hash.replace('tips-', ''));
   }
+
+  loadTopNav();
 
   $nav.find('a').on('click', function() {
     $content.find('section').hide();

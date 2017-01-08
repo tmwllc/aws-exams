@@ -1,0 +1,32 @@
+<h1>S3 Tips</h1>
+<h3>Security</h3>
+<ul>
+  <li>By default all newly created buckets are private.</li>
+  <li>Access Control
+    <ul>
+      <li>Bucket policies - apply to entire bucket</li>
+      <li>Access Control Lists - can drill down to individual items within a bucket</li>
+    </ul>
+  </li>
+  <li>Can be configured to create access logs which log all requests to the bucket. Can be logged to another bucket.</li>
+</ul>
+<h3>Encryption</h3>
+<ul>
+  <li>In transit: SSL/TLS</li>
+  <li>At Rest:
+    <ul>
+      <li>Server Side Encryption
+        <ul>
+          <li>S3 Managed Keys - SSE-S3. Each object encrypted with unique key. Additionally, the key itself is encrypted with a amaster key, which is regularly reotated.</li>
+          <li>AWS Key Mangement Service, Managed Keys - SSE-KMS. Separate permissions for use of an envelope key. Envelope key is a key that protects the data's encryption key. Also provides audit trail of when keys were used and who used them. Can manage and encrypt keys yourself, or use default.</li>
+          <li>Server Side Encryption with Customer Provided Keys - SSE-C. Customer manages the encryption keys, Amazon manages the encryption/decryption.</li>
+        </ul>
+      </li>
+      <li>Client Side Encryption
+        <ul>
+          <li>You encrypt data on client side and then upload it to S3.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>

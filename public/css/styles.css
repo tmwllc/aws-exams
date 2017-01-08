@@ -2,6 +2,14 @@ html {
 	font-family: sans-serif;
 }
 
+#topNav li {
+	font-weight: bold;
+}
+
+#topNav li.active {
+	font-weight: normal;
+}
+
 #content section {
 	display: none;
 }
