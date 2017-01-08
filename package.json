@@ -1,0 +1,25 @@
+{
+  "name": "aws-exams",
+  "version": "1.0.0",
+  "description": "Exam tips for AWS certification",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tmwllc/aws-exams.git"
+  },
+  "author": "Tom Wallace",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tmwllc/aws-exams/issues"
+  },
+  "homepage": "https://github.com/tmwllc/aws-exams#readme",
+  "dependencies": {
+    "express": "^4.14.0",
+    "jquery": "^3.1.1",
+    "lodash": "^4.17.4"
+  },
+  "devDependencies": {}
+}

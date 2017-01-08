@@ -3,7 +3,6 @@
 var express = require('express'),
   exphbs = require('express-handlebars'),
   app = express(),
-  path = require('path'),
   hbs = exphbs.create({
     defaultLayout: 'main',
     partialsDir: [
@@ -71,10 +70,6 @@ app.get('/solutions-architect-associate', function(req, res) {
 
 app.use(express.static('public'));
 
-// app.get('/', function(req, res) {
-//   res.sendFile(path.join(__dirname, 'public', 'index.html'));
-// });
-//
 app.use(function(req, res) {
   res.status(404).send('File Not Found');
 });
