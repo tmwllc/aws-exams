@@ -5,7 +5,7 @@ var ACTIVE_CLASS = 'active';
 /* global $ */
 function showContent(id) {
   var folder = $('body').attr('data-certification'),
-    contentPath = 'content/' + folder + '/' + id + '.html',
+    contentPath = '/content/' + folder + '/' + id + '.html',
     $thisContent = $('#tips-' + id),
     $link = $('#tip-link-' + id);
 
