@@ -1,0 +1,65 @@
+<h1>EC2 Tips</h1>
+
+<ul>
+  <li>On Demand
+    <ul>
+      <li>Users that want the low cost and flexibility of EC2 without up front payment or long term commitment.</li>
+      <li>Applications with short term, spiky, or unpredictable workloads that can't be interrupted.</li>
+      <li>Apps being develped or tested on EC2 for the first time.</li>
+    </ul>
+  </li>
+  <li>Reserved
+    <ul>
+      <li>Apps with staedy state or predictable usage</li>
+      <li>Apps that require reserved capacity</li>
+      <li>Users are able to make upfront payments to reduce their total computing costs</li>
+    </ul>
+  </li>
+  <li>Spot
+    <ul>
+      <li>Apps that flexible start/end times</li>
+      <li>Apps that are only feasible at very low compute prices</li>
+      <li>Users with urgent computing needs for large amounts of additional capacity</li>
+    </ul>
+  </li>
+  <li>Dedicated Hosts
+    <ul>
+      <li>Useful for regulatory requirements that may not support multi-tenant virtualization</li>
+      <li>Great for licensing which does not support multi-tenancy or cloud deployments</li>
+      <li>Can be purchased on demand (hourly)</li>
+      <li>Can be purchased as a reservation for up to 70% off the on-demand price.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>If spot instances are terminated by Amazon due to price change, you will not be charged for that hour. However, if you terminate it, you will be charged for that hour.</p>
+
+<p>EC2 instance levels:</p>
+<ul>
+  <li>T - cheap</li>
+  <li>D - density</li>
+  <li>F - Field Programmable Gate Array</li>
+  <li>R - RAM</li>
+  <li>G - graphics</li>
+  <li>C - compute</li>
+  <li>I - IOPS (input/output operations per second)</li>
+  <li>M - main choice for general purpose</li>
+  <li>X - eXtreme memory</li>
+  <li>P - graphics (think pics)</li>
+</ul>
+
+<p>Instance types:</p>
+<ul>
+  <li>t2 - low cost, general purpose. used for web servers, small dbs.</li>
+  <li>m4 - general purpose. used for app servers.</li>
+  <li>m3 - general purpose, used for app servers.</li>
+  <li>c4 - compute optimized, cpu intensive apps/dbs.</li>
+  <li>c3 - compute optimized, cpu intensive apps/dbs.</li>
+  <li>r3 - memory optimized, memory intensive apps/dbs</li>
+  <li>g2 - graphics/general purpose gpu. video encoding, machine learning, 3d app streaming</li>
+  <li>i2 - high speed storage, nosql dbs, data warehousing</li>
+  <li>f1 - field programmable gate array. hardware acceleration for your code. Can change underlying hardware to suit your code.</li>
+  <li>d2 - dense storage. used for file servers, data warehousing, hadoop</li>
+  <li>p2 - graphics and general purpose. machine learning, bit coin mining</li>
+  <li>x1 - memory optimized. For SAP HANA/Apache Spark, etc.</li>
+</ul>
