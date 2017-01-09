@@ -1,0 +1,33 @@
+<h1>Storage GateWay Tips</h1>
+
+<p>Storage Gateway is a service that connects an on-premises software appliance with cloud-based storage to provide seamless and secure integration between an organization's on-premises IT environment and AWS's storage infrastructure. The service enables you to securely store data to the AWS cloud for scalable and cost-effective storage.</p>
+
+<p>Storage Gateway's software appliance is available for download as a VM image that you install on a host in your datacenter. Storage Gateway supports either VMware ESXi or Microsoft Hyper-V. Once you've installed your gateway and associated it with your AWS account through the activation process, you can use the AWS Management Console to create the storage gateway option that is right for you.</p>
+
+<h3>Types</h3>
+<ul>
+  <li>File Gateway (NFS) - store flat files in S3</li>
+  <li>Volume Gateway (iSCSI) - block based storage, used for installing OS's or applications. Not stored in S3.
+    <ul>
+      <li>Stored volumes - store entire copy of dataset</li>
+      <li>Cached volumes - stores recently accessed data</li>
+    </ul>
+  </li>
+  <li>Tape Gateway (VTL) - archiving solution, creates virtual tapes, send to S3, use lifecycle rules to move to Glacier.</li>
+</ul>
+
+<h3>File Gateway</h3>
+<p>Files are stored in S3, accessed through a Network File System (NFS) mount point. Ownership, permissions, and timestamps are durably stored in S3 in the user-metadata of the object associated with the file. Once objects are transferred to S3, they can be managed as native S3 objects, and bucket policies such as versioniung, lifecycle management, and corss-region replication apply directly to objects stored in your bucket.</p>
+
+<h3>Volume Gateway</h3>
+<p>Presents your applications with disc volumes using the iSCSI block protocol.</p>
+<p>Data written to these volumes can be asynchronously backed up as point-in-time snapshots of your volumes, and stored in the cloud as Amazon EBS snapshots.</p>
+<p>Snapshots are incremental backups that capture only changed blocks. All snapshot storage is also compressed to minimize your storage charges.</p>
+<h4>Two Types of Volume Gateway</h4>
+<ul>
+  <li><b>Stored Volumes</b> - let you store your primary data locally, while asynchronously backing up that data to AWS. Stored volumes provide your on-premises applications with low-latency access to their entire datasets, while providing durable, off-site backups. You can create storage volumes and mount them as iSCSI devices from your on-premises application servers. Data written to your stored volumes is stored on your on-premises storage hardware. This data is asynchronously backed up to S3 in the form of EBS snapshots. 1GB-16TB in size for stored volumes.</li>
+  <li><b>Cached Volumes</b> - let you use S3 as primary data storage while retaining frequently accessed data locally in your storage gateway. Cached volumes minimize the need to scale your on-premises storage infrastructure, while still providing your applications with low-latency access to their frequently accessed data. You can create storage volumes up to 32TB in size and attached them as iSCSI devices from your on-premises application servers. Your gateway stores data that you write to these volumes in S3 and retains recently read data in your on-premises storage gateway's cache and upload buffer storage. 1GB-32TB in size.</li>
+</ul>
+
+<h3>Tape Gateway</h3>
+<p>Offers a durable, cost-effective solution to archive your data in the AWS cloud. The VTL interface it provides lets you leverage your existing tape-based backup application infrastructure to store data on virtual tape cartfidges that you create on your tape gateway. Each tape gateway is preconfigured with a media changer and tape drives, which are available to your existing client backup application as iSCSI devices. You add tape cartirdes as you need to archive your data. Supported by NetBackup, Backup Exec, Veam, etc.</p>
