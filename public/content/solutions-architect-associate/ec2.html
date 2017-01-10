@@ -63,3 +63,36 @@
   <li>p2 - graphics and general purpose. machine learning, bit coin mining</li>
   <li>x1 - memory optimized. For SAP HANA/Apache Spark, etc.</li>
 </ul>
+
+<h3>Status Checks</h3>
+<ul>
+  <li>System Status Check - checks network connectivity, verifies that AWS is able to get network packets to the instance. Does not validate that the OS and applications are accepting traffic.</li>
+  <li>Instance Status Check - ensures that instance OS is accepting traffic.</li>
+</ul>
+
+<h3>Volume Encryption</h3>
+<p>When provisioning an instance, you can add additional volumes. These will give the option to be encrypted. But the Root volume will not give this option. Root volume can be encrypted, but you must provision them first, create an AMI of that instance, and while copying that encrypt the root device volume.</p>
+
+<ul>
+  <li>Termination proectection is turned off by default. If turned on, the instance cannot be terminated from the console without first disabling termination protection.</li>
+  <li>On an EBS backed instance, the default action is for the root EBS volume to be deleted when instance is terminated.</li>
+</ul>
+
+<h3>Volumes and Snapshots</h3>
+<ul>
+  <li>Volumes exist on EBS and are like a virtual hard disk. Can not be attached to multiple instances.</li>
+  <li>Snapshots exist on S3
+    <ul>
+      <li>Can take a snapshot of a volume and store it on S3</li>
+      <li>Snapshots are point in time copies of volumes.</li>
+      <li>Snapshots are incremental, this means that only the blocks that have changed since last snapshot are moved to S3.</li>
+      <li>If this is you first snapshot, it mayuu take some time to create.</li>
+    </ul>
+  </li>
+</ul>
+<p>When taking a snapshot of an EBS volume that serves as root, you should first stop the instance. If you don't, AWS will stop it automatically before taking the snapshot.</p>
+
+<h3>Elastic Load Balancers</h3>
+<ul>
+  <li>Never have a static IP address, only a DNS name which resolve to a dynamic IP.</li>
+</ul>
