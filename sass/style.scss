@@ -1,0 +1,17 @@
+html {
+  font-family: sans-serif;
+}
+
+#topNav {
+  li {
+	font-weight: bold;
+	.active {
+	  font-weight: normal;
+	}
+  }
+}
+
+#content section {
+  display: none;
+  max-width: 750px;
+}
