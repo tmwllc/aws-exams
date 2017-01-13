@@ -5,7 +5,7 @@
     <ul>
       <li>Users that want the low cost and flexibility of EC2 without up front payment or long term commitment.</li>
       <li>Applications with short term, spiky, or unpredictable workloads that can't be interrupted.</li>
-      <li>Apps being develped or tested on EC2 for the first time.</li>
+      <li>Apps being developed or tested on EC2 for the first time.</li>
     </ul>
   </li>
   <li>Reserved
@@ -62,6 +62,46 @@
   <li>d2 - dense storage. used for file servers, data warehousing, hadoop</li>
   <li>p2 - graphics and general purpose. machine learning, bit coin mining</li>
   <li>x1 - memory optimized. For SAP HANA/Apache Spark, etc.</li>
+</ul>
+
+<h3>Elastic Block Storage (EBS)</h3>
+<p>Allows you to create storage volumes create storage volumes and attach them to EC2 instances. Once attached, you can create a file system on them, run a DB, or use them in any other way you would use a block device. EBS volumes are placed in a specific Availability Zone, where they are automatically repliced to protect you from the failure of a single component.</p>
+<h4>EBS Volume Types</h4>
+<ul>
+  <li>General Purpose SSD (GP3)
+    <ul>
+      <li>General purpose, balances both price and performance.</li>
+      <li>Ratio of 3 IOPS per GB with up to 10,000 IOPS and the ability to burst up to 3,000 IOPS for extended periods of time for volumes under 1GB.</li>
+    </ul>
+  </li>
+  <li>Provisioned IOPS SSD (IO1)
+    <ul>
+      <li>Designed for I/O intensive applications such as large relational or NoSQL databases.</li>
+      <li>Use if you need more than 10,000 IOPS.</li>
+      <li>Can provision up to 20,000 IOPS</li>
+    </ul>
+  </li>
+  <li>Throughput Optimized HDD (ST1)
+    <ul>
+      <li>Big data</li>
+      <li>Data warehouses</li>
+      <li>Log processing</li>
+      <li>Cannot be a boot volume</li>
+    </ul>
+  </li>
+  <li>Cold HDD (SC1)
+    <ul>
+      <li>Lowest cost storage for infrequently accessed workloads.</li>
+      <li>File server</li>
+      <li>Cannot be a boot volume</li>
+    </ul>
+  </li>
+  <li>Magnetic (Standard)
+    <ul>
+      <li>Lowest cost per GB of all EBS volume types that is bootable.</li>
+      <li>Ideal for workloads where data is accessed infrequently and applications where the lowest storage cost is important.</li>
+    </ul>
+  </li>
 </ul>
 
 <h3>Status Checks</h3>
