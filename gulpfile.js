@@ -25,12 +25,12 @@ gulp.task('nodemon', function(cb) {
 
 gulp.task('browser-sync', ['nodemon', 'styles'], function() {
   gulp.watch('sass/**/*.scss', ['styles']);
-  browserSync.init(null, {
-    proxy: 'http://localhost:3000',
-    files: ['public/*&*/*.*'],
-    browser: 'chrome',
-    port: 7000
-  });
+  // browserSync.init(null, {
+  //   proxy: 'http://localhost:3000',
+  //   files: ['public/*&*/*.*'],
+  //   browser: 'google chrome',
+  //   port: 7000
+  // });
 });
 
 gulp.task('default', ['browser-sync']);

@@ -12,6 +12,7 @@ var express = require('express'),
   });
 
 app.engine('handlebars', hbs.engine);
+app.set('port', process.env.port || 3000);
 app.set('view engine', 'handlebars');
 app.get('/', function(req, res) {
   res.render('index', {
@@ -47,6 +48,11 @@ app.use(function(error, req, res) {
   res.status(505).send('Internal Server Error');
 });
 
-app.listen(3000, function() {
+app.use(function(err, req, res) {
+  console.error(err.stack);
+  res.status(500).send('Internal Server Error');
+});
+
+app.listen(app.get('port'), function() {
   console.log('Example app listening on port 3000');
 });

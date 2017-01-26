@@ -1,0 +1,11 @@
+<h1>Placement Group Tips</h1>
+
+<p>A placement group is a logical grouping of instances within a single availability zone. Using placement groups enables apps to participate in a low-latency, 10Gbps network. Placement groups are recommended for aps that benefit from low network latency, high network throughput, or both.</p>
+
+<ul>
+	<li>Can NOT span multiple availability zones.</li>
+	<li>Name must be unique within your account</li>
+	<li>Only certain types of instances allowed: Compute optimized, GPU, Memory, Storage Optimized, but no T2.micro</li>
+	<li>AWS recommend homogeneous instances within placement groups. These are instances of same size/family.</li>
+	<li>Can't merge placement groups and can't move existing instance into placement group. However, you can create an AMI from your instance and then launch a new instance from the AMI into a placement group.</li>
+</ul>
