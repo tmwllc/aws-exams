@@ -1,0 +1,12 @@
+<h1>Route 53 Tips</h1>
+<ul>
+  <li>ELBs do not have pre-defined IPv4 addresses, you resolve them using a DNS name.</li>
+  <li>Understand the difference between an Alias Record and a CNAME.
+    <ul>
+      <li>Alias records allow you to resolve a naked domain name to an ELB's DNS address.</li>
+      <li>When making a request to Route 53 for a DNS record, you will be charged for that request if using CNAME. But you will not be charged if using Alias Record.</li>
+      <li>Most of the time you should be using an Alias record.</li>
+    </ul>
+  </li>
+
+</ul>
