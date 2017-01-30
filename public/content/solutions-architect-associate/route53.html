@@ -5,8 +5,50 @@
     <ul>
       <li>Alias records allow you to resolve a naked domain name to an ELB's DNS address.</li>
       <li>When making a request to Route 53 for a DNS record, you will be charged for that request if using CNAME. But you will not be charged if using Alias Record.</li>
-      <li>Most of the time you should be using an Alias record.</li>
+      <li>Most of the time you should be using an Alias record instead of a CNAME record.</li>
     </ul>
   </li>
 
+  <h3>Records</h3>
+  <ul>
+    <li>SOA Records
+      <ul>
+        <li>Name of the server that supplied the data for the zone</li>
+        <li>Admin of the zone</li>
+        <li>Current version of data file</li>
+        <li>Number of seconds a secondary name server should wait before checking for updates</li>
+        <li>Number of seconds a secondary name server should wait before retrying a failed zone transfer</li>
+        <li>Max number of seconds that a secondary name server can use data before it must either be refreshed or expire.</li>
+        <li>Default number of seconds for TTL on resource records.</li>
+      </ul>
+    </li>
+    <li>Name Server Records
+      <ul>
+        <li>Used by top level domain servers to direct traffic to the content DNS server which contains the authoritative DNS records.</li>
+      </ul>
+    </li>
+    <li>A Record
+      <ul>
+        <li>Fundamental type of DNS record and the A in A record stands for Address. The A record is used by a computer to translate the name of the domain to the IP address. For example, http://www.acloud.guru might point to http://123.10.10.80.</li>
+      </ul>
+    </li>
+    <li>TTL Record
+      <ul>
+        <li>Length that a DNS record is cached on either the Resolving Server of the users own PC is equal to the value of the TTL in seconds. The lower the time to live, the faster changes to DNS recrods take to propagate throughtout the internet.</li>
+        <li>When doing a DNS change, it's best to drop the TTL down to 5 minutes at least 2 days ahead of time before the DNS change. That way when you migrate the server, the DNS only takes 5 minutes at most to refresh.</li>
+      </ul>
+    </li>
+    <li>Alias Records
+      <ul>
+        <li>Used to map resource record sets in your hosted zone to Load Balancers, CloudFront distributions, or S3 buckets that are configured as websites.</li>
+        <li>Work like a CNAME record in that you can map one DNS name to another target DNS name.</li>
+        <li>Key difference - CNAME can't be used for naked domain names (domains with no subdomain in front). You can't have a CNAME for http://acloud.guru, it must either be an A record or an Alias.</li>
+        <li>Alias record sets can save you time because Route 53 automatically recognizes changes in the record sets that the alias resource record set refers to.</li>
+        <li>For example, suppose an alias resource record set for example.com points to an ELB at lb1-1234.us-east-1.elb.amazonaws.com. If the IP addresss of that ELB changes, Route 53 will automatically reflect those changes in DNS answers for example.com without any changes to the hosted zone that contains resource record sets for example.com</li>
+      </ul>
+    </li>
+  </ul>
 </ul>
+
+<h3>CNAMES</h3>
+<p>A Canonical Name (CNAME) can be used to resolve one domain name to another. For example, you may have a mobile webstire with the domain name http://m.acloud.guru that is used for when users browser to your domain name on their mobile devices. You may also want the name http://mobile.acloud.guru to resolve to this same address.</p>
