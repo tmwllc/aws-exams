@@ -6,6 +6,7 @@
       <li>Alias records allow you to resolve a naked domain name to an ELB's DNS address.</li>
       <li>When making a request to Route 53 for a DNS record, you will be charged for that request if using CNAME. But you will not be charged if using Alias Record.</li>
       <li>Most of the time you should be using an Alias record instead of a CNAME record.</li>
+      <li>There is a limit of 50 domain names that you can manage with Route 53, but the limit can be raised by contacting AWS support.</li>
     </ul>
   </li>
 
@@ -52,3 +53,12 @@
 
 <h3>CNAMES</h3>
 <p>A Canonical Name (CNAME) can be used to resolve one domain name to another. For example, you may have a mobile webstire with the domain name http://m.acloud.guru that is used for when users browser to your domain name on their mobile devices. You may also want the name http://mobile.acloud.guru to resolve to this same address.</p>
+
+<h3>Routing Policies</h3>
+<ul>
+  <li>Simple (default) - Most commonly used when you have a single resource that performs a given function for your domain, for example, one web server that serves content for the http://acloud.guru website.</li>
+  <li>Weighted - allows Route53 to send a certain % of traffic to a different region or ELB. Useful for A/B testing if you only want a small % of users to see a new design you're testing.</li>
+  <li>Latency - Allows you to route traffic based on lowest network latency for your end user. To use it, create a latency record set for the EC2 (or ELB) resource in each region that hosts your website. When Route 53 receives a query for your site, it selects the latency record set for the region that gives the user the lowest latency.</li>
+  <li>Failover - Used when you want to create an active/passive setup. For example you may want your primary site to be in us-west-1 and your secondary in us-east-1. Route 53 will monitor the health of primary using health check. Route 53 will fail over to passive site.</li>
+  <li>Geolocation - Lets you choose where traffic will be sent based on geographic location of users. For example, you might want all queries from Europe to be routed to a fleet of EC2 instances that are configured for European customers. These servers may have the local language of European customers and all prices displayed in Euros.</li>
+</ul>
