@@ -1,4 +1,57 @@
 <h1>S3 Tips</h1>
+
+<p>Bucket limit is 100 by default, but can request to increase limit by visiting AWS Service Limits.</P>
+
+<h2><a href="https://aws.amazon.com/s3/faqs/" target="_blank">S3 FAQ</a></h2>
+<ul>
+  <li>99.99% availability</li>
+  <li>99.999999999% durability (11 x 9s)</li>
+  <li>Tiered storage available (standard, infrequent access, glacier)</li>
+  <li>Lifecycle management to move files to lower tiers or delete based on age of file.</li>
+  <li>Versioning</li>
+  <li>Encryption</li>
+  <li>Secure with ACLs or bucket policies</li>
+</ul>
+
+<h3>Charges:</h3>
+<ul>
+  <li>Storage</li>
+  <li>Requests</li>
+  <li>Storage Management Pricing - allows you to associate data with different teams/departments so you can see which team is costing what.</li>
+  <li>Data transfer pricing (moving around within S3)</li>
+  <li>Transfer Acceleration - enables fast transfers between users and a bucket. Uses CloudFront's globally distributed edge locations. Data arrives at an edge location, it is routed to S3 over an optimized network path for fastest transfer.</li>
+</ul>
+
+<h3>Tiers:</h3>
+<ul>
+  <li>Standard - 99.99% available, 99.999999999% durability, stored across multiple devices in multiple facilities, designed to sustain the loss of 2 facilities concurrently.</li>
+  <li>Infrequently Accessed - For data accessed less frequently, but requires rapid access when needed. lower fee than standard, but you are charged a retrieval fee.</li>
+  <li>Reduced Redundancy - 99.99% durability and availability.</li>
+  <li>Glacier - Very cheap, but for archival only. 3-5 hours to restore from Glacier.</li>
+</ul>
+
+<p>To increase performance when saving log files, add a random string to the start of the file name. This way they are not all grouped together alphabetically.</p>
+
+<h3>Bucket URL Formats:</h3>
+<ul>
+  <li>Bucket: https://s3-REGION.amazonaws.com/BUCKETNAME</li>
+  <li>Website: http://BUCKETNAME.s3-website-REGION.amazonaws.com</li>
+</ul>
+
+<h3>S3 Objects:</h3>
+<ul>
+  <li>Key (filename)</li>
+  <li>Value (the data, made up for a byte sequence)</li>
+  <li>Version ID (used for versioning)</li>
+  <li>Metadata (data about the data being stored)</li>
+  <li>Subresources:
+    <ul>
+      <li>Access Control Lists (give fine grained permissios for an individual file</li>
+      <li>Torrent</li>
+    </ul>
+  </li>
+</ul>
+
 <h3>Security</h3>
 <ul>
   <li>By default all newly created buckets are private.</li>
@@ -33,3 +86,10 @@
 
 <h3>Transfer Acceleration</h3>
 <p>Utilises CloudFront Edge Network to accelerate your uploads to S3. Instead of uploading directly to S# bucket, you can use a distinct URL to upload directly to an edge location which will then transfer that file to S3. You will get a distinct URL to upload to, like: http://acloudguru.s3-accelerate.amazonaws.com.</p>
+
+<h3>Data Consistency</h3>
+<ul>
+  <li>PUTs: Read after write (available immediately after writing the file)</li>
+  <li>Overwrite PUTs and DELETEs: Eventual consistency, usually within a second.</li>
+  <li>Updates are atomic. When updating and immediately reading, you will either see old file or new file, never a partial file.</li>
+</ul>
