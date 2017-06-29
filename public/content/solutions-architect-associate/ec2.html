@@ -140,3 +140,9 @@
 <h3>Roles</h3>
 <p>Can only assign a role to an instance at creation. It cannot be added later. You can however modify the policy of an IAM role already assigned to an EC2 instance. Roles are much more secure than storying your access key and secret access key on the EC2 instances. If a hacker gains access to your EC2 instance he can then copy your secret access key and use it to login from anywhere. Also, if you need to revoke access to a user, you'd have to login to each EC2 instance the user had access to and update the SSH keys. Using roles makes it much easier to revoke access to a user.</p>
 <p>Roles are universal and can be used in any region.</p>
+
+<h3>AMI Types</h3>
+<ul>
+  <li>EBS Backed - Can be stopped and started, can detach volume. Most of the default Amazon AMIs are EBS backed. Volume is created from an EBS snapshot.</li>
+  <li>Instance Store (Ephgemeral) - Cannot be stopped, can only be terminated or restarted. Also, cannot detach volume. Volume doesn't even show up on Volumes page. Can only attach an EBS volume at creation. Cannot attach them after creation. Volume is created from a template store in S3, which results in it being a little slower to initialize than EBS.</li>
+</ul>
