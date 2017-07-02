@@ -10,7 +10,7 @@
   </li>
   <li>Reserved
     <ul>
-      <li>Apps with staedy state or predictable usage</li>
+      <li>Apps with steady state or predictable usage</li>
       <li>Apps that require reserved capacity</li>
       <li>Users are able to make upfront payments to reduce their total computing costs</li>
     </ul>
@@ -20,6 +20,7 @@
       <li>Apps that flexible start/end times</li>
       <li>Apps that are only feasible at very low compute prices</li>
       <li>Users with urgent computing needs for large amounts of additional capacity</li>
+      <li> Good idea to use these when demand is really low, and therefore price is low. For example 2am.</li>
     </ul>
   </li>
   <li>Dedicated Hosts
@@ -35,6 +36,7 @@
 <p>If spot instances are terminated by Amazon due to price change, you will not be charged for that hour. However, if you terminate it, you will be charged for that hour.</p>
 
 <p>EC2 instance levels:</p>
+<p>Dr McGiftPx</p>
 <ul>
   <li>T - cheap</li>
   <li>D - density</li>
@@ -131,6 +133,14 @@
   </li>
 </ul>
 <p>When taking a snapshot of an EBS volume that serves as root, you should first stop the instance. If you don't, AWS will stop it automatically before taking the snapshot.</p>
+<p>When taking a snapshot of a RAID array, you must stop writes to the disks first. Easiest way to do this is to shut down the EC2 instance. Can also unmount the RAID array or freeze the files system.</p>
+
+<h3>Volumes vs Snapshots - Security</h3>
+<ul>
+  <li>Snapshots of encrypted volumes are encrypted automatically</li>
+  <li>Volumes restored from encrypted snapshots are encrypted automaticallys</li>
+  <li>You can share snapshots, but only if they are unencrypted. Snapshots can be shared with other AWS accounts or made public.</li>
+</ul>
 
 <h3>Elastic Load Balancers</h3>
 <ul>
@@ -144,5 +154,5 @@
 <h3>AMI Types</h3>
 <ul>
   <li>EBS Backed - Can be stopped and started, can detach volume. Most of the default Amazon AMIs are EBS backed. Volume is created from an EBS snapshot.</li>
-  <li>Instance Store (Ephgemeral) - Cannot be stopped, can only be terminated or restarted. Also, cannot detach volume. Volume doesn't even show up on Volumes page. Can only attach an EBS volume at creation. Cannot attach them after creation. Volume is created from a template store in S3, which results in it being a little slower to initialize than EBS.</li>
+  <li>Instance Store (Ephemeral) - Cannot be stopped, can only be terminated or restarted. Also, cannot detach volume. Volume doesn't even show up on Volumes page. Can only attach an EBS volume at creation. Cannot attach them after creation. Volume is created from a template store in S3, which results in it being a little slower to initialize than EBS.</li>
 </ul>
