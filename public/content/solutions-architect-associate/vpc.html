@@ -99,11 +99,12 @@
 <h3>Steps to create a VPC with public/private subnets, public web server, private SQL server:</h3>
 <ol>
   <li>Create VPC with CIDR range 10.0.0.0/16</li>
-  <li>Create Private Subnet with IP range 10.0.1.0/24 in AZ 1</li>
+  <li>Create Private Subnet with IP range 10.0.0.0/24 in AZ 1</li>
   <li>Subnet Actions - Modify auto-assign IP settings -> Enable to auto create public IP for instances created in this subnet</li>
-  <li>Create Public Subnet with IP range 10.0.2.0/24 in AZ 2</li>
+  <li>Create Public Subnet with IP range 10.0.1.0/24 in AZ 2</li>
   <li>Create Internet Gateway and attach it to VPC</li>
-  <li>Create Route Table, with rule giving 0.0.0.0 a route to the internet using the Internet Gateway and associate it with public subnet</li>
+  <li>Create Route Table, with rule giving 0.0.0.0 a route to the internet using the Internet Gateway</li>
+  <li>Associate Route with public subnet</li>
   <li>Create Security Group which gives HTTP, HTTPS and SSH access to 0.0.0.0/0, which will be used for public subnet EC2 instances.</li>
   <li>Create Security Group which gives SSH access to 10.0.2.0/24</li>
   <li>Create EC2 instance in public subnet with bootstrap script to install/start Apache and create simple webpage</li>
