@@ -23,4 +23,31 @@ Resources:
             - Effect: Allow
               Action: "cloudformation:CreateStack"
               Resource: "*"
+            - Effect: Allow
+              Action: "ec2:CreateVpc"
+              Resource: "*"
+            - Effect: Allow
+              Action: "ec2:CreateSubnet"
+              Resource: "*"
+            - Effect: Allow
+              Action: "ec2:CreateNatGateway"
+              Resource: "*"
+            - Effect: Allow
+              Action: "ec2:CreateRoute"
+              Resource: "*"
+            - Effect: Allow
+              Action: "ec2:CreateRouteTable"
+              Resource: "*"
+            - Effect: Allow
+              Action: "ec2:CreateInternetGateway"
+              Resource: "*"
+            - Effect: Allow
+              Action: "ec2:CreateNetworkAcl"
+              Resource: "*"
+            - Effect: Allow
+              Action: "ec2:CreateNetworkAclEntry"
+              Resource: "*"
+            - Effect: Allow
+              Action: "ec2:CreateSecurityGroup"
+              Resource: "*"
       RoleName: CloudFormationRole
