@@ -1,0 +1,16 @@
+<h3>Aurora Exam Tips</h3>
+<p>Aurora is a MySQL compatible relational DB engine that combines the speed and availability of high end commercial DBs with the simplicity and cost-effectiveness of open source DBs. Aurora provies up to five times better performance than MySQL at a price point one tenth that of a commercial DB while delivery similar performance and availability. It's a great competitor to Orcale given how much cheaper it is.</p>
+<ul>
+    <li>Scales automatically. Start with 10GB, get 10 more automatically when needed.</li>
+    <li>Compute resources scale up to 32 vCPUs and 244GB of memory. They say it's push button scaling, but there is downtime with it unlike scaling Dynamo. It is fast scaling, though.</li>
+    <li>2 copies of your data is contined in each AZ, with minimum of 3 AZ, resulting in 6 copies of your data.</li>
+    <li>Designed to handle the loss of up to two copies of data without affecting DB write availability and up to 3 copies without affecting read availability.</li>
+    <li>Self healing. Data blocks and disks are continuously scanned for errors and repaired automatically.</li>
+</ul>
+
+<h4>Replicas</h4>
+<ul>
+    <li>Aurora Replicas (currently 15 max)</li>
+    <li>MySQL read replicas (currently 5 max)</li>
+    <li>Key diff: automatic failover to Aurora replica, but not automatic with read replica</li>
+</ul>

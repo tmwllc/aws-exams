@@ -1,0 +1,35 @@
+<h3>RDS Exam Tips</h3>
+
+<h4>Backups</h4>
+<p>Automated backups and manual snapshots, both can be used for disaster recovery. With automated backups, it creates a daily snapshot along with transaction logs throughout the day. This allows you to restore to a point in time. Each daily snapshot is based on the previous day's snapshot, with the day's transactions applied on top of that. Automated backups are neabled by default and are stored in S3. You automatically get the S3 storage space required for free, which is equal to the size of the DB.</p>
+<p>Manual snapshots are done on demand and are NOT deleted when the DB is deleted, unlike automated backups, though it will prompt you to do a final DB backup when deleting.</p>4
+<p>When restoring from a snapshot, it will create a new RDS instance with a new endpoint.</p>
+
+<h4>Encryption</h4>
+<p>Encryption is supported at rest, but cannot be applied to an existing instance.</p>
+<h4>Multi AZ</h4>
+<p>Creates copy of DB in another AZ. All writes to primary DB are copies to secondary. If primary goes down, AWS fails over to secondary automatically, no endpoint change necessary.</p>
+<h4>Read Replicas</h4>
+<ul>
+    <li>Allow you to have copies of a DB. Queries can be made across multiple replicas, allowing for performance improvement.</li>
+    <li>Using an ELB, each EC2 instance can be setup to talk to a read replica within the same AZ, rather than all instances talking to a single DB</li>
+    <li>Used for scaling, not for disaster recovery.</li>
+    <li>Must have automatic backups turned on to use read replicas.</li>
+    <li>Can have up to 5 read replica copies of a DB. Can also have replicas of replicas, but that will introduce more latency.</li>
+    <li>Cannot have read replicas in multiple AZs.</li>
+    <li>However you can create read replicas of multi-AZ DBs.</li>
+    <li>Supported by MySql, PostGres and Maria DB (not Oracle or SQL Server)</li>
+    <li>Can be promoted to be their own DBs. This will break replication.</li>
+    <li>Read replicas are read only, cannot be written to.</li>
+</ul>
+
+<h4>DynamoDB vs RDS</h4>
+<ul>
+    <li>Dynamo offers push button scaling, so you scale on the fly with no down time.</li>
+    <li>Scaling up is a manual process. Take snapshot, create new instance with larger size, or create read replica, but that only helps for reads, not for writes..</li>
+</ul>
+
+
+
+
+
