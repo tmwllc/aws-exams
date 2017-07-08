@@ -1,10 +1,12 @@
 <h1>VPC Tips</h1>
 
+<p>When creating a new VPC, a security group, route and ACL are created automatically. However, it does not create, subnets or internet gateway.</p>
+
 <p>VPC is a logical datacenter. Do not span regions, but can span availability zones. Can have a maximum of 5 VPCs in each AWS region by default Consists of Ineternet Gateways (IGWs) or Virtual Private Gateways, Route Tables, Access Control Lists, Subnets, Security Groups. 1 subnet = 1 availability zone (they cannot span multiple AZs) - this comes up a lot on exams</p>
 
 <p>It is a logically isolated section of AWS where you can AWS resources in a virtual network that you define. You have complete control over virtual networking env, including selection of your IP address range, creation of subnets, configuration of route tables and network gateways.</p>
 
-<p>Can create public facing subnet for webservers that has access to Internet, and place backend systems such as DBs or app servers in private facing subnet with no Internet access. Can leverage mutlple layers of security, including security group and network access control lists, to helpl control access to EC2 instances in each subnet.</p>
+<p>Can create public facing subnet for web servers that has access to Internet, and place backend systems such as DBs or app servers in private facing subnet with no Internet access. Can leverage mutlple layers of security, including security group and network access control lists, to helpl control access to EC2 instances in each subnet.</p>
 
 <p>Can create Hardware VPN connection between your corporate datacenter and your VPC and leverage the AWS cloud as an extension of corporate datacenter.</p>
 
@@ -69,6 +71,8 @@
   <li>No need to disable source/destination check</li>
 </ul>
 
+<p><a href="http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-comparison.html" target="_blank">Comparison of NAT Instances and NAT Gateways</a></p>
+
 <h3>Bastions:</h3>
 <p>Used to securely administer EC2 instances (using SSH or RDP) in private subnets. Also called jump boxes or jump servers. SSH into bastion, and from there you can SSH into server in private subnet.</p>
 <p>Put them behind an autoscaling group with a minimum size of 2. Use Route53 to automatically fail over.</p>
@@ -77,6 +81,7 @@
 <p>Used to provide internet access to EC2 instances that are within private subnets.</p>
 
 <h3>ACLs and Security Groups</h3>
+<p><a href="http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Security.html#VPC_Security_Comparison" target="_blank">Comparison of Security Groups and Network ACLs</a></p>
 
 <h4>Security Groups:</h4>
 <p>Security groups are first line of defense and are at the instance level. Everything is denied by default, white list allows various protocols and IPs through. Stateful, when opening up inbound traffic, outbound is automatically allowed as well. Instances must be manually put into a security group.</p>
@@ -90,3 +95,23 @@
 <p>If you want your servers to be highly available, you always want at least 2 public subnets and 2 private subnets so that you can use a load balancer to send traffic to each. Make sure each subnet is in a different availability zone.</p>
 
 <p>When creating subnets within a VPC in different availability zones, by default they can still communicate with each other.</p>
+
+<h3>Steps to create a VPC with public/private subnets, public web server, private SQL server:</h3>
+<ol>
+  <li>Create VPC with CIDR range 10.0.0.0/16</li>
+  <li>Create Private Subnet with IP range 10.0.0.0/24 in AZ 1</li>
+  <li>Subnet Actions - Modify auto-assign IP settings -> Enable to auto create public IP for instances created in this subnet</li>
+  <li>Create Public Subnet with IP range 10.0.1.0/24 in AZ 2</li>
+  <li>Create Internet Gateway and attach it to VPC</li>
+  <li>Create Route Table, with rule giving 0.0.0.0 a route to the internet using the Internet Gateway</li>
+  <li>Associate Route with public subnet</li>
+  <li>Create Security Group which gives HTTP, HTTPS and SSH access to 0.0.0.0/0, which will be used for public subnet EC2 instances.</li>
+  <li>Create Security Group which gives SSH access to 10.0.1.0/24</li>
+  <li>Create EC2 instance in public subnet with bootstrap script to install/start Apache and create simple webpage</li>
+  <li>Attempt to load webpage in browser</li>
+  <li>Remote into public instance. Copy key into new text file on public instance.</li>
+  <li>chmod key with 400</li>
+  <li>SSH into private instance from public instance using private IP</li>
+  <li>Create NAT Gateway in public subnet, use Create New IP button to give it an IP</li>
+  <li>Open default route table and add a route for 0.0.0.0/0 and give target of our NAT Gateway</li>
+</ol>

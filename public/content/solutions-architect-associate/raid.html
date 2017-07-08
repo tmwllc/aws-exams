@@ -1,9 +1,17 @@
-<h1>RAID Snapshots</h1>
+<h1>RAID</h1>
 
 <p>When taking a snapshot, it excludes all data held in cache by applications and the OS. This is fine for a single volume, but with RAID arrays it is an issue. We need to take an application consistent snapshot by stopping the app from writing to disk and flushing all caches. This can be done in 3 ways:</p>
-
 <ul>
   <li>Freeze the file system</li>
   <li>Unmount the RAID array</li>
   <li>Shut down the EC2 instance associated with volumes (easiest and most common route)</li>
 </ul>
+
+<ul>
+  <li>RAID 0 - Striped, no redundancy, good performance</li>
+  <li>RAID 1 - Mirrored, redundancy</li>
+  <li>RAID 5 - good for reads, bad for writes</li>
+  <li>RAID 10 - Striped and mirrored, good redundancy, good performance</li>
+</ul>
+
+<p>Amazon strongly recommends against using RAID 5. So if a question asks about which RAID to use and an option is RAID 5, that is not the answer.</p>

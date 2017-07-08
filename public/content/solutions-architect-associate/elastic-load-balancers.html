@@ -1,0 +1,14 @@
+<h3>Elastic Load Balancer Tips</h3>
+
+<p><a href="https://aws.amazon.com/elasticloadbalancing/classicloadbalancer/faqs/" target="_blank">Elastic Load Balancer FAQ</a></p>
+
+<ul>
+  <li>Application Load Balancer - newer, introduced in mid 2016, not featured on tests yet</li>
+  <li>Classic Load Balancer</li>
+</ul>
+
+<ul>
+  <li>Never have IP addresses, only DNS names, which point to a dynamic IP</li>
+  <li>Instances monitored by ELBs will be reported as InService or OutofService</li>
+  <li>Health checks check health by talking to, looking for a specific endpoint and whether the response is 200 (or some other specified value from 200-299)</li>
+</ul>
