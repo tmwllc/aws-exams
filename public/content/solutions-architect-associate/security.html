@@ -1,0 +1,31 @@
+<h1>Security Exam Tips</h1>
+
+<p><a href="https://d0.awsstatic.com/whitepapers/Security/AWS_Security_Whitepaper.pdf">AWS Overview of Security Processes Whitepaper</a></p>
+
+<p>Shared Responsibility - AWS is responsible for securing underlying infrastructure that supports the cloud, and you're responsible for anythying you put on the cloud or connect to the cloud.</p>
+
+<p>IAAS - such as EC2, VPC and S3 are completely under your control and require you to perform all of the necessary security configuration tasks.</p>
+
+<p>Managed services, AWS is responsible for patching, antivirus, etc., however you are responsible for account management and user access. It's recommended that MFA be implemented, communicate to these services using SSL/TLS and that API/user activity logging be setup with CloudTrail.</p>
+
+<p>Storage Decommissioning - When a storage devices has reached end of life, AWS procedures include a decommissioning process that prevents customer data from being exposed.</p>
+
+<p>AWS uses techniques detailed in DoD 5220.22-M or NIST800-88 to destroy data. All decommissioned magnetic storage devices are degaussed and physically destroyed in accordance with industry-standard practices.</p>
+
+<p>Transmission Protection - Can connect to AWS using HTTP/HTTPS using SSL. If desired, can use VPC and create private subnet and use IPsec VPN device to provide an encrypted tunnel between VPC and your data center.</p>
+
+<p>Amazon Corporate is segregated from the AWS network by means of a set of network security/segregation devices.</p>
+
+<p>AWS protects against DDoS, Man in the Middle, IP Spoofing, Port Scanning, and Packet Sniffing by other tenants.</p>
+
+<p>IP Spoofing - AWS uses a host-based firewall which will not permit an instance to send traffic with a source IP or MAC address other than its own. Unauthorized port scans by EC2 customers are a violation of AWS use policy. You may request permissiong to conducat vulnerability scans of your own environments, but must not violate AWS use policy. You must request the scan in advance.</p>
+
+<p>Can secure CloudFront assets using x.509 certificates.</p>
+
+<p>Istance Isolation - Instances running on same machine are isolated from each other using Xen hypervisor. AWS firewall resides within hypervisor layer, between physical network interface and the instance's virtual interface. All packets must pass through this layer, thus an instance's neighbors have no more access to that instance than any other host on the Internet and can be treated as if they are on separate physical hosts. PAM is separated using similar mechanisms.</p>
+
+<p>Instances have no access to raw disk devices, instead use virtualized disks. AWS disk virtualization layer automatically resets every block of storage used that customer data is never exposed (this is disk zeroing). In addition, memory allocated to guests is scrubbed (set to zero) by the hypervisor when it is unallocated. Memory is not returned to pool of free memory until scrub is complete.</p>
+
+<p>AWS has no access to your instances, cannot RDP or SSH into them.</p>
+
+<p>Elastic Load Balancing - SSL Termination on the ELB is supported. This allows you to identify the originating IP of a client whether you're using HTTPS or TCP load balancing.</p>

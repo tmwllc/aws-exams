@@ -1,7 +1,9 @@
 var gulp = require('gulp'),
   sass = require('gulp-sass'),
   nodemon = require('gulp-nodemon'),
-  browserSync = require('browser-sync');
+  browserSync = require('browser-sync'),
+  cfn = require('cfn'),
+  config = require('config-yml');
 
 gulp.task('styles',  function() {
   return gulp.src('./sass/**/*.scss')
@@ -32,5 +34,13 @@ gulp.task('browser-sync', ['nodemon', 'styles'], function() {
   //   port: 7000
   // });
 });
+
+gulp.task('deploy:vpc', function() {
+
+})
+
+gulp.task('deploy:app', function() {
+
+})
 
 gulp.task('default', ['browser-sync']);

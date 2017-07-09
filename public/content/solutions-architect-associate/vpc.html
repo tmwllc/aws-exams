@@ -109,9 +109,13 @@
   <li>Create Security Group which gives SSH access to 10.0.1.0/24</li>
   <li>Create EC2 instance in public subnet with bootstrap script to install/start Apache and create simple webpage</li>
   <li>Attempt to load webpage in browser</li>
+  <li>Create EC2 in private subnet with new security group that gives SSH access to 10.0.0.0/24.</li>
   <li>Remote into public instance. Copy key into new text file on public instance.</li>
-  <li>chmod key with 400</li>
+  <li>chmod key with 400 (do this with sudo)</li>
   <li>SSH into private instance from public instance using private IP</li>
   <li>Create NAT Gateway in public subnet, use Create New IP button to give it an IP</li>
   <li>Open default route table and add a route for 0.0.0.0/0 and give target of our NAT Gateway</li>
+  <li>Create new ACL and associate it with public subnet.</li>
+  <li>Add ACL rules to allow traffic for HTTP, HTTPS, and SSH from 0.0.0.0/0 (make sure to add same rules for outbound)</li>
+  <li>Add ephemeral ports rule using Custom TCP in ACL with port range 1024-65536 (again, outbound as well)</li>
 </ol>
