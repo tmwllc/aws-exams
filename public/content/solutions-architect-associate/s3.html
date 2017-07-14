@@ -63,6 +63,14 @@
   </li>
   <li>Can be configured to create access logs which log all requests to the bucket. Can be logged to another bucket.</li>
 </ul>
+<h3>Glacier</h3>
+<ul>
+  <li>Glacier automatically encrypts data at rest usin AES 256 bit symmetric keys and supports secure transfer over SSL</li>
+  <li>Single archive can be as large as 40TB</li>
+  <li>Can store unlimited number of archies and unlimited amount of data</li>
+  <li>Each archive is assigned a unique id at creation</li>
+  <li>Content is immutable, so it cannot be updated</li>
+</ul>
 <h3>Encryption</h3>
 <ul>
   <li>In transit: SSL/TLS</li>
@@ -92,4 +100,18 @@
   <li>PUTs: Read after write (available immediately after writing the file)</li>
   <li>Overwrite PUTs and DELETEs: Eventual consistency, usually within a second.</li>
   <li>Updates are atomic. When updating and immediately reading, you will either see old file or new file, never a partial file.</li>
+</ul>
+
+<h3>Event Notifications</h3>
+<p><a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html" target="_blank">S3 Event Notifications</a></p>
+<p>Events can be triggered for the following:</p>
+<ul>
+  <li>New object created</li>
+  <li>Object removed via s3:ObjectRemoved:Delete or versioned object permanently deleted via s3:ObjectRemoved:DeleteMarkerCreated. Can use wildcard to cover both via s3:ObjectRemoved:*.</li>
+  <li>RRS object lost</li>
+</ul>
+<ul>
+  <li>SNS</li>
+  <li>SQS</li>
+  <li>Lambda</li>
 </ul>

@@ -10,7 +10,7 @@
 
 <p>Can create Hardware VPN connection between your corporate datacenter and your VPC and leverage the AWS cloud as an extension of corporate datacenter.</p>
 
-<p>Subnets can be public or private. They will have different address ranges. Example: public 10.0.1.0/24, private 10.0.2.0/24.</p>
+<p>Subnets can be public or private. They will have different address ranges. Example: public 10.0.1.0/24, private 10.0.2.0/24. A public subnet is one that has at least one route in routing table that uses an internet gateway.</p>
 
 <p>Security groups and Access Control Lists (ACLs) can span subnets.</p>
 
@@ -119,3 +119,11 @@
   <li>Add ACL rules to allow traffic for HTTP, HTTPS, and SSH from 0.0.0.0/0 (make sure to add same rules for outbound)</li>
   <li>Add ephemeral ports rule using Custom TCP in ACL with port range 1024-65536 (again, outbound as well)</li>
 </ol>
+
+<p>When using VPC wizard, there are 4 options for creating a VPC:</p>
+<ul>
+  <li>Single Public Subnet</li>
+  <li>Public and Private Subnets</li>
+  <li>Public and Private Subnets and Hardware VPN Access</li>
+  <li>Private Subnet with Hardware VPN Access</li>
+</ul>
