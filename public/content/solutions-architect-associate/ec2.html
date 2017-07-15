@@ -114,6 +114,7 @@
 
 <h3>Volume Encryption</h3>
 <p>When provisioning an instance, you can add additional volumes. These will give the option to be encrypted. But the Root volume will not give this option. Root volume can be encrypted, but you must provision them first, create an AMI of that instance, and while copying that encrypt the root device volume.</p>
+<p>To create an encrypted volume from an unencrypted volume, create a snapshot of it applying encryption parameters, then copy the snapshot and create a volume from the copied snapshot.</p>
 
 <ul>
   <li>Termination proectection is turned off by default. If turned on, the instance cannot be terminated from the console without first disabling termination protection.</li>
@@ -156,3 +157,5 @@
   <li>EBS Backed - Can be stopped and started, can detach volume. Most of the default Amazon AMIs are EBS backed. Volume is created from an EBS snapshot.</li>
   <li>Instance Store (Ephemeral) - Cannot be stopped, can only be terminated or restarted. Also, cannot detach volume. Volume doesn't even show up on Volumes page. Can only attach an EBS volume at creation. Cannot attach them after creation. Volume is created from a template store in S3, which results in it being a little slower to initialize than EBS.</li>
 </ul>
+
+<p>Autoscaling is meant for gradual increases in traffic, not load spikes. When setting up auto scaling, the ami id is used when configuring the launch configuration in order to create new EC2 instances as needed.</p>

@@ -4,9 +4,11 @@
 <p>Automated backups and manual snapshots, both can be used for disaster recovery. With automated backups, it creates a daily snapshot along with transaction logs throughout the day. This allows you to restore to a point in time. Each daily snapshot is based on the previous day's snapshot, with the day's transactions applied on top of that. Automated backups are neabled by default and are stored in S3. You automatically get the S3 storage space required for free, which is equal to the size of the DB.</p>
 <p>Manual snapshots are done on demand and are NOT deleted when the DB is deleted, unlike automated backups, though it will prompt you to do a final DB backup when deleting.</p>4
 <p>When restoring from a snapshot, it will create a new RDS instance with a new endpoint.</p>
+<p>Backups are taken during a defined window, usually at a time when it's not being used much as it may cause elevated latency.</p>
+<p>When you restore from either a backup or snapshot, the restored version is always a new RDS instance with a new endpoint.</p>
 
 <h4>Encryption</h4>
-<p>Encryption is supported at rest, but cannot be applied to an existing instance.</p>
+<p>Encryption is supported at rest, but cannot be applied to an existing instance. Can only be applied to MySQL, PostGreSQL, SQL Server, Oracle and Maria DB. Encryption is done via KMS. Once instance is encrypted, data stored in it in encrypted as well as its automated backups, read replicas and snapshots. Cannot encrypt an existing instance. You must instead create a new encrypted DB and then migrate data into it.</p>
 <h4>Multi AZ</h4>
 <p>Creates copy of DB in another AZ. All writes to primary DB are copies to secondary. If primary goes down, AWS fails over to secondary automatically, no endpoint change necessary.</p>
 <h4>Read Replicas</h4>
@@ -29,7 +31,4 @@
     <li>Scaling up is a manual process. Take snapshot, create new instance with larger size, or create read replica, but that only helps for reads, not for writes..</li>
 </ul>
 
-
-
-
-
+<p>To alleviate read throughput, create read replicas and/or use an Elastic Cache in front of the database to cache common queries.</p>
