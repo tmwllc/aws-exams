@@ -1,9 +1,7 @@
 var gulp = require('gulp'),
   sass = require('gulp-sass'),
   nodemon = require('gulp-nodemon'),
-  browserSync = require('browser-sync'),
-  cfn = require('cfn'),
-  config = require('config-yml');
+  browserSync = require('browser-sync');
 
 gulp.task('styles',  function() {
   return gulp.src('./sass/**/*.scss')

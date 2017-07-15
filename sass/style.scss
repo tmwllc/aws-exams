@@ -11,7 +11,54 @@ html {
   }
 }
 
-#content section {
-  display: none;
-  max-width: 750px;
+#leftNav {
+  float: left;
+  list-style: none;
+  margin-right: 15px;
+  padding: 0 0 0 10px;
+
+  li {
+	font-size: 0.9em;
+	padding: 3px 0;
+  }
+}
+
+#content {
+  float: left;
+
+  section {
+	display: none;
+	max-width: 750px;
+  }
+  p {
+	padding: 5px 0;
+  }
+  ul, ol {
+	padding: 10px 0;
+	li {
+	  margin: 0 0 0 17px;
+	  padding: 3px 0;
+	}
+  }
+  ul li {
+	list-style: disc;
+  }
+  ol li {
+	list-style: decimal;
+  }
+
+  h1, h3 {
+	font-weight: bold;
+	padding: 7px 0;
+  }
+  h1 {
+	font-size: 1.0em;
+  }
+  h3 {
+	font-size: 0.9em;
+  }
+  p, li {
+	font-size: 0.8rem;
+	line-height: 1.1rem;
+  }
 }
