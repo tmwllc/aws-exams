@@ -1,3 +1,13 @@
 <h1>Kinesis Exam Tips</h1>
 
 <p>Streams uses shards, each with a set max tps. Firehose does not use shards.</p>
+
+<p><a href="http://docs.aws.amazon.com/streams/latest/dev/service-sizes-and-limits.html" target="_blank">Kinesis Stream Limits</a></p>
+
+<ul>
+    <li>Max retention is 7 days, but default is 24 hours. Range is 1-7 days.</li>
+    <li>Max size of data blob is 1MB</li>
+    <li>Consumer - gets data records from Kinesis streams</li>
+    <li>Producer - puts data records into Kinesis streams</li>
+    <li>Streams - ingests a large amount of data in real time, durably stores the data, and makes the data available for consumption</li>
+</ul>

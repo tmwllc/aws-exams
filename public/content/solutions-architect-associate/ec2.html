@@ -106,6 +106,20 @@
   </li>
 </ul>
 
+<p>The following instance types allow for SSD backed storage:</p>
+<ul>
+  <li>m3</li>
+  <li>c3</li>
+  <li>g2</li>
+  <li>r3</li>
+  <li>x1</li>
+  <li>d2</li>
+  <li>i2</li>
+  <li>i3</li>
+</ul>
+
+<p>To run scripts on instance startup you can add a bootstrap script via Advanced Details and in the User Data section.</p>
+
 <h3>Status Checks</h3>
 <ul>
   <li>System Status Check - checks network connectivity, verifies that AWS is able to get network packets to the instance. Does not validate that the OS and applications are accepting traffic.</li>
@@ -129,7 +143,8 @@
       <li>Can take a snapshot of a volume and store it on S3</li>
       <li>Snapshots are point in time copies of volumes.</li>
       <li>Snapshots are incremental, this means that only the blocks that have changed since last snapshot are moved to S3.</li>
-      <li>If this is you first snapshot, it mayuu take some time to create.</li>
+      <li>If this is you first snapshot, it may take some time to create.</li>
+      <li>Snapshots occur asynchronously; the point-in-time snapshot is created immediately, but the status of  the snapshot is pending until complete. Can take several hours. While it is completing, it is not affected by ongoing reads/writes to the volume.</li>
     </ul>
   </li>
 </ul>
@@ -159,3 +174,7 @@
 </ul>
 
 <p>Autoscaling is meant for gradual increases in traffic, not load spikes. When setting up auto scaling, the ami id is used when configuring the launch configuration in order to create new EC2 instances as needed.</p>
+
+<h3>SSH Error Troubleshooting</h3>
+<p><a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html#TroubleshootingInstancesConnectingPuTTY" target="_blank">Connecting via Putty</a></p>
+<p>If you receive an error while trying to SSH that says "error: no supported authentication methods available" or "error: server refused our key", then make sure that you are connecting with appropriate user name for the AMI. Also verify that private key (.pem) has been correctly converted to format recognized by Putty (.ppk).</p>

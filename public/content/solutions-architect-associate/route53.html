@@ -62,3 +62,17 @@
   <li>Failover - Used when you want to create an active/passive setup. For example you may want your primary site to be in us-west-1 and your secondary in us-east-1. Route 53 will monitor the health of primary using health check. Route 53 will fail over to passive site.</li>
   <li>Geolocation - Lets you choose where traffic will be sent based on geographic location of users. For example, you might want all queries from Europe to be routed to a fleet of EC2 instances that are configured for European customers. These servers may have the local language of European customers and all prices displayed in Euros.</li>
 </ul>
+
+<h3>Supported Record Types</h3>
+<ul>
+  <li>A - IPv4</li>
+  <li>AAAA - IPv6</li>
+  <li>MX - Mail exchange</li>
+  <li>TXT</li>
+  <li>PTR</li>
+  <li>SRV</li>
+  <li>SPF</li>
+  <li>NAPTR</li>
+  <li>NS</li>
+  <li>SOA</li>
+</ul>
