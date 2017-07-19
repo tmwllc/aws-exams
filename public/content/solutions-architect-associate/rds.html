@@ -11,6 +11,7 @@
 <p>Encryption is supported at rest, but cannot be applied to an existing instance. Can only be applied to MySQL, PostGreSQL, SQL Server, Oracle and Maria DB. Encryption is done via KMS. Once instance is encrypted, data stored in it in encrypted as well as its automated backups, read replicas and snapshots. Cannot encrypt an existing instance. You must instead create a new encrypted DB and then migrate data into it.</p>
 <h4>Multi AZ</h4>
 <p>Creates copy of DB in another AZ. All writes to primary DB are copies to secondary. If primary goes down, AWS fails over to secondary automatically, no endpoint change necessary.</p>
+<p>If deployment of primary DB fails in a multi-AZ setup, the CNAME record is changed from primary to secondary to prevent connection troubles.</p>
 <h4>Read Replicas</h4>
 <ul>
     <li>Allow you to have copies of a DB. Queries can be made across multiple replicas, allowing for performance improvement.</li>
@@ -32,3 +33,5 @@
 </ul>
 
 <p>To alleviate read throughput, create read replicas and/or use an Elastic Cache in front of the database to cache common queries.</p>
+<p>When hosting a DB in a VPC using RDS, your VPC must have at least one subnet in at least two AZs.</p>
+<p>In the basic monitoring package for RDS, CloudWatch provides database visible metrics, such as number of connections. It does not provide DB memory usage, OS visible metrics like memory utilization or web service visible metrics such as number of failed transaction requests.</p>

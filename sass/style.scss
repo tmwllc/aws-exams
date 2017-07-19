@@ -38,6 +38,9 @@ html {
 	li {
 	  margin: 0 0 0 17px;
 	  padding: 3px 0;
+	  li:first-child {
+		padding-top: 0;
+	  }
 	}
   }
   ul li {
@@ -46,19 +49,30 @@ html {
   ol li {
 	list-style: decimal;
   }
-
-  h1, h3 {
-	font-weight: bold;
-	padding: 7px 0;
-  }
-  h1 {
-	font-size: 1.0em;
-  }
-  h3 {
-	font-size: 0.9em;
-  }
   p, li {
 	font-size: 0.8rem;
 	line-height: 1.1rem;
   }
+  p {
+	margin: 0 0 5px;
+  }
+  h1, h2, h3, h4, h5, h6 {
+	font-weight: bold;
+	& + ul, & + ol {
+	  padding-top: 0;
+	}
+  }
+  h1 {
+	font-size: 1.0em;
+	padding: 7px 0;
+  }
+  h3 {
+	font-size: 0.9em;
+	padding: 3px 0;
+  }
+  h4 {
+	font-size: 0.85em;
+	padding: 3px 0;
+  }
+
 }

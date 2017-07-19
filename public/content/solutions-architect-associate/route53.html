@@ -46,6 +46,7 @@
         <li>Key difference - CNAME can't be used for naked domain names (domains with no subdomain in front). You can't have a CNAME for http://acloud.guru, it must either be an A record or an Alias.</li>
         <li>Alias record sets can save you time because Route 53 automatically recognizes changes in the record sets that the alias resource record set refers to.</li>
         <li>For example, suppose an alias resource record set for example.com points to an ELB at lb1-1234.us-east-1.elb.amazonaws.com. If the IP addresss of that ELB changes, Route 53 will automatically reflect those changes in DNS answers for example.com without any changes to the hosted zone that contains resource record sets for example.com</li>
+        <li>When creating an alias record, the default TTL is 60 seconds and can't be changed.</li>
       </ul>
     </li>
   </ul>

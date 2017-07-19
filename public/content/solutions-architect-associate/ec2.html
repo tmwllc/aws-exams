@@ -17,7 +17,7 @@
   </li>
   <li>Spot
     <ul>
-      <li>Apps that flexible start/end times</li>
+      <li>Apps that have flexible start/end times</li>
       <li>Apps that are only feasible at very low compute prices</li>
       <li>Users with urgent computing needs for large amounts of additional capacity</li>
       <li> Good idea to use these when demand is really low, and therefore price is low. For example 2am.</li>
@@ -67,7 +67,7 @@
 </ul>
 
 <h3>Elastic Block Storage (EBS)</h3>
-<p>Allows you to create storage volumes create storage volumes and attach them to EC2 instances. Once attached, you can create a file system on them, run a DB, or use them in any other way you would use a block device. EBS volumes are placed in a specific Availability Zone, where they are automatically repliced to protect you from the failure of a single component.</p>
+<p>Allows you to create storage volumes and attach them to EC2 instances. Once attached, you can create a file system on them, run a DB, or use them in any other way you would use a block device. EBS volumes are placed in a specific Availability Zone, where they are automatically replicated to protect you from the failure of a single component.</p>
 <h4>EBS Volume Types</h4>
 <ul>
   <li>General Purpose SSD (GP3)
@@ -81,6 +81,7 @@
       <li>Designed for I/O intensive applications such as large relational or NoSQL databases.</li>
       <li>Use if you need more than 10,000 IOPS.</li>
       <li>Can provision up to 20,000 IOPS</li>
+      <li>Max size 16TB</li>
     </ul>
   </li>
   <li>Throughput Optimized HDD (ST1)
@@ -104,6 +105,13 @@
       <li>Ideal for workloads where data is accessed infrequently and applications where the lowest storage cost is important.</li>
     </ul>
   </li>
+</ul>
+
+<h3>Instance Termination</h3>
+<ul>
+  <li>For EBS backed AMI, any volume other than OS volume is preserved</li>
+  <li>All snapshots of the EBS volume with OS are preserved</li>
+  <li>For S3 backed AMI, all data in local HD is deleted</li>
 </ul>
 
 <p>The following instance types allow for SSD backed storage:</p>
@@ -164,7 +172,7 @@
 </ul>
 
 <h3>Roles</h3>
-<p>Can only assign a role to an instance at creation. It cannot be added later. You can however modify the policy of an IAM role already assigned to an EC2 instance. Roles are much more secure than storying your access key and secret access key on the EC2 instances. If a hacker gains access to your EC2 instance he can then copy your secret access key and use it to login from anywhere. Also, if you need to revoke access to a user, you'd have to login to each EC2 instance the user had access to and update the SSH keys. Using roles makes it much easier to revoke access to a user.</p>
+<p>Can now be added after instance creation. Roles are much more secure than storying your access key and secret access key on the EC2 instances. If a hacker gains access to your EC2 instance he can then copy your secret access key and use it to login from anywhere. Also, if you need to revoke access to a user, you'd have to login to each EC2 instance the user had access to and update the SSH keys. Using roles makes it much easier to revoke access to a user.</p>
 <p>Roles are universal and can be used in any region.</p>
 
 <h3>AMI Types</h3>
@@ -178,3 +186,12 @@
 <h3>SSH Error Troubleshooting</h3>
 <p><a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html#TroubleshootingInstancesConnectingPuTTY" target="_blank">Connecting via Putty</a></p>
 <p>If you receive an error while trying to SSH that says "error: no supported authentication methods available" or "error: server refused our key", then make sure that you are connecting with appropriate user name for the AMI. Also verify that private key (.pem) has been correctly converted to format recognized by Putty (.ppk).</p>
+
+<h3>Instance States</h3>
+<ul>
+  <li>pending</li>
+  <li>running</li>
+  <li>rebooting</li>
+</ul>
+
+<p>If you no longer need a reserved instance, you should terminate it immediately to preserve remaining term and sell it on the AWS Reserved Instance Marketplace.</p>

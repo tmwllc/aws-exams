@@ -127,3 +127,4 @@
   <li>Public and Private Subnets and Hardware VPN Access</li>
   <li>Private Subnet with Hardware VPN Access</li>
 </ul>
+<p>When setting up EC2 instances (db and app) in a VPC in different subnets, you must setup an ACL that allows communication between the two and ensure SGs are set to allow the app host to talk to the db on the right port/protocol.</p>
