@@ -12,3 +12,5 @@
   <li>Instances monitored by ELBs will be reported as InService or OutofService</li>
   <li>Health checks check health by talking to, looking for a specific endpoint and whether the response is 200 (or some other specified value from 200-299)</li>
 </ul>
+
+<p>By default, load balancers distribute requests evenly across its enabled AZs. So if you have 10 instances in AZ A, and 2 instances in AZ B, the 2 instances in AZ B serve the same number of requests as the 10 in AZ A. To spread the traffic evenly across all instances, enable cross zone load balancing.</p>
