@@ -181,7 +181,7 @@
   <li>Instance Store (Ephemeral) - Cannot be stopped, can only be terminated or restarted. Also, cannot detach volume. Volume doesn't even show up on Volumes page. Can only attach an EBS volume at creation. Cannot attach them after creation. Volume is created from a template store in S3, which results in it being a little slower to initialize than EBS.</li>
 </ul>
 
-<p>Autoscaling is meant for gradual increases in traffic, not load spikes. When setting up auto scaling, the ami id is used when configuring the launch configuration in order to create new EC2 instances as needed.</p>
+<p>Auto scaling is meant for gradual increases in traffic, not load spikes. When setting up auto scaling, the ami id is used when configuring the launch configuration in order to create new EC2 instances as needed. When scaling down, if one AZ has more instances than others, that AZ will scale down an instance first. Also, instances with the oldest launch configuration are stopped first.</p>
 
 <h3>SSH Error Troubleshooting</h3>
 <p><a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html#TroubleshootingInstancesConnectingPuTTY" target="_blank">Connecting via Putty</a></p>
