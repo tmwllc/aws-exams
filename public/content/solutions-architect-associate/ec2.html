@@ -20,7 +20,10 @@
       <li>Apps that have flexible start/end times</li>
       <li>Apps that are only feasible at very low compute prices</li>
       <li>Users with urgent computing needs for large amounts of additional capacity</li>
-      <li> Good idea to use these when demand is really low, and therefore price is low. For example 2am.</li>
+      <li>Good idea to use these when demand is really low, and therefore price is low. For example 2am.</li>
+      <li>When AWS terminates a spot instance due to the current price exceeding your bid, you will receive a 2 minute warning. This notice is accessible inside the instance via the metadata: http://169.254.169.254/latest/meta-data/termination-time.</li>
+      <li>AWS may not action the shutdown even after giving 2 minute warning</li>
+      <li><a href="https://aws.amazon.com/blogs/aws/new-ec2-spot-instance-termination-notices/" target="_blank">Termination</a></a></li>
     </ul>
   </li>
   <li>Dedicated Hosts

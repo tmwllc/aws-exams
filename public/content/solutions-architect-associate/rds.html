@@ -35,3 +35,4 @@
 <p>To alleviate read throughput, create read replicas and/or use an Elastic Cache in front of the database to cache common queries.</p>
 <p>When hosting a DB in a VPC using RDS, your VPC must have at least one subnet in at least two AZs.</p>
 <p>In the basic monitoring package for RDS, CloudWatch provides database visible metrics, such as number of connections. It does not provide DB memory usage, OS visible metrics like memory utilization or web service visible metrics such as number of failed transaction requests.</p>
+<p>#27: When running a multi-AZ deployment, you cannot use the standby for read/write operations.</p>

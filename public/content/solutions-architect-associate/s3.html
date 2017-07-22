@@ -30,6 +30,22 @@
   <li>Glacier - Very cheap, but for archival only. 3-5 hours to restore from Glacier.</li>
 </ul>
 
+<h4><a href="http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html#RESTObjectPUT-requests-request-headers" target="_blank">PUT Request Headers</a></h4>
+<ul>
+  <li>Cache-Control - specify caching behavior</li>
+  <li>Content-Disposition - specify presentational information</li>
+  <li>Content-Encoding</li>
+  <li>Content-Length</li>
+  <li>Content-MD5 - base64 encoded 128 bit MD5 digest of the message (without the headers)</li>
+  <li>Content-Type</li>
+  <li>Expect - when app uses 100-continue, it does not send request body until it receives an acknowledgement</li>
+  <li>Expires - time at which it is no longer cacheable</li>
+  <li>x-amz-meta- Headers starting with this prefix are user-defined metadata.</li>
+  <li>x-amz-storage-class - Default is standard. Cther options are STANDARD | REDUCED REDUNDANCY</li>
+  <li>x-amz-tagging - Specifies a set of one or more tags</li>
+  <li>x-amz-website-redirect-location - If bucket is a website, redirects requests for this object to another object in same bucket or to an external URL.</li>
+</ul>
+
 <p>To increase performance when saving log files, add a random string to the start of the file name. This way they are not all grouped together alphabetically.</p>
 
 <h3>Bucket URL Formats:</h3>
