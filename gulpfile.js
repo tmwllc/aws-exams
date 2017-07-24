@@ -33,12 +33,4 @@ gulp.task('browser-sync', ['nodemon', 'styles'], function() {
   // });
 });
 
-gulp.task('deploy:vpc', function() {
-
-})
-
-gulp.task('deploy:app', function() {
-
-})
-
 gulp.task('default', ['browser-sync']);

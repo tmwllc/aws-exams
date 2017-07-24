@@ -37,6 +37,14 @@ app.get('/solutions-architect-associate', function(req, res) {
   });
 });
 
+app.get('/sysops-admin-associate', function(req, res) {
+  res.render('sysops-admin-associate', {
+    title: 'SysOps Administrator Associate',
+    certification: 'sysops-admin-associate',
+    sysOpsLinkClass: 'active'
+  })
+})
+
 app.use(express.static('public'));
 
 app.use(function(req, res) {

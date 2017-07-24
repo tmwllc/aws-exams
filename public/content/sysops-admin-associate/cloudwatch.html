@@ -1,0 +1,65 @@
+<h1>CloudWatch Exam Tips</h1>
+<h3>Resources CloudWatch Can Monitor</h3>
+<ul>
+    <li>Compute
+        <ul>
+            <li>Autoscaling Groups</li>
+            <li>Elastic Load Balancers</li>
+            <li>Route53 Health Checks</li>
+        </ul>
+    </li>
+    <li>
+        <ul>
+            <li>EBS Volumes</li>
+            <li>Storage Gateways</li>
+            <li>CloudFront</li>
+        </ul>
+    </li>
+    <li>Databases and Analytics
+        <ul>
+            <li>DynamoDB</li>
+            <li>Elasticache Nodes</li>
+            <li>RDS Instances</li>
+            <li>Elastic MapReduce Job Flows</li>
+            <li>Redshift</li>
+        </ul>
+    </li>
+    <li>Other
+        <ul>
+            <li>SNS Topics</li>
+            <li>SQS Queues</li>
+            <li>Opsworks</li>
+            <li>CloudWatch Logs</li>
+            <li>Estimated Charges on AWS Bill</li>
+        </ul>
+    </li>
+</ul>
+
+<p>By default, metrics are stored for 2 weeks. You can retrieve older metrics using the GetMetricStatistics API, or by using third party tools. You can retrieve data from any terminated EC2 or ELB instance for  up to 2 weeks after its termination.</p>
+
+<p>Default metric granularity is 5 minutes, detailed is 1 minute but costs more. For custom metrics, the minimum granularity that you can have is 1 minute.</p>
+
+<p>Can set a CloudWatch alarm for any metric in account.</p>
+
+<h3>EC2 Status Checks</h3>
+<ul>
+    <li>System Status - Checks physical machine hosting the instance
+        <ul>
+            <li>Loss of network connectivity</li>
+            <li>Loss of system power</li>
+            <li>Software issues on the physical host</li>
+            <li>Hardware issues on the physical host</li>
+            <li>Best way to resolve is to stop/start VM. This will start it on a different physical host.</li>
+        </ul>
+    </li>
+    <li>Instance Status - Checks the virtual machine itself
+        <ul>
+            <li>Failed system status checks</li>
+            <li>Misconfigured networking or startup configuration</li>
+            <li>Exhausted memory</li>
+            <li>Corrupted file system</li>
+            <li>Incompatible kernel</li>
+            <li>Best way to trouble shoot is by rebooting or making modifications in OS</li>
+        </ul>
+    </li>
+</ul>
