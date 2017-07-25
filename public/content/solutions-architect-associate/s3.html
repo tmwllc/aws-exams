@@ -41,7 +41,7 @@
   <li>Expect - when app uses 100-continue, it does not send request body until it receives an acknowledgement</li>
   <li>Expires - time at which it is no longer cacheable</li>
   <li>x-amz-meta- Headers starting with this prefix are user-defined metadata.</li>
-  <li>x-amz-storage-class - Default is standard. Cther options are STANDARD | REDUCED REDUNDANCY</li>
+  <li>x-amz-storage-class - Default is STANDARD. Other options are STANDARD_IA | REDUCED REDUNDANCY</li>
   <li>x-amz-tagging - Specifies a set of one or more tags</li>
   <li>x-amz-website-redirect-location - If bucket is a website, redirects requests for this object to another object in same bucket or to an external URL.</li>
 </ul>
@@ -57,12 +57,12 @@
 <h3>S3 Objects:</h3>
 <ul>
   <li>Key (filename)</li>
-  <li>Value (the data, made up for a byte sequence)</li>
+  <li>Value (the data, made up of a byte sequence)</li>
   <li>Version ID (used for versioning)</li>
   <li>Metadata (data about the data being stored)</li>
   <li>Subresources:
     <ul>
-      <li>Access Control Lists (give fine grained permissios for an individual file</li>
+      <li>Access Control Lists (give fine grained permissions for an individual file)</li>
       <li>Torrent</li>
     </ul>
   </li>
@@ -81,9 +81,9 @@
 </ul>
 <h3>Glacier</h3>
 <ul>
-  <li>Glacier automatically encrypts data at rest usin AES 256 bit symmetric keys and supports secure transfer over SSL</li>
+  <li>Glacier automatically encrypts data at rest using AES 256 bit symmetric keys and supports secure transfer over SSL</li>
   <li>Single archive can be as large as 40TB</li>
-  <li>Can store unlimited number of archies and unlimited amount of data</li>
+  <li>Can store unlimited number of archives and unlimited amount of data</li>
   <li>Each archive is assigned a unique id at creation</li>
   <li>Content is immutable, so it cannot be updated</li>
 </ul>
@@ -94,8 +94,8 @@
     <ul>
       <li>Server Side Encryption
         <ul>
-          <li>S3 Managed Keys - SSE-S3. Each object encrypted with unique key. Additionally, the key itself is encrypted with a amaster key, which is regularly reotated.</li>
-          <li>AWS Key Mangement Service, Managed Keys - SSE-KMS. Separate permissions for use of an envelope key. Envelope key is a key that protects the data's encryption key. Also provides audit trail of when keys were used and who used them. Can manage and encrypt keys yourself, or use default.</li>
+          <li>S3 Managed Keys - SSE-S3. Each object encrypted with unique key. Additionally, the key itself is encrypted with a a master key, which is regularly rotated.</li>
+          <li>AWS Key Management Service, Managed Keys - SSE-KMS. Separate permissions for use of an envelope key. Envelope key is a key that protects the data's encryption key. Also provides audit trail of when keys were used and who used them. Can manage and encrypt keys yourself, or use default.</li>
           <li>Server Side Encryption with Customer Provided Keys - SSE-C. Customer manages the encryption keys, Amazon manages the encryption/decryption.</li>
         </ul>
       </li>
@@ -109,7 +109,7 @@
 </ul>
 
 <h3>Transfer Acceleration</h3>
-<p>Utilises CloudFront Edge Network to accelerate your uploads to S3. Instead of uploading directly to S# bucket, you can use a distinct URL to upload directly to an edge location which will then transfer that file to S3. You will get a distinct URL to upload to, like: http://acloudguru.s3-accelerate.amazonaws.com.</p>
+<p>Utilises CloudFront Edge Network to accelerate your uploads to S3. Instead of uploading directly to S3 bucket, you can use a distinct URL to upload directly to an edge location which will then transfer that file to S3. You will get a distinct URL to upload to, like: http://acloudguru.s3-accelerate.amazonaws.com.</p>
 
 <h3>Data Consistency</h3>
 <ul>
@@ -126,6 +126,7 @@
   <li>Object removed via s3:ObjectRemoved:Delete or versioned object permanently deleted via s3:ObjectRemoved:DeleteMarkerCreated. Can use wildcard to cover both via s3:ObjectRemoved:*.</li>
   <li>RRS object lost</li>
 </ul>
+<p>Events can be sent to these destinations:</p>
 <ul>
   <li>SNS</li>
   <li>SQS</li>
@@ -138,5 +139,5 @@
   <li>Multipart Upload - 5TB</li>
 </ul>
 
-<p>Can use Multi-Object delete to delete mutliple files in a single request.</p>
+<p>Can use Multi-Object delete to delete multiple files in a single request.</p>
 <p>There is no charge for data transfer from S3 to AWS services within the same region.</p>

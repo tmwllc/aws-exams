@@ -1,8 +1,8 @@
 <h1>VPC Tips</h1>
 
-<p>When creating a new VPC, a security group, route and ACL are created automatically. However, it does not create, subnets or internet gateway.</p>
+<p>When creating a new VPC, a security group, route and ACL are created automatically. However, it does not create subnets or internet gateway.</p>
 
-<p>VPC is a logical datacenter. Do not span regions, but can span availability zones. Can have a maximum of 5 VPCs in each AWS region by default Consists of Ineternet Gateways (IGWs) or Virtual Private Gateways, Route Tables, Access Control Lists, Subnets, Security Groups. 1 subnet = 1 availability zone (they cannot span multiple AZs) - this comes up a lot on exams</p>
+<p>VPC is a logical datacenter. Do not span regions, but can span availability zones. Can have a maximum of 5 VPCs in each AWS region by default Consists of Internet Gateways (IGWs) or Virtual Private Gateways, Route Tables, Access Control Lists, Subnets, Security Groups. 1 subnet = 1 availability zone (they cannot span multiple AZs) - this comes up a lot on exams</p>
 
 <p>It is a logically isolated section of AWS where you can AWS resources in a virtual network that you define. You have complete control over virtual networking env, including selection of your IP address range, creation of subnets, configuration of route tables and network gateways.</p>
 
@@ -100,13 +100,12 @@
 <ol>
   <li>Create VPC with CIDR range 10.0.0.0/16</li>
   <li>Create Private Subnet with IP range 10.0.0.0/24 in AZ 1</li>
-  <li>Subnet Actions - Modify auto-assign IP settings -> Enable to auto create public IP for instances created in this subnet</li>
   <li>Create Public Subnet with IP range 10.0.1.0/24 in AZ 2</li>
+  <li>Subnet Actions - Modify auto-assign IP settings -> Enable to auto create public IP for instances created in Public subnet</li>
   <li>Create Internet Gateway and attach it to VPC</li>
   <li>Create Route Table, with rule giving 0.0.0.0 a route to the internet using the Internet Gateway</li>
   <li>Associate Route with public subnet</li>
   <li>Create Security Group which gives HTTP, HTTPS and SSH access to 0.0.0.0/0, which will be used for public subnet EC2 instances.</li>
-  <li>Create Security Group which gives SSH access to 10.0.1.0/24</li>
   <li>Create EC2 instance in public subnet with bootstrap script to install/start Apache and create simple webpage</li>
   <li>Attempt to load webpage in browser</li>
   <li>Create EC2 in private subnet with new security group that gives SSH access to 10.0.0.0/24.</li>

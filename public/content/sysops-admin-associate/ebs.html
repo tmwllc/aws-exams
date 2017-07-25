@@ -1,0 +1,111 @@
+<h1>EBS Exam Tips</h1>
+
+<h3>Volume Types</h3>
+<ul>
+  <li>General Purpose (SSD) - gps
+    <ul>
+      <li>Recommended for most workloads</li>
+      <li>Boot volumes</li>
+      <li>Virtual desktops</li>
+      <li>Low-latency interactive apps</li>
+      <li>Dev/test environments</li>
+      <li>Base of 3 IOPS per GiB of volume</li>
+      <li>Max volume size of 16,384 GiB (16TB)</li>
+      <li>Max IOPS 10,000 (if you need more, switch to Provisioned IOPS)</li>
+      <li>Can burst up to 3,000 IOPS using I/O credits</li>
+      <li>If you need more than 3,000 IOPS, you can't rely on bursting. What you should do is increase volume size, which will allow higher IOPS due to 3 IOPS/GB rule.</li>
+      <li>If your volume is using more than the baseline performance IO level, it uses IO credits to balance burst to the required performance level, uo to a max of 3,000 IOPS</li>
+      <li>Each volume starts with a credit balance of 5,400,000 IO credits. This is enough to sustain the max burst of 3,000 IOPS for 30 minutes.</li>
+      <li>When you are not exceeding provisioned IO level, you will be earning credits.</li>
+    </ul>
+  </li>
+  <li>Provision IOPS (SSD) - io1
+    <ul>
+      <li>Critical business apps that require sustained IOPS performance or > 10,0000 IOPS or 160MiB/s of throughput</li>
+      <li>Large RDS DB workloads</li>
+    </ul>
+  </li>
+  <li>Throughput Optimized (HDD) - st1
+    <ul>
+      <li>Streaming workloads requiring consistent, fast throughput at low price</li>
+      <li>Big data</li>
+      <li>Data warehousing</li>
+      <li>Log processing</li>
+      <li>Cannot be boot volume</li>
+    </ul>
+  </li>
+  <li>Cold (HDD) - sc1
+    <ul>
+      <li>Throughput-oriented storage for large volumes</li>
+      <li>Scenariors where the lowest storage cost is important</li>
+      <li>Cannot be boot volume</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>CloudWatch Metrics</h3>
+<ul>
+  <li>
+    VolumeReadBytes/VolumeWriteBytes
+    <ul>
+      <li><Provides information on the IO operations in a specified period of time. The Sum statistic reports the total number of bytes transferred during the period. The Average statistic reports the average size of each IO operation during the period. The SampleCount statistic reports the total number of IO operations during the period. The Minium and Maximum statistics are not relevant for this metric. Data is only reported to CloudWatch when the volume is active. If volume is idle, no data is reported to CloudWatch.</li>
+      <li>Units: Bytes</li>
+    </ul>
+  </li>
+  <li>VolumeReadOps/VolumeWriteOps
+    <ul>
+      <li>Total number of IO operations in a specified period of time. To calculate the average IOPS for the period, divide the total operations in the period by the number of seconds in the period.</li>
+      <li>Units: Count</li>
+    </ul>
+  </li>
+  <li>VolumeTotalReadTime/VolumeTotalWriteTime
+    <ul>
+      <li>Total # of seconds spent by all operations that completed in a specified period of time. If multiple requests are submitted at the same time, this total could be greater than the length of the period. I.e., for a period of 5 minutes (300 seconds) if 700 operations completed during that period and each operation took 1 second, the value would be 700 seconds.</li>
+      <li>Units: Seconds</li>
+    </ul>
+  </li>
+  <li>VolumeIdleTime
+    <ul>
+      <li>The total number of seconds in a specified period of time when no read/write operations were submitted.</li>
+      <li>Units: Seconds</li>
+    </ul>
+  </li>
+  <li>VolumeQueueLength
+    <ul>
+      <li># of read/write operation requests waiting to be completed in a specified period of time.</li>
+      <li>Units: Count</li>
+    </ul>
+  </li>
+  <li>VolumeThroughputPercentage
+    <ul>
+      <li>Used with Provisioned IOPS (SSD) volumes only. % of IOPS delivered of the total IOPS provisioned for an EBS volume. Provisioned IOPS (SSD) volumes deliver within 10% of the provisioned IOPS performance 99.9% of the time over a given year.</li>
+      <li>Units: %</li>
+    </ul>
+  </li>
+  <li>VolumeConsumedReadWriteOps
+    <ul>
+      <li>Used with Provisioned IOPS (SSD) volumes only. The total amount of read/write operations (normalized to 256K capacity units) consumed in a specified period of time. IO operations smaller than 256K each count as 1 consumes IOPS. IO operations larger than 256K are counted in 256K capacity units. I.e., a 1024K IO would count as 4 consumed IOPS.</li>
+      <li>Units: Count</li>
+    </ul>
+  </li>
+</ul>
+
+<p><a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-initialize.html" target="_blank">Initializing EBS Volumes</a></p>
+<p><a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-volume-status.html#monitoring-volume-checks" target="_blank">Monitoring Volumes with Status Checks</a></p>
+
+<h3>Volume Status Checks</h3>
+<ul>
+  <li>ok - normal</li>
+  <li>warning - degraded (performance below expectations), severely degraded (performance well below expectations)</li>
+  <li>impaired - Stalled (performance severely impacted), not available (unable to determine IO performance because IO is disabled)</li>
+  <li>insufficient-data - </li>
+</ul>
+<p>If volume is degraded or severely degraded, you'll see status "warning". If volume is stalled or not available, you'll see status "impoaired".</p>
+
+<h3>Modifying EBS Volumes (new, may not be in exam)</h3>
+<p>You can increase EBS volume size, change volume type or (for an io1 volume) adjust its IOPS performance, all without detaching it. Can apply to detached volumes as well.</p>
+<ul>
+  <li>Issue modification command (console or command line)</li>
+  <li>Monitor progress of modification</li>
+  <li>If size of volume was modified, extend the volume's file system to take advantage of increase storage capacity</li>
+</ul>

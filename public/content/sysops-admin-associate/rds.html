@@ -1,0 +1,29 @@
+<h1>Monitoring RDS Exam Tips</h1>
+<ul>
+  <li>Metrics
+    <ul>
+      <li>BinLogDiskUsage</li>
+      <li>CPUUtilization</li>
+      <li><b>DatabaseConnections</b> - if app is running slowly, check if DB connections are being closed when done</li>
+      <li><b>DiskQueueDepth</b> - # of read/write operations queued, always want this to be zero</li>
+      <li>Freeable Memory</li>
+      <li><b>FreeStorageSpace</b> - Shows if RDS is running out of storage space. Good idea to set an alarm when this gets low.</li>
+      <li><b>ReplicaLag (seconds)</b> - Lag in seconds between RDS and Read Replicas. If data seems to be out of date, check ReplicaLag to ensure it's low.</li>
+      <li>SwapUsage</li>
+      <li><b>ReadIOPS</b></li>
+      <li><b>WriteIOPS</b></li>
+      <li><b>ReadLatency</b></li>
+      <li><b>WriteLatency</b></li>
+      <li>ReadThroughput</li>
+      <li>WriteThroughput</li>
+      <li>NetworkReceiveThroughput</li>
+      <li>NetworkTransmitThroughput</li>
+    </ul>
+  </li>
+  <li>Events
+    <ul>
+      <li>Events - Let you view a history of events for your DBs, like when backups have started/completed</li>
+      <li>Event Subscriptions - allow you to setup notifications for when events happen. Example, get an SNS notification when DB fails over.</li>
+    </ul>
+  </li>
+</ul>
