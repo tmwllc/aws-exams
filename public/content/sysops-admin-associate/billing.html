@@ -1,0 +1,16 @@
+<h1>Organizations and Billing Exam Tips</h1>
+
+<h2>Organizations</h2>
+<p>Organizations is an account management service that enables you to consolite multiple AWS accounts into an organization that you create and centrally manage.</p>
+<h2>Consolidated Billing</h2>
+<p>Allows linking of accounts to a paying account. Only get 1 monthly bill to paying account, but costs are broken down by linked accounts. Paying account and all linked accounts are independent and cannot access resources in other accounts. Current default limit of 20 linked accounts for consolidated billing.</p>
+<p>Allows sharing costs of resources like S3 or EC2 reserved instances. I.e., S3 is cheaper per GB when storing more data. Combined data in linked accounts can push you over price break limits. Similarly if you're paying for 5 reserved instances and only using 3 in one account, other linked accounts can use the other 2 at no additional cost.</p>
+
+<ul>
+  <li>Always enable MFA on root account</li>
+  <li>Always use strong/complex password on root account</li>
+  <li>Paying account should be used for billing only, do not deploy resources in it.</li>
+  <li>Limit of 20 linked accounts, but can request more</li>
+  <li>Can enable billing alert on paying account as well as linked accounts</li>
+  <li>CloudTrail is per account. Can consolidate logs using S3 by enabling CloudTrail on paying account, creating bucket policy to allow cross account access and turning on CloudTrail in linked accounts and point it to the S3 bucket.</li>
+</ul>

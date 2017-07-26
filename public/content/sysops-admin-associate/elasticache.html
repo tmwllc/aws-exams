@@ -1,0 +1,60 @@
+<h1>Elasticache Monitoring Exam Tips</h1>
+<ul>
+  <li>CPU Utilization
+    <ul>
+      <li>Memcached
+        <ul>
+          <li>Multi-threaded</li>
+          <li>Can handle loads of up to 90%. If > 90%, add more nodes to cluster.</li>
+        </ul>
+      </li>
+      <li>Redis
+        <ul>
+          <li>Not multi-threaded</li>
+          <li>To determine when to scale, take 90 and divide by number of cores. So, if instance has 4 cores, 90/4 = 22.5%, so you need to need to scale at 22.5% CPU Utilization.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Swap Usag
+    <ul>
+      <li>Amount of swap file used. Swap file is disk storage space reserved for when computer runs out of RAM. Swap file usually is equal to amount of RAM.</li>
+      <li>Memcached
+        <ul>
+          <li>Should be around 0 most of the time and should not exceed 50Mb</li>
+          <li>If it exceeds 50Mb, increase memcached_connections_overhead parameter</li>
+          <li>The memcached_connections_overhead defines the amount of memory to be reserved for memcached connections and other overhead.</li>
+        </ul>
+      </li>
+      <li>Redis
+        <ul>
+          <li>No SwapUsage metric, instead use reserved-memory</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Evictions
+    <ul>
+      <li>Evictions occur when a new item is added and an old item must be removed due to lack of free space.</li>
+      <li>Memcached
+        <ul>
+          <li>No recommended setting. Choose a threshold based off of your application.</li>
+          <li>Either scale up (increase memory of existing nodes) or scale out (add nodes)</li>
+        </ul>
+      </li>
+      <li>Redis
+        <ul>
+          <li>No recommended setting. Choose a threshold based off your application.</li>
+          <li>Can only scale out (add read replices). Cannot scale up.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Concurrent Connections
+    <ul>
+      <li>No recommended setting for either Memcached or Redis</li>
+      <li>If there is a large and sustained spike in # of concurrent connections, this can either mean large traffic spike OR your app is not releasing connections as it should be.</li>
+      <li>Good idea to set an alarm on the # of concurrent connections for elasticache.</li>
+    </ul>
+  </li>
+</ul>
