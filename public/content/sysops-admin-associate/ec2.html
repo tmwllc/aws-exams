@@ -1,0 +1,16 @@
+<h1>EC2 Exam Tips</h1>
+<ul>
+    <li>Spot - bid for price, if current price <= bid, server will start. If price rises above big, AWS will send notification with 2 minute warning and then shut it down. Good idea to use spot when you can for cheaper prices during low demand times. Save output from instance to S3 so that when it shuts down you'll still have your data.</li>
+    <li>On Demand - paid by the hour, not always guaranteed availability. Region may not have the capacity for a given instance type at all times</li>
+    <li>Reserved - paid up front either 1 year or 3 years. Up to 75% cheaper than On Demand. Good idea to use Reserved for server you know you'll need all year, but use Auto Scaling to spin up On Demand instances as needed. For high availability, use 2 reserved instances at all times.</li>
+</ul>
+
+<h3>Utilization Test Question</h3>
+<p>You run an app hosted on 2 EC2 instances in an ASG across 2 AZs. It's determined that you only need one web server to handle min load. During core business hours (9-6 M-F), 6-8 servers are needed. 5-6 days/year, # of servers required might go up to 20. Which of the following choices best reduces cost while providing full availability:</p>
+<ul>
+    <li>A - 6 reserved (heavy utilization), rest covered by <b>Spot Instances</b></li>
+    <li>B -6 reserved (heavy utilization), rest covered by On Demand Instances</li>
+    <li>C -2 reserved (heavy utilization), 6 On Demand instances, rest covered by <b>Spot Instances</b></li>
+    <li>D - 2 reserved (heavy utilization), 4 reserved (medium utilization), rest covered by On Demand Instances</li>
+</ul>
+<p>Can't rely on Spot instances as price may rise above bid, so rule out A and C. B has 6 reserved with heavy util, which seems overkill given that min load only requires one instance (2 for high availability). Medium utilization instances are generally around half the hourly price as heavy utilization, so you'll save quite a by using 2 heavy/4medium over using 6 heavy. D is the correct answer.</p>

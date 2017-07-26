@@ -1,0 +1,33 @@
+<h1>High Availability Exam Tips</h1>
+<h2>Elasticity</h2>
+<p>Think of elasticity as a rubber band. It allows you to stretch out and retract back your infrastructure, based on demand. Only pay for what you need. Elasticity is used during a short time period, such as hours or days.</p>
+<h2>Scalability</h2>
+<p>Used to talk about building out the infrastructure to meet your long term needs. Scalability is used over longer time periods, such as weeks, days, months, and years.</p>
+
+<h3>Scalability vs Elasticity in AWS Services</h3>
+<ul>
+    <li>EC2
+        <ul>
+            <li>Scalability - Increase instance sizes as require, using reserved instances</li>
+            <li>Elasticity - Increase number of EC2 instances, based on autoscaling</li>
+        </ul>
+    </li>
+    <li>
+        <ul>
+            <li>Scalability - </li>
+            <li>Elasticity - </li>
+        </ul>
+    </li>
+    <li>DynamoDB
+        <ul>
+            <li>Scalability - Unlimited storage</li>
+            <li>Elasticity - Increase IOPS for additional traffic. Decrease afterward. DynamoDB now has autoscaling for this.</li>
+        </ul>
+    </li>
+    <li>RDS
+        <ul>
+            <li>Scalability - Increase instance size</li>
+            <li>Elasticity - Not very elastic, can't scale RDS based on demand</li>
+        </ul>
+    </li>
+</ul>
