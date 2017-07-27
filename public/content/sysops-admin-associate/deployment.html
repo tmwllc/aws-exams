@@ -1,0 +1,26 @@
+<h1>Deployment & Provisioning Exam Tips</h1>
+<h3>Services with root/admin access to the OS</h3>
+<ul>
+    <li>Elastic Beanstalk</li>
+    <li>EC2</li>
+    <li>OpsWorks</li>
+    <li>Elastic Map Reduce</li>
+</ul>
+
+<h3>Elastic Load Balancers</h3>
+<p>Used for balancing load across different AZs, but within the same region or VPCs.</p>
+<ul>
+    <li>External ELB - external DNS names</li>
+    <li>Internal ELB - internal DNS names</li>
+</ul>
+<h3>Health Check</h3>
+<p>Configure the port, protocol and path for the health check. Also set the Response Timeout, Health Check Interval, Unhealthy Threshold, Healthy Threshold.</p>
+<h3>Sticky Sessions</h3>
+<p>Not enabled by default, so each request is routed to the app instance with the smallest load at that time. When Sticky Sessions (aka session affinity) are enabled, all requests from one user are sent to the same instance.</p>
+<ul>
+    <li>Duration Based - Most commonly used, ELB creates the cookie. When ELB receives request, it checks for the cookie. If no cookie, it chooses and instance to route traffic to based on ELB algorithm and creates a cookie. If there is a cookie, it routes traffic to the instance specified in the cookie. Stickiness policy configuration defines a cookie expiration, which establishes the duration of validity for each cookie. Cookie is automatically updated after expiration. If an instance fails or becomes unhealthy, ELB stops routing traffic to it and chooses a new instance. Request is routed to new instance and session is no longer sticky. In the console, Duration based stickiness is shown as "Enable Load Balancer Generated Cookie Stickiness".</li>
+    <li>Application Controlled - ELB creates a cookie, but the timing of that cookie is set by the application. You specify a cookie name in the ELB configuration. ELB only inserts a new stickiness cookie if the app response includes a new app cookie. ELB stickiness cookie does not update with each request. If the application cookie is explicitly removed or expires, the session stops being sticky until a new app cookie is issued. If instance fails, ELB stops routing to it and chooses a new instance to route to. ELB treats the session as stuck to the new healthy instance and continue routing requests to it even if original instances becomes healthy again. However, app is now responsible for determining whether/how to respond to new session which it hasn't seen before.</li>
+</ul>
+<p>If web page is loading slowly, good idea to check Latency metric of load balancer. Exam may ask what CloudWatch metric should be used to verify that your app is maintaining a good quality of service for your customers. The answer is Latency.</p>
+<h3>Pre-Warming</h3>
+<p>AWS can pre-warm ELBs for you. This is typically done when you want to do load testing. ELBs will scale on their own with ASGs, but they do so slowly, not in response to large, sudden spikes in traffic. You'll need to raise a ticket to AWS to pre-warm an ELB. You'll give them the start/end dates of your expected traffic/test, expected request rate and total size of the typical request/response you'll be expecting.</p>
