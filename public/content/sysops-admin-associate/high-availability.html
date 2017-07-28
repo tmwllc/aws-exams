@@ -31,3 +31,75 @@
         </ul>
     </li>
 </ul>
+
+<p>Exam may ask outdated question based on EC2 instances having better network throughput when you scale up. This is no longer the case, but exam may still ask about it.</p>
+<p>Your infrastructure makes use a single t2Small NAT instance within a VPC to allow inside hosts to communicate with the Internet without being directly addressable. As your traffic has grown, the amount of traffic going through the NAT has increased and is overwhelming it which is slowing down your infrastructure. What 2 options should you do to alleviate this issue?</p>
+<ul>
+  <li>A - Add another internet gateway to your VPC</li>
+  <li>B - Increase the instance size of the NAT from t2.Small to t2.medium</li>
+  <li>C - Use Direct Copnnect to route all traffic instead</li>
+  <li>D 0 Add another NAT instance and configure your subnet route tables to be spread across two NATs</li>
+</ul>
+<p>Answer is B and D.</p>
+
+<h3>Exam Tips</h3>
+<ul>
+  <li>If the bottleneck is network related, the answer is to scale up by upgrading instance class.</li>
+  <li>If problem is in relation to not having enough resources (can't increase size further) the answer is to scale out (add more instances).</li>
+  <li>Remember elasticity. Scaling out, you can scale back. Scaling up is easy, scaling down is not so easy.</li>
+</ul>
+
+<h3>RDS Multi-AZ</h3>
+<p>DB instances use a DNS name, called an RDS endpoint. AWS will failover that name from your primary to your secondary in the event of a DB failure on the primary. The DNS name does not change, but the IP it points to does.</p>
+<h4>Multi-AZ Failover Advantages</h4>
+<ul>
+  <li>High Availability</li>
+  <li>Backsups are taken from secondary which avoids IO suspension to the primary</li>
+  <li>Restores are taken from the secondary, which avoids IO suspension to the primary</li>
+  <li>You can force a failover by rebooting the primary instance in the console, or by using the RebootDbInstance API call.</li>
+</ul>
+<p>RDS is for DR, not for scaling. Read Replicas are used for scaling, not for DR.</p>
+
+<h3>Read Replicas</h3>
+<p>Read Replicas are a read only copy of your DB. Allows you to scale out to alleviate read constraints. Can create a Read Replica with a few clicks in the console or using the CreateDBInstanceReadReplica API. Once created, DB updates on the source DB instance will be replicated using a supported engine's native, ascynhronous replication. You can create multiple Read Replicas for a given source DB instance and distribute your application's read traffic amongst them.</p>
+<h4>When to Use</h4>
+<ul>
+  <li>Scaling beyond the compute or IO capacity of a single DB instance for read heavy DB workloads. This excess read traffic can be directed to one or more Read Replicas.</li>
+  <li>Serving read traffic while source DB is unavailable, due to suspension or scheduled maintenance, you can direct read traffic to your Read Replicas.</li>
+  <li>Business reporting or data warehousing scenarios; you may want business reporting queries to run against a Read Replicas, rather than your primary production DB.</li>
+</ul>
+<h4>Supported Versions</h4>
+<ul>
+  <li>MySQL
+    <ul>
+      <li>v5.6 (not 5.1 or 5.5)</li>
+      <li>Can use both MySQL engines (MyISAM and InnoDB), however only InnoDB is supported by AWS</li>
+    </ul>
+  </li>
+  <li>PostGreSQL
+    <ul>
+      <li>v.9.3.5+</li>
+    </ul>
+  </li>
+  <li>Aurora</li>
+  <li>MariaDB</li>
+</ul>
+<h4>Creating Read Replicas</h4>
+<ul>
+  <li>AWS will take a snapshot of your DB</li>
+  <li>If Multi-AZ is not enabled, snapshot will be of primary DB and can cause brief IO suspension for around 1 minute</li>
+  <li>If Mutli-AZ is enabled, snapshot will be secondary DB and will not experience any performance hits on primary DB.</li>
+</ul>
+<p>When connecting to a new Read Replica you will use a new endpoint DNS address. Will have to update application to use that.</p>
+<p>Read Replicas can be promoted to its own standalone DB. Doing this will break replication.</p>
+<ul>
+  <li>Can have up to 5 Read Replicas in MySQL and PostGreSQL.</li>
+  <li>Can have Read Replicas in different regions, but for MySQL only.</li>
+  <li>Replication is asynchronous only</li>
+  <li>Read Replicas can be built off Multi AZ DBs</li>
+  <li>Read Replicas CANNOT be Multi-AZ currently</li>
+  <li>Can have Read Replicas of Read Replicas, but only for MySQL, and this will further increase latency.</li>
+  <li>DB snapshots and automated backups CANNOT be taken off Read Replicas</li>
+  <li>Key metric to look for is ReplicaLag.</li>
+  <li>Read Replicas require backups to be enabled</li>
+</ul>
