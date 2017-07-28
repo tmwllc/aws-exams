@@ -49,7 +49,8 @@
   <li>Remember elasticity. Scaling out, you can scale back. Scaling up is easy, scaling down is not so easy.</li>
 </ul>
 
-<h3>RDS Multi-AZ</h3>
+<h3>RDS</h3>
+<h4>Multi-AZ</h4>
 <p>DB instances use a DNS name, called an RDS endpoint. AWS will failover that name from your primary to your secondary in the event of a DB failure on the primary. The DNS name does not change, but the IP it points to does.</p>
 <h4>Multi-AZ Failover Advantages</h4>
 <ul>
@@ -102,4 +103,26 @@
   <li>DB snapshots and automated backups CANNOT be taken off Read Replicas</li>
   <li>Key metric to look for is ReplicaLag.</li>
   <li>Read Replicas require backups to be enabled</li>
+</ul>
+
+<p>Can scale up, switch to Multi-AZ, enable backups without altering the DNS name of the instance. However, restoring from a backup/snapshot will always create a new DB with new DNS name. Scaling up will result in some downtime, though, so should be done during off hours, or restore from a backup and switch the app to point to the new DNS name. </p>
+<p>Cannot have multiple AZs enabled on Read Replicas. You can have multiple Read Replicas in different AZs, though.</p>
+<p>If you want to force a failover from primary DB to secondary DB in different AZ, reboot the primary. You'll see option for "reboot with failover". Select that and click ok.</p>
+
+<h3>Bastion Hosts</h3>
+<p>For high availability, setup 2+ bastion hosts in different AZs/Subnets. Use Route53 Failover routing to send traffic to primary/secondary Bastion host.</p>
+
+<h3>Troubleshooting Autoscaling</h3>
+<p>Things to look for if instances are not launching into ASG</p>
+<ul>
+    <li>Associated Key Pair does not exist</li>
+    <li>SG does not exist</li>
+    <li>Autoscaling config is not working correctly</li>
+    <li>Autoscaling group not found</li>
+    <li>Instance type specified is not supported in the AZ</li>
+    <li>AZ is no longer supported</li>
+    <li>Invalid EBS device mapping</li>
+    <li>Autoscaling service is not enabled on account</li>
+    <li>Attempting to attach an EBS block device to an instance-store AMI</li>
+    <li></li>
 </ul>
