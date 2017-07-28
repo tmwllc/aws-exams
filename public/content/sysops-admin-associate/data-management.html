@@ -1,0 +1,140 @@
+<h1>Data Management</h1>
+<h3>Disaster Recovery</h3>
+<p><a href="http://media.amazonwebservices.com/AWS_Disaster_Recovery.pdf" target="_blank">AWS Disaster Recovery Whitepaper</a></p>
+
+<h4>Services that support Disaster Recovery</h4>
+<ul>
+  <li>Storage Gateway
+    <ul>
+      <li>Gateway-cached volumes - store primary data and cache most recently used data locally</li>
+      <li>Gateway-stored volumes - store entire dataset on site and asynchronously replicate back to S3</li>
+      <li>Gateway-virtual tape library - Store virtual tapes in S3 or Glacier</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>RTO vs RPO</h3>
+<p>Recovery Time Objective (RTO) is the length of time from which you can recover from a disaster. It is measured from when the disaster first occurred to when you have fully recovered from it.</p>
+<p>Recovery Point Objective (RPO) is the amount of data your organization is prepared to lose in the event of a disaster (1 days worth of emails, 5 hours of online transaction records, 24 hours of backup, etc.)</p>
+<p>Typically the lower the RTO and RPO threshold, the more costly the solution will be.</p>
+
+<ul>
+  <li>Backup & Restore
+    <ul>
+      <li>Data is backed up to tape and sent off site regularly.</li>
+      <li>Can take a long time to restore system.</li>
+      <li>S3 is ideal destination for backup data.</li>
+      <li>Transferring data to/from S3 is typically done through the network and is therefore accessible from any location.</li>
+      <li>Can use AWS Import/Export (or Snowball) to transfer very large data sets by shipping storage devices directly to AWS.</li>
+      <li>For longer-term data storage where retrieval times of several hours are adequate, Glacier is ideal. It has the same durability as S3. Glacier and S3 can be used in conjunction to produce a tiered backup solution.
+      </li>
+      <li>Key Steps for Backup/Restore
+        <ul>
+          <li>Select appropriate tool/method to backup data into AWS</li>
+          <li>Ensure that you have an appropriate retention policy for this data</li>
+          <li>Ensure security measures are in place for this data, including encryption and access policies</li>
+          <li>Regularly test the recovery of this data and restoration of your system</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Pilot Light -
+    <ul>
+      <li>Minimal version of an environment is always running in the cloud</li>
+      <li>Scenario is similar to Backup/Restore.</li>
+      <li>Maintain a pilot light by configuring/running the most critical core elements of your system in AWS</li>
+      <li>Can rapidly provision a full-scale production environment around the critical core</li>
+      <li>Infrastrucre elements for pilot light typically include DB servers which would replicate data to EC2 or RDS</li>
+      <li>Might be other data outside of DB that needs to be replicated to AWS.</li>
+      <li>This is the critical core of the system (pilot light) around which all other infrastructure pieces in AWS can quickly be provisioned to restore the complete system.</li>
+      <li>To provision the remainder of the the infrastructure, you would have some preconfigured servers bundled as AMIS which are ready to be started up at a moment's notice.</li>
+      <li>When starting recovery, instances from those AMIs come up quickly with their pre-defined role (web or app server)</li>
+      <li>Two Options:
+        <ul>
+          <li>Use pre-allocated elastic IP addresses and associate them with your instances when invoking DR. you can also use pre-allocated elastic network interfaces (ENIs) with pre-allocated MAC addresses for apps with special licensing requirements. (THIS COMES UP ON EXAM A LOT)</li>
+          <li>Use ELB to distribute traffic to multiple instances. Then update DNS to point at your EC2 instance or point to your load balancer using a CNAME.</li>
+        </ul>
+      </li>
+      <li></li>
+    </ul>
+  </li>
+  <li>Warm Standby
+    <ul>
+      <li>DR scenario in which a scaled-down version of a fully functional environment is always running in the cloud.</li>
+      <li>Extends pilot light elements and preparation.</li>
+      <li>Decreases RTO (over Pilot Light) because some services are always running.</li>
+      <li>By identifying business-critical systems, can fully duplicate these on AWS and have them always on.</li>
+      <li>Servers can be running on the minimum-sized fleet of EC2 instances on smallest sizes possible.</li>
+      <li>Solution is not scaled to take full production workload, but is fully functional.</li>
+      <li>Can be used for non-production work, such as testing, quality assurance and internal use.</li>
+      <li>System is scaled up quickly to handle the production load.</li>
+      <li>Can be done by adding more instances to the load balancer and by resizing the small capacity servers to run on larger EC2 instance types.</li>
+      <li>Horizontal scaling is preferred over vertical scaling.</li>
+      <li>Key Steps for Setup:
+        <ul>
+          <li>Set up EC2 instances to replicate data</li>
+          <li>Create and maintain AMIs</li>
+          <li>Run application using minimal footprint of EC2 instances</li>
+          <li>Patch and update software and configuration files in line with your live environment</li>
+        </ul>
+      </li>
+      <li>Key Steps for Recovery:
+        <ul>
+          <li>Increase size of EC2 fleets with load balancer (horizontal scaling)</li>
+          <li>Start apps on larger EC2 instances (vertical scaling)</li>
+          <li>Manually change DNS records, or use Route53 automated health checks so that all traffic is routed to AWS environment</li>
+          <li>Consider using auto scaling to right-size the fleet or accommodate the increased load.</li>
+          <li>Add resilience  or scale up DB.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Multi Site
+    <ul>
+      <li>Runs in AWS as well as your existing on-site infrastructure</li>
+      <li>Data replication method determined by recovery point that you choose</li>
+      <li>Can use Route53 to route traffic to both sites symmetrically or asymmetrically</li>
+      <li>In an on-site disaster, can adjust DNS weighting to send all traffic to AWS servers</li>
+      <li>Capacity of AWS service can be rapidly increased to handle production load.</li>
+      <li>Can use EC2 auto scaling to automate process.</li>
+      <li>Might need some app logic to detect failure of primary DB and cut over to parallel DB in AWS.</li>
+      <li>Key Steps:
+        <ul>
+          <li>Setup AWS environment to duplicate production env</li>
+          <li>Setup DNS weighting or similar traffic routing technology to distribute incoming requests to both sites</li>
+          <li>Configure automated failover to re-route traffic away from affected site</li>
+        </ul>
+      </li>
+      <li>Preparation:
+        <ul>
+          <li>Manually or by using DNS failover, change DNS weighting so that all requests are sent to AWS site.</li>
+          <li>Have app logic for failover to use the local AWS DB for all queries</li>
+          <li>Consider using auto scaling to right-size the fleet or accommodate the increased load.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Failing Back:
+    <ul>
+      <li>Backup/Restore:
+        <ul>
+          <li>Freeze data changes to the DR site</li>
+          <li>Take a backup</li>
+          <li>Restore back to primary site</li>
+          <li>Re-point users to the primary site</li>
+          <li>Unfreeze changes</li>
+        </ul>
+      </li>
+      <li>Pilot Light, Warm Standy, Multi-Site:
+        <ul>
+          <li>Establish reverse mirroring/replication from DR back to primary</li>
+          <li>Freeze data changes to DR site</li>
+          <li>Re-point users to primary site</li>
+          <li>Unfreeze changes</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>Pay particular attention to Pilot Light scenario, and the fact that you can have ENIs with preconfigured MAC addresses</p>
