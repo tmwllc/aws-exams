@@ -138,3 +138,103 @@
 </ul>
 
 <p>Pay particular attention to Pilot Light scenario, and the fact that you can have ENIs with preconfigured MAC addresses</p>
+
+<h3>Services with Automated Backups</h3>
+<ul>
+  <li>RDS
+    <ul>
+      <li>For MySQL need InnoDB (transactional engine)</li>
+      <li>For the other RDS types (SQL Server, PostGreSQL, Oracle, Aurora, MariaDB) support automated backups</li>
+      <li>Performance hit if Multi-AZ is not enabled</li>
+      <li>If you delete an instance, all automated backups are deleted</li>
+      <li>Manual backups are not deleted on instance delete</li>
+      <li>All backups stored on S3</li>
+      <li>When you restore, you can change engine type (SQL Standard to SQL Enterprise for example), provided you have enough storage space.</li>
+    </ul>
+  </li>
+  <li>Elasticache (Redis only, not Memcached)
+    <ul>
+      <li>Entire cluster is snapshotted</li>
+      <li>Snapshot will degrade performance</li>
+      <li>Therefore only set your snapshot window during the least busy part of the day</li>
+      <li>Stored on S3</li>
+    </ul>
+  </li>
+  <li>Redshift
+    <ul>
+      <li>Stored on S3</li>
+      <li>By default, Redshift enables automated backups of your cluster with a 1-day retention period</li>
+      <li>Redshift only backs up data that has changed so most snapshots only use up a small amount of your free backup storage</li>
+    </ul>
+  </li>
+</ul>
+<h3>Services without Automated Backups</h3>
+<ul>
+  <li>EC2
+    <ul>
+      <li>No automated backups</li>
+      <li>Can do manual snapshots, but they will degrade performance. Schedule these during non-busy time.</li>
+      <li>Snapshots are stored in S3</li>
+      <li>Can create automated backups using either the CLI or Python</li>
+      <li>They are incremental:
+        <ul>
+          <li>Snapshots only store incremental changes since last snapshot</li>
+          <li>Only charged for incremental storage</li>
+          <li>Each snapshot still contains the base snapshot data</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3>EC2 Instance Types</h3>
+<h4>Volume Types</h4>
+<ul>
+  <li>Root volume
+    <ul>
+      <li>Can be either EBS or Instance Store</li>
+      <li>Instance store root max size is 10GB</li>
+      <li>EBS root can be up to 1 or 2TB depending on the OS</li>
+      <li>When terminating instance:
+        <ul>
+          <li>EBS root is terminated by default. This can be disabled by unchecking "Delete on Termination" or by setting the deleteontermination flag to false via the CLI.</li>
+          <li>Non-root EBS volumes are preserved when EC2 instance is deleted</li>
+          <li>Instance store root volumes are terminated by default when EC2 instance is terminated. Cannot disable this.</li>
+          <li>Other instance store volumes will also be terminated on EC2 termination.</li>
+          <li>Other EBS volumes attached to the instance will persist automatically.</li>
+          <li>EBS volumes can changed on the fly (except for magnetic standard, which must be stopped, detached, snapshotted and create new volume from it)</li>
+          <li>Best practice to stop/detach/snapshot volume when upgrading it</li>
+          <li>If you change volume on the fly, must wait 6 hours before making another change</li>
+          <li>Can scale EBS volumes up only, not down</li>
+          <li>Volumes must be in the same AZ as EC2 instance.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Additional volume</li>
+</ul>
+<p>Data in an instance store persists only during t he lifetime of its associated instance. If instance reboots, data in the instance store perists. However, data on instance store volumes is lost under the following circumstances:</p>
+<ul>
+  <li>Failure of an underlying drive</li>
+  <li>Stopping an EBS-backed instance</li>
+  <li>Terminating an instance</li>
+</ul>
+<p>To keep data safe, don't use instance store volumes. Use a replication strategy across multiple instances, storage data in S3 or use EBS volumes. Additional EBS volumes persist when EC2 is terminated. So need to clean those up manually.</p>
+
+<h4>To Upgrade a non-root EBS Volume</h4>
+<ul>
+  <li>Unmount volume while SSHed into instance</li>
+  <li>Detach volume in EC2 console</li>
+  <li>Create snapshot of volume</li>
+  <li>Select snapshot and then Actions -> Create New Volume, using desired volume specs</li>
+  <li>Attach new volume to EC2 instance</li>
+</ul>
+
+<h4>Exam Scenario</h4>
+<p>You need to implement tiered storage for your DB backups and logs. The backups need to be archived to a durable storage solution at EOD. After 28 days, the backups must be archived off to cheaper storage but must still be retained. Which tiered storage proposal meets the recovery scenario, minimizes costs and addresses the requirements?</p>
+<ul>
+  <li>A - Use an independent EBS volume to store backups and log files. Take daily snapshots of this volume. After 28 days rotate your EBS snapshots.</li>
+  <li>B - At EOD back up DB and copy backup files to S3. After 28 days copy the data from S3 to RDS Log File Collector.</li>
+  <li>C - Store log files on EC2 ephemeral storage and then randomly terminate your EC2 instances.</li>
+  <li><b>D - Use an independent EBS volume to store daily backups and copy the backup files to S3. Create a lifecycle policy on S3 to archive off the backups to Glacier after 28 days.</b></li>
+</ul>

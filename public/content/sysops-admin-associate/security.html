@@ -1,0 +1,57 @@
+<h1>Security Exam Tips</h1>
+<h3>Security Token Service (STS)</h3>
+<p>Grants users limited and temporary access to AWS resources. User can come from three sources:</p>
+<ul>
+  <li>Federation (typically Active Directory)
+    <ul>
+      <li>Uses Security Assertion Markup Language (SAML)</li>
+      <li>Grants temporary access based off the users Active Directory Credentials. Does not need to be a user in IAM.</li>
+      <li>Single sign on allows users to log into AWS console without assigning IAM credentials.</li>
+    </ul>
+  </li>
+  <li>Federation with Mobile Apps - Use Facebook/Amazon/Google or other OpenID providers to log in.</li>
+  <li>Cross Account Access - Lets users from one AWS account access resources in another account</li>
+</ul>
+
+<p>Federation: combining or joining a list of users in one domain (such as IAM) with a list of users in another domain (such as Active Directory, Facebook, etc.)</p>
+<p>Identity Broken: a service that allows you to take an identity from point A and join it (federate it) to point B. </p>
+<p>Idenity Store: Services like Active Directory, Facebook, Google, etc.</p>
+<p>Identities: a user of a service like Facebook, etc.</p>
+
+<h4>Exam Scenario</h4>
+<p>You are hosting a company website on EC2. Users of the website must log in to the site which then authenticates against the company's active directory servers which are based on site at the company's headquarters. Your VPC is connected to your company HQ via a secure IPSEC VPN. Once logged in, the user can only have access to their own S3 bucket. How do you set this up?</p>
+<ol>
+  <li>Employee enters their username/password</li>
+  <li>Application calls an Identity Broker. Broker captures username/password.</li>
+  <li>Identity Broker uses the organization's LDAP directory to validate the employee's identity.</li>
+  <li>Identity Broker calls the new GetFederationToken function using IAM credentials. The call must include an IAM policy and a duration (1 to 36 hours), along with a policy that specifies the permissions to be granted to the temporary security credentials.</li>
+  <li>STS confirms that the policy of the IAM user making the call to GetFederationToken gives permission to create new tokens and then returns four values to the application: an access key, secret access key, a token and a duration (TTL).</li>
+  <li>Identity Broker returns the temporary security credentials to the reporting application.</li>
+  <li>The data storage application uses the temporary security credentials (including the token) to make requests to S3.</li>
+  <li>S3 uses IAM to verify that the credentials allow the requested operation on the given S3 bucket and key</li>
+  <li>IAM provides S3 with the go-ahead to perform the requested operation.</li>
+</ol>
+<h4>Scenario 1</h4>
+<ol>
+  <li>Develop an Identity Broker to communicate with LDAP and STS</li>
+  <li>Identity Broker always authenticates with LDAP first, THEN with STS.</li>
+  <li>Application then gets temporary access to AWS resources.</li>
+</ol>
+<h4>Scenario 2</h4>
+<ol>
+  <li>Develop an Identity Broker to communicate with LDAP and STS</li>
+  <li>Identity Broker always authenticates with LDAP first, gets an IAM role associated with a user</li>
+  <li>Application then authenticates with STS and assumes that IAM role</li>
+  <li>Application that IAM role to interact with S3.</li>
+</ol>
+<h3>X.509 Certificates</h3>
+<p>Digitally signed SOAP requests to AWS APIs. SSL server certificates for HTTPS. X.509 certificates are only used to sign SOAP-based requests (currently used only with S3). You can have AWS create an X.509 certificate and private key that you can download, or you can upload your own certificate by using the Security Credentials page.</p>
+
+<h3>Trusted Advisor</h3>
+<p>Inspects AWS env and makes recommendations when opportunities may exist to save money, improve performance, or close security gaps. Provides alerts on several of the most common security misconfigurations, including leaving certain ports open that make you vulnerable to hacking, neglecting to create IAM accounts for your internal users, allowing public access to S3 buckets, not turning on user activity logging (CloudTrail) or not using MFA on your root AWS account. Really only looks at IAM, doesn't look at all AWS services.</p>
+
+<h3>Direct Connect</h3>
+<p>Bypass internet service providers in your network path. You can procure rack space within the facility housing the AWS Direct Connect location and deploy your equipment nearby. Once deployed, you can connect this equipment to AWS Direct Connect using a cross-connect.</p>
+<p>Using industry standard 802.1q VLANs, the dedicated connection can be partitioned into m ultiple virtual interfaces. This allows you to use the same connection to access public resources such as objects store in S3 using public IP address space, and private resources such as EC2 instances running within a VPC using private IP space, while maintaining network separation between the public and private environments.</p>
+
+<p><a href="https://d0.awsstatic.com/whitepapers/Security/AWS_Security_Whitepaper.pdf" target="_blank">AWS Security Overview</a></p>

@@ -1,0 +1,32 @@
+<h1>OpsWorks Exam Tips</h1>
+<p>Similar to CloudFormation, it provides a simple way to create and manage stacks and their associated applications and resources. Chef turns infrastructure into code. With Chef, you can automate how you build, deploy, and manage your infrastructure. Your infrastructure becomes as versionable, testable, and repeatable as application code. Chef server stores your recipes as well as other configuration data. The Chef client is installed on each server, virtual machine, container, or networking device you manage - we'll call these nodes. The client periodically polls Chef server latest policy and state of your network. If anything on the node is out od date, the client brings it up to date.</p>
+
+<h3>OpsWorks</h3>
+<ul>
+  <li>A GUI to deploy and configure your infrastructure quickly. OpsWorks consists of two elements, Stacks and Layers</li>
+  <li>A stack is a contianer (or group) of resourcesd such as ELBs, EC2 instanches, RDS instances, etc</li>
+  <li>A layer exists within a stack and ocnsists of things like a web application layer, n application processing layer or a DB layer.</li>
+  <li>When you create a layer, rather than going and configuring everything manually (like installing Apache, PHP, etc), OpsWorks takes care of this for you.</li>
+</ul>
+<h4>Layers</h4>
+<ul>
+  <li>1 more layers in the stack</li>
+  <li>An instance must be assigned to at least 1 layer</li>
+  <li>Which chef layers run, are determined by the layer the instance belongs to</li>
+  <li>
+    Preconfigured layers include:
+    <ul>
+      <li>Aplications</li>
+      <li>Databases</li>
+      <li>Load Balancers</li>
+      <li>Caching</li>
+    </ul>
+  </li>
+</ul>
+<p>When attaching an ELB to a layer, OpsWorks removes any currently registered instances and then manages the load balancer for you. If you subsequently use the ELB console or API to modify the configuration, the changes will not be permanent.</p>
+<h4>Instances</h4>
+<ul>
+  <li>Default (24x7)</li>
+  <li>Time-based - instances turn on/off on a set schedule</li>
+  <li>Load-based - OpsWorks automatically starts/stops instances in response to CPU, memory and application load changes across all the instances in a layer.</li>
+</ul>
