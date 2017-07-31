@@ -1,0 +1,213 @@
+<h1>Quiz Questions</h1>
+<div class="question">
+    <p>Your application in a VPC has hard coded IPs in the configuration. Which 2 mechanisms will allow app to failover to new instances without the need for reconfiguration?</p>
+    <ul>
+        <li>Create ELB to reroute traffic to failover instance</li>
+        <li class="correct">Create a secondary ENI that can be moved to a failover instance</li>
+        <li>Use Route53 health checks to fail traffic over to a failover instance</li>
+        <li class="correct">Assign a secondary private IP address to the primary ENI that can be moved to a failover instance.</li>
+    </ul>
+    <p class="more-info"><a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html" target="_blank">More Info</a></p>
+</div>
+<div class="question">
+    <p>You are designing a system with a Bastion host. This component needs to be highly available without human intervention. Which of the following would you use?</p>
+    <ul>
+        <li>Run bastion on two instances, one in each AZ</li>
+        <li>Run bastion on an active instance in one AZ and have an AMI ready to boot up in the event of failure</li>
+        <li class="correct">Configure bastion instance in an ASG, specify the ASG to include multiple AZs but have a min-size of 1 and max-size of 1</li>
+        <li>Configure an ELB in front of the bastion host</li>
+    </ul>
+    <p class="more-info"><a href="https://aws.amazon.com/autoscaling/" target="_blank">More Info</a></p>
+</div>
+<div class="question">
+    <p>You have been asked to automate many routine systems administrator backup and recovery activities. Your current plan is to leverage AWS-managed solutions as much as possible and automate the rest with CLI and scripts. Which task would be best accomplished with a script?</p>
+    <ul>
+        <li class="correct">Creating daily EBS snapshots with a monthly rotation of snapshots</li>
+        <li>Creating daily RDS snapshots with a monthly rotation of snapshots</li>
+        <li>Automatically detect and stop unused or underutilized EC2 instances</li>
+        <li>Automatically add Auto Scaled EC2 instances to an ELB</li>
+    </ul>
+    <p class="more-info">RDS has automated backups, so no need to use a script to do this. Autoscaling handles C and D</p>
+</div>
+
+<div class="question">
+    <p></p>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <p class="more-info"><a href="" target="_blank">More Info</a></p>
+</div>
+<div class="question">
+    <p></p>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <p class="more-info"><a href="" target="_blank">More Info</a></p>
+</div>
+<div class="question">
+    <p></p>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <p class="more-info"><a href="" target="_blank">More Info</a></p>
+</div>
+<div class="question">
+    <p></p>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <p class="more-info"><a href="" target="_blank">More Info</a></p>
+</div>
+<div class="question">
+    <p></p>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <p class="more-info"><a href="" target="_blank">More Info</a></p>
+</div>
+<div class="question">
+    <p></p>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <p class="more-info"><a href="" target="_blank">More Info</a></p>
+</div>
+<div class="question">
+    <p></p>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <p class="more-info"><a href="" target="_blank">More Info</a></p>
+</div>
+<div class="question">
+    <p></p>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <p class="more-info"><a href="" target="_blank">More Info</a></p>
+</div>
+<div class="question">
+    <p></p>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <p class="more-info"><a href="" target="_blank">More Info</a></p>
+</div>
+<div class="question">
+    <p></p>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <p class="more-info"><a href="" target="_blank">More Info</a></p>
+</div>
+<div class="question">
+    <p></p>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <p class="more-info"><a href="" target="_blank">More Info</a></p>
+</div>
+<div class="question">
+    <p></p>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <p class="more-info"><a href="" target="_blank">More Info</a></p>
+</div>
+<div class="question">
+    <p></p>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <p class="more-info"><a href="" target="_blank">More Info</a></p>
+</div>
+<div class="question">
+    <p></p>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <p class="more-info"><a href="" target="_blank">More Info</a></p>
+</div>
+<div class="question">
+    <p></p>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <p class="more-info"><a href="" target="_blank">More Info</a></p>
+</div>
+<div class="question">
+    <p></p>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <p class="more-info"><a href="" target="_blank">More Info</a></p>
+</div>
+<div class="question">
+    <p></p>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <p class="more-info"><a href="" target="_blank">More Info</a></p>
+</div>
+
+<!--<div class="question">-->
+    <!--<p></p>-->
+    <!--<ul>-->
+        <!--<li></li>-->
+        <!--<li></li>-->
+        <!--<li></li>-->
+        <!--<li></li>-->
+    <!--</ul>-->
+    <!--<p class="more-info"><a href="" target="_blank">More Info</a></p>-->
+<!--</div>-->

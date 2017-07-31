@@ -75,4 +75,65 @@ html {
 	padding: 3px 0;
   }
 
+  .question {
+    padding: 5px;
+    border: 1px solid #FFF;
+    p {
+      font-weight: bold;
+
+      &.more-info {
+        font-weight: normal;
+      }
+      & + ul {
+        padding-top: 0;
+        margin: 0 4px;
+      }
+    }
+    ul li {
+      list-style: none;
+      margin-left: 0;
+      &:before {
+        font-weight: bold;
+      }
+      &:nth-child(1) {
+        &:before {
+          content: 'A - ';
+        }
+      }
+      &:nth-child(2) {
+        &:before {
+          content: 'B - ';
+        }
+      }
+      &:nth-child(3) {
+        &:before {
+          content: 'C - ';
+        }
+      }
+      &:nth-child(4) {
+        &:before {
+          content: 'D - ';
+        }
+      }
+      &:nth-child(5) {
+        &:before {
+          content: 'E - ';
+        }
+      }
+      &:nth-child(6) {
+        &:before {
+          content: 'F - ';
+        }
+      }
+      &.correct {
+        font-weight: bold;
+        border: 1px solid #CDC;
+        background: #EFE;
+      }
+    }
+    &:nth-child(odd) {
+      background: #F5F5F5;
+      border: 1px solid #CCC;
+    }
+  }
 }
