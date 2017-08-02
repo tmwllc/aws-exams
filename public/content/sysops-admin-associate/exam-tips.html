@@ -41,92 +41,89 @@
     <p class="more-info"><a href="https://aws.amazon.com/rds/details/multi-az/#Failover_conditions" target="_blank">More Info</a></p>
 </div>
 <div class="question">
-    <p></p>
+    <p>In order to setup programmatic billing access, which of the following are not required or enabled?</p>
     <ul>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
+        <li class="correct">Programmatic access</li>
+        <li>S3 bucket to hold the billing report</li>
+        <li>AWS billing alerts</li>
+        <li>Monthly Billing report</li>
+    </ul>
+</div>
+<div class="question">
+    <p>A user has created a subnet within a VPC and launched an EC2 instance in it with only default settings. Which of the following options are ready to use on the EC2 instance as soon as it is launched.</p>
+    <ul>
+        <li>Elastic IP</li>
+        <li class="correct">Private IP</li>
+        <li>Public IP</li>
+        <li>Internet gateway</li>
+    </ul>
+    <p class="more-info">With default subnet/EC2 settings, only a private IP is created. Public IP is only created if you set the subnet to automatically create a public IP for EC2 instances, or set the EC2 instance itself to create one. Internet gateway must also be manually setup.</p>
+</div>
+<div class="question">
+    <p>A user is trying to aggregate all CloudWatch metric data of the last week. Which of the following statistics is not available as part of the aggregation?</p>
+    <ul>
+        <li class="correct">Aggregate</li>
+        <li>Sum</li>
+        <li>Data Samples</li>
+        <li>Average</li>
     </ul>
     <p class="more-info"><a href="" target="_blank">More Info</a></p>
 </div>
 <div class="question">
-    <p></p>
+    <p>A user has setup a CloudWatch alarm on an EC2 instance when CPU utilization is about 75%. The alarm sends a notification to SNS on the alarm state. How can the user simulate the alarm state?</p>
     <ul>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
+        <li>Run activities on the CPU such that its utilization reaches about 75%</li>
+        <li>From the AWS console change the state to "Alarm"</li>
+        <li class="correct">The user can set the alarm state to "Alarm" using CLI</li>
+        <li>Run the SNS action manually</li>
+    </ul>
+    <p class="more-info">aws cloudwatch set-alarm-state --alarm-name "TestAlarm" --state-value ALARM --state-reason "Demo purposes"</p>
+</div>
+<div class="question">
+    <p>A user has created a web application with auto scaling. The user is regularly monitoring the application and observed that the traffic is highest on Thursday and Friday between 8am-6pm. What is the best solution to handle scaling in this case?</p>
+    <ul>
+        <li>Add a new instance manually by 8am Thursday and terminate it by 6pm Friday</li>
+        <li class="correct">Schedule auto scaling to scale up by 8am Thursday and scale down after 6pm Friday</li>
+        <li>Schedule a policy which may scale up every day at 8am and scales down by 6pm</li>
+        <li>Configure a batch process to add an instance by 8am and remote by Friday 6pm</li>
+    </ul>
+    <p class="more-info">To configure ASG to scale based on a schedule, you create a scheduled action, which tells Auto Scaling to perform a scaling action at specified times. To create a scaling action, you specify the start time when you want the scaling action to take effect, and the new minimum, maximum and desired sizes for the scaling action. At the specified time, the Auto Scaling updates the group with the values for min/max/desired specified by the scaling action.</p>
+</div>
+<div class="question">
+    <p>A user is planning to use CloudFormation. Which of the following functionalities does not help them to correctly understand CloudFormation?</p>
+    <ul>
+        <li class="correct">CloudFormation follows the DevOps model for creation of Dev/Test</li>
+        <li>CloudFormation does not charge the user for its service, but does charge for resources created with it</li>
+        <li>CloudFormation works with a wide variety of AWS services, such as EC2, EBS, VPC, IAM, S3, RDS, ELB, etc</li>
+        <li>CloudFormation provides a set of application bootstrapping scripts which enables the user to install Software</li>
     </ul>
     <p class="more-info"><a href="" target="_blank">More Info</a></p>
 </div>
 <div class="question">
-    <p></p>
+    <p>You are bulding an online store on AWS that uses SQS to process your customer orders. Your backen system needs those messages in the same sequence the customer orders have been put in. How can you achieve that.</p>
     <ul>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
+        <li>It is not possible to do this with SQS</li>
+        <li class="correct">You can use sequencing info on each message</li>
+        <li>You can do this with SQS, but you also need to use SWF</li>
+        <li>Messages will arrive in the same order by default</li>
     </ul>
-    <p class="more-info"><a href="" target="_blank">More Info</a></p>
 </div>
 <div class="question">
-    <p></p>
+    <p>An organization wants to move to AWS. They are looking for a secure encrypted database storage options. Which of the below mentioned AWS functionalities helps them to achive this?</p>
     <ul>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
+        <li>AWS MFA with EBS</li>
+        <li class="correct">AWS EBS encryption</li>
+        <li>Multi-tier encryption with Redshift</li>
+        <li>S3 server side storage</li>
     </ul>
-    <p class="more-info"><a href="" target="_blank">More Info</a></p>
 </div>
 <div class="question">
-    <p></p>
+    <p>A user has created an S3 bucket which is not publicy accessible. The bucket has 30 objects which are also private. If the user wants to make the objects public, how can they configure this with minimal efforts?</p>
     <ul>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-    </ul>
-    <p class="more-info"><a href="" target="_blank">More Info</a></p>
-</div>
-<div class="question">
-    <p></p>
-    <ul>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-    </ul>
-    <p class="more-info"><a href="" target="_blank">More Info</a></p>
-</div>
-<div class="question">
-    <p></p>
-    <ul>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-    </ul>
-    <p class="more-info"><a href="" target="_blank">More Info</a></p>
-</div>
-<div class="question">
-    <p></p>
-    <ul>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-    </ul>
-    <p class="more-info"><a href="" target="_blank">More Info</a></p>
-</div>
-<div class="question">
-    <p></p>
-    <ul>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
+        <li>The user should select all objects from the console and apply a single policy to mark them public</li>
+        <li>The user can write a program which programmatically makes all objects public using S3 SDK</li>
+        <li class="correct">Set the AWS bucket policy which amrks all objects as public</li>
+        <li>Make the bucket ACL as public so it will also mark all objects as public</li>
     </ul>
     <p class="more-info"><a href="" target="_blank">More Info</a></p>
 </div>
