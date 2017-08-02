@@ -128,6 +128,77 @@
     <p class="more-info"><a href="" target="_blank">More Info</a></p>
 </div>
 <div class="question">
+    <p>A system admin is maintaining an application on AWS. The app is installed on EC2 and user has configured ELB and auto scaling. Considering future load increase, the user is planning to launch new servers proactively so that they get registered with the ELB. How can the user add these instances with auto scaling?</p>
+    <ul>
+        <li class="correct">Increase the desired capacity of the auto scaling group</li>
+        <li>Increase the maximum limit of the auto scaling group</li>
+        <li>Launch an instance manually and register it with ELB on the fly</li>
+        <li>Decrease the minimum limit of the auto scaling group</li>
+    </ul>
+    <p class="more-info">The key to this is "proactively", meaning before you need it. B will allow you to create more automatically when needed, but A will cause them to spin up immediately, before they're needed.</p>
+</div>
+<div class="question">
+    <p>A user has setup connection draining with ELB to allow in-flight requests to continue while the instance is being deregistered through auto scaling. If the user has not specified the draining time, how long will ELB allow inflight request traffic to continue?</p>
+    <ul>
+        <li>600 seconds</li>
+        <li>3600 seconds</li>
+        <li class="correct">300 seconds</li>
+        <li>0 seconds</li>
+    </ul>
+    <p class="more-info">To view this value, go to the ELB in console and select Instances tab. You can view and edit the Connection Draining value here. Default is 300 seconds.</p>
+</div>
+<div class="question">
+    <p>A root AWS account owner is trying to understand various options to set the permission to AWS S3. Which of the below mentioned options is not the right option to grant permission for S3?
+    </p>
+    <ul>
+        <li>User Access Policy</li>
+        <li class="correct">S3 Object Access Policy</li>
+        <li>S3 Bucket Access Policy</li>
+        <li>S3 Access Control List</li>
+    </ul>
+    <p class="more-info">In S3 when you go to permissions section, you can add the Grantee, which is at the ACL level and then you can also add bucket permissions. You may also create IAM policies at the user level and manage access to S3.</p>
+</div>
+<div class="question">
+    <p>You have an Auto Scaling group associated with an ELB. You have noticed that instances launched via the Auto Scaling group are being marked unhealthy due to an ELB health check, but these unhealthy instances are not being terminated. What do you need to do to ensure trial instances marked unhealthy by the ELB will be terminated and replaced?</p>
+    <ul>
+        <li>Change the thresholds set on the Auto Scaling group health check</li>
+        <li class="correct">Add an Elastic Load Balancing health check to your Auto Scaling group</li>
+        <li>Increase the value for the Health check interval set on the Elastic Load Balancer Incorrect</li>
+        <li>Change the health check set on the Elastic Load Balancer to use TCP rather than HTTP checks</li>
+    </ul>
+    <p class="more-info">When configuring auto scaling, you can choose either the option of EC2 or ELB health checks. Since EC2 instances are being marked unhealthy but not getting terminated, it means the health check from the auto scaling side is incorrectly configured.</p>
+</div>
+<div class="question">
+    <p>A user has created a queue named “demoqueue” with SQS. There are four messages published to queue which are not received by the consumer yet. If the user tries to delete the queue, what will happen?</p>
+    <ul>
+        <li>A user can never delete a queue manually. AWS deletes it after 30 days of inactivity in the queue.</li>
+        <li class="correct">It will delete the queue</li>
+        <li>It will initiate the delete, but wait for 4 days before deleting until all messages are deleted automatically.</li>
+        <li>It will ask user to delete the messages first.</li>
+    </ul>
+    <p class="more-info">You can delete queues in the console. It will prompt you "are you sure you want to delete" and list how many messages are in the queue. It does not matter if messages are in queue, though, it will still delete them.</p>
+</div>
+<div class="question">
+    <p>A user has created numerous EBS volumes. What is the general limit for each AWS account for the maximum number of EBS volumes that can be created?</p>
+    <ul>
+        <li>10000</li>
+        <li class="correct">5000</li>
+        <li>100</li>
+        <li>1000</li>
+    </ul>
+    <p class="more-info"><a href="http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html" target="_blank">AWS Service Limits</a></p>
+</div>
+<div class="question">
+    <p>A user is checking the CloudWatch metrics from the AWS console. The user notices that the CloudWatch data is coming in UTC. The user wants to convert the data to a local time zone. How can the user perform this?</p>
+    <ul>
+        <li>In the CloudWatch dashboard the user should set the local timezone so that CloudWatch shows the data only in the local timezone</li>
+        <li class="correct">In the CloudWatch console select the local timezone under the Time Range tab to view the data as per the local timezone</li>
+        <li>The CloudWatch data is always in UTC; the user has to manually convert the data</li>
+        <li>The user should have sent the local timezone while uploading the data so that CloudWatch will show the data only in the local timezone.</li>
+    </ul>
+    <p class="more-info"><a href="" target="_blank">More Info</a></p>
+</div>
+<div class="question">
     <p></p>
     <ul>
         <li></li>
