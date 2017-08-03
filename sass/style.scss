@@ -89,9 +89,31 @@ html {
         margin: 0 4px;
       }
     }
+    .more-info {
+      display: none;
+    }
+    &.revealed {
+      ul li {
+        border: 1px #CAA solid;
+        background: #FDD;
+        &.correct {
+          &:nth-child(1) {
+            border: 1px solid #9B9;
+          }
+          background: #EFE;
+          color: #242;
+        }
+      }
+      .more-info {
+        display: block;
+      }
+    }
     ul li {
       list-style: none;
+      color: #422;
       margin-left: 0;
+      padding: 2px;
+      border: 1px solid #FFF;
       &:before {
         font-weight: bold;
       }
@@ -99,6 +121,9 @@ html {
         &:before {
           content: 'A - ';
         }
+      }
+      &:nth-child(2), &:nth-child(3), &:nth-child(4), &:nth-child(5), &:nth-child(6) {
+        border-top: none;
       }
       &:nth-child(2) {
         &:before {
@@ -124,11 +149,6 @@ html {
         &:before {
           content: 'F - ';
         }
-      }
-      &.correct {
-        font-weight: bold;
-        border: 1px solid #CDC;
-        background: #EFE;
       }
     }
     &:nth-child(odd) {

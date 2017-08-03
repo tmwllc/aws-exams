@@ -3,6 +3,15 @@
 var ACTIVE_CLASS = 'active';
 
 /* global $ */
+
+function setupQuestions() {
+  var $questions = $('.question')
+  $questions.on('click', function() {
+    var $thisQuestion = $(this)
+    $thisQuestion.toggleClass('revealed')
+  })
+}
+
 function showContent(id) {
   var folder = $('body').attr('data-certification'),
     contentPath = '/content/' + folder + '/' + id + '.html',
@@ -12,7 +21,9 @@ function showContent(id) {
   $('#leftNav').removeClass(ACTIVE_CLASS);
   $link.addClass(ACTIVE_CLASS);
   $thisContent.empty()
-    .load(contentPath)
+    .load(contentPath, null, function() {
+      setupQuestions();
+    })
     .show();
 }
 
