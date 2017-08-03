@@ -85,7 +85,7 @@
         <li>Add a new instance manually by 8am Thursday and terminate it by 6pm Friday</li>
         <li class="correct">Schedule auto scaling to scale up by 8am Thursday and scale down after 6pm Friday</li>
         <li>Schedule a policy which may scale up every day at 8am and scales down by 6pm</li>
-        <li>Configure a batch process to add an instance by 8am and remote by Friday 6pm</li>
+        <li>Configure a batch process to add an instance by 8am and remove by Friday 6pm</li>
     </ul>
     <p class="more-info">To configure ASG to scale based on a schedule, you create a scheduled action, which tells Auto Scaling to perform a scaling action at specified times. To create a scaling action, you specify the start time when you want the scaling action to take effect, and the new minimum, maximum and desired sizes for the scaling action. At the specified time, the Auto Scaling updates the group with the values for min/max/desired specified by the scaling action.</p>
 </div>
@@ -100,7 +100,7 @@
     <p class="more-info"><a href="" target="_blank">More Info</a></p>
 </div>
 <div class="question">
-    <p>You are bulding an online store on AWS that uses SQS to process your customer orders. Your backen system needs those messages in the same sequence the customer orders have been put in. How can you achieve that.</p>
+    <p>You are bulding an online store on AWS that uses SQS to process your customer orders. Your backend system needs those messages in the same sequence the customer orders have been put in. How can you achieve that.</p>
     <ul>
         <li>It is not possible to do this with SQS</li>
         <li class="correct">You can use sequencing info on each message</li>
@@ -122,7 +122,7 @@
     <ul>
         <li>The user should select all objects from the console and apply a single policy to mark them public</li>
         <li>The user can write a program which programmatically makes all objects public using S3 SDK</li>
-        <li class="correct">Set the AWS bucket policy which amrks all objects as public</li>
+        <li class="correct">Set the AWS bucket policy which marks all objects as public</li>
         <li>Make the bucket ACL as public so it will also mark all objects as public</li>
     </ul>
     <p class="more-info"><a href="" target="_blank">More Info</a></p>
@@ -199,7 +199,7 @@
     <p class="more-info"><a href="" target="_blank">More Info</a></p>
 </div>
 <div class="question">
-    <p>A user has configured Elastic Load Balancing by enabling a Secure Socket Layer - SSL. negotiation Configuration known as a Security Policy. Which of the below mentioned options is not part of this secure policy while negotiating the SSL connection between the user and the client?</p>
+    <p>A user has configured Elastic Load Balancing by enabling an SSL negotiation Configuration known as a Security Policy. Which of the below mentioned options is not part of this secure policy while negotiating the SSL connection between the user and the client?</p>
     <ul>
         <li>SSL Protocols</li>
         <li class="correct">Client Order Preference</li>
@@ -209,44 +209,45 @@
     <p class="more-info"><a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-security-policy-table.html" target="_blank">More Info</a></p>
 </div>
 <div class="question">
-    <p></p>
+    <p>A media company produces new video files on-premises every day with a total size of around 100GB after compression All files have a size of 1 -2 GB and need to be uploaded to Amazon S3 every night in a fixed time window between 3am and 5am Current upload takes almost 3 hours, although less than half of the available bandwidth is used. What step(s) would ensure that the file uploads are able to complete in the allotted time window?</p>
     <ul>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
+        <li>Increase your network bandwidth to provide faster throughput to S3</li>
+        <li class="correct">Upload the files in parallel to S3, using multi part upload</li>
+        <li>Pack all files into a single archive, upload to S3 and extract the files in AWS</li>
+        <li>Use AWS Import/Export to transfer the video files</li>
+    </ul>
+</div>
+<div class="question">
+    <p>A user is planning to evaluate AWS for their internal use. The user does not want to incur any charge on his account during the evaluation. Which of the below mentioned AWS services would incur a charge if used?</p>
+    <ul>
+        <li>S3 with 1GB storage</li>
+        <li>EC2 t2.micro instance running 24 hours a day</li>
+        <li>ELB running 24 hours a day</li>
+        <li class="correct">AWS Provisioned IOPS volume with 10GB size</li>
+    </ul>
+    <p class="more-info">Free tier comes with 5GB of S3 storage, 750 hours of EC2 (t2.micro) use, and 750 hours of ELB use. However, you are only allowed General Purpose or Magnetic EBS volumes, not Provisioned IOPS volumes.</p>
+</div>
+<div class="question">
+    <p>A user has launched an ELB which has 5 instances registered with it. The user deletes the ELB by mistake. What will happen to the instances?</p>
+    <ul>
+        <li>ELB will ask the user whether to delete the instances or not</li>
+        <li>Instances will be terminated</li>
+        <li>ELB cannot be deleted if it has running instances registered with it</li>
+        <li class="correct">Instances will keep running</li>
     </ul>
     <p class="more-info"><a href="" target="_blank">More Info</a></p>
 </div>
 <div class="question">
-    <p></p>
+    <p>When assessing an organization's use of AWS API access credentials which of the following three credentials should be evaluated? Choose 3 answers from the options given below</p>
     <ul>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
+        <li class="correct">Key Pairs</li>
+        <li>Copnsole passwords</li>
+        <li class="correct">Access keys</li>
+        <li>Signed certificates</li>
+        <li class="correct">Security Group memberships</li>
     </ul>
-    <p class="more-info"><a href="" target="_blank">More Info</a></p>
-</div>
-<div class="question">
-    <p></p>
-    <ul>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-    </ul>
-    <p class="more-info"><a href="" target="_blank">More Info</a></p>
-</div>
-<div class="question">
-    <p></p>
-    <ul>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-    </ul>
-    <p class="more-info"><a href="" target="_blank">More Info</a></p>
+    <p class="more-info">You use different types of security credentials depending on how you interact with AWS. For example, you use a user name and password to sign in to the AWS Management Console. You use access keys to make programmatic calls to AWS API actions. Key pairs consist of a public key and a private key. You use the private key to create a digital signature, and then AWS uses the corresponding public key to validate the signature. You can create Amazon EC2 key pairs from the Amazon EC2 console, CLI, or API. Access keys consist of an access key ID and a secret access key. You use access keys to sign programmatic requests that you make to AWS if you use the AWS SDKs, REST, or Query APIs. One can use the IAM API to upload a certificate, via the UploadServerCertificate request.
+    </p>
 </div>
 <div class="question">
     <p></p>

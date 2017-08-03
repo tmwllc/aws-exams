@@ -92,6 +92,13 @@ html {
     .more-info {
       display: none;
     }
+    &:nth-child(odd) {
+      background: #F5F5F5;
+      border: 1px solid #CCC;
+      ul li {
+        border: 1px solid #F5F5F5;
+      }
+    }
     &.revealed {
       ul li {
         border: 1px #CAA solid;
@@ -150,10 +157,6 @@ html {
           content: 'F - ';
         }
       }
-    }
-    &:nth-child(odd) {
-      background: #F5F5F5;
-      border: 1px solid #CCC;
     }
   }
 }

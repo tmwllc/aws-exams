@@ -5,10 +5,8 @@ var ACTIVE_CLASS = 'active';
 /* global $ */
 
 function setupQuestions() {
-  var $questions = $('.question')
-  $questions.on('click', function() {
-    var $thisQuestion = $(this)
-    $thisQuestion.toggleClass('revealed')
+  $('.question').on('click', function() {
+    $(this).toggleClass('revealed')
   })
 }
 
