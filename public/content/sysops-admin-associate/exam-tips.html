@@ -412,44 +412,82 @@
   <p class="more-info">Maximum connection draining allowed is 1 hour</p>
 </div>
 <div class="question">
-  <p></p>
+  <p>A user is using the AWS EC2. The user wants to make so that when there is an issue in the EC2 server, such as instance status failed, it should start a new instance in the user’s private cloud. Which AWS service helps to achieve this automation?</p>
   <ul>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
+    <li>AWS CloudWatch + Cloudformation</li>
+    <li>AWS CloudWatch + AWS AutoScaling + AWS ELB Incorrect</li>
+    <li>AWS CloudWatch + AWS VPC</li>
+    <li class="correct">AWS CloudWatch + AWS SNS</li>
   </ul>
-  <p class="more-info"><a href="" target="_blank">More Info</a></p>
+  <p class="more-info">When you create an ALARM, you have the option to add a notification as well. So the SNS service can be used to trigger a service which can then be used to trigger an instance in the private cloud.</p>
 </div>
 <div class="question">
-  <p></p>
+  <p>A sys admin has enabled logging on ELB. Which of the below mentioned fields will not be a part of the log file name?</p>
   <ul>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
+    <li>Load Balancer IP</li>
+    <li class="correct">EC2 instance IP</li>
+    <li>S3 bucket name Incorrect</li>
+    <li>Random string</li>
   </ul>
-  <p class="more-info"><a href="" target="_blank">More Info</a></p>
+  <p class="more-info">As per the AWS documentation below is format of the ELB access log file. In this format the only thing which is not there is the EC2 instance IP.<br/>
+    bucket[/prefix]/AWSLogs/AWS-account-id/elasticloadbalancing/region/yyyy/mm/dd/AWS-account-id_elasticloadbalancing_region_load-balancer-id_end-time_ip-address_random-string.log.gz</p>
 </div>
 <div class="question">
-  <p></p>
+  <p>An organization has setup multiple IAM users. The organization wants that each IAM user accesses the IAM console only within the organization and not from outside. How can it achieve this?</p>
   <ul>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
+    <li>Create an IAM policy with the security group and use that security group for AWS console login</li>
+    <li class="correct">Create an IAM policy with a condition which denies access when the IP address range is not from the organization</li>
+    <li>Configure the EC2 instance security group which allows traffic only from the organization’s IP range Incorrect</li>
+    <li>Create an IAM policy with VPC and allow a secure gateway between the organization and AWS Console</li>
   </ul>
-  <p class="more-info"><a href="" target="_blank">More Info</a></p>
+  <p class="more-info">You can actually use a Deny condition which will not allow the person to log in from outside. The below example shows the Deny condition to ensure that any address specified in the source address is not allowed to access the resources in AWS.<br/>
+    {<br/>
+    "Version": "2012-10-17",<br/>
+    "Statement": {<br/>
+    "Effect": "Deny",<br/>
+    "Action": "*",<br/>
+    "Resource": "*",<br/>
+    "Condition": {"NotIpAddress": {"AWS:SourceIp": [<br/>
+    "192.0.2.0/24",<br/>
+    "203.0.113.0/24"<br/>
+    ]}}<br/>
+    }<br/>
+    }</p>
 </div>
 <div class="question">
-  <p></p>
+  <p>An organization has created one IAM user and applied the below mentioned policy to the user. What entitlements do the IAM users avail with this policy?<br/>
+    {<br/>
+    “Version”: “2012-10-17”,<br/>
+    “Statement”: [<br/>
+    {<br/>
+    “Effect”: “Allow”,<br/>
+    “Action”: “ec2:Describe*”,<br/>
+    “Resource”: “*”<br/>
+    },<br/>
+    {<br/>
+    “Effect”: “Allow”<br/>
+    “Action”: [<br/>
+    “cloudwatch:ListMetrics”,<br/>
+    “cloudwatch:GetMetricStatistics”,<br/>
+    “cloudwatch:Describe*”<br/>
+    ],<br/>
+    “Resource”: “*”<br/>
+    },<br/>
+    {<br/>
+    “Effect”: “Allow”,<br/>
+    “Action”: “autoscaling:Describe*”,<br/>
+    “Resource”: “*”<br/>
+    }]}</p>
   <ul>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
+    <li>The policy will allow the user to perform all read only activities on the EC2 services Incorrect</li>
+    <li>The policy will allow the user to list all the EC2 resources except EBS</li>
+    <li>The policy will allow the user to perform all read and write activities on the EC2 services</li>
+    <li class="correct">The policy will allow the user to perform all read only activities on the EC2 services except load Balancing</li>
   </ul>
-  <p class="more-info"><a href="" target="_blank">More Info</a></p>
+  <p class="more-info">For access to load balancing you need to have the following statements as well.<br/>
+    "Effect": "Allow",<br/>
+    "Action": "elasticloadbalancing:Describe*",<br/>
+    "Resource": "*"</p>
 </div>
 <div class="question">
   <p></p>
