@@ -371,34 +371,45 @@
   <p class="more-info"><a href="" target="_blank">More Info</a></p>
 </div>
 <div class="question">
-  <p></p>
+  <p>An organization has configured two single availability zones. The Auto Scaling groups are configured in separate zones. The user wants to merge the groups such that one group spans across multiple zones. How can the user configure this?</p>
   <ul>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
+    <li>Run the command as-join-auto-scaling-group to join the two groups</li>
+    <li class="correct">Run the command update-auto-scaling-group to configure one group to span across zones and delete the other group</li>
+    <li>Run the command as-copy-auto-scaling-group to join the two groups</li>
+    <li>Run the command as-merge-auto-scaling-group to merge the groups</li>
   </ul>
   <p class="more-info"><a href="" target="_blank">More Info</a></p>
 </div>
 <div class="question">
-  <p></p>
+  <p>A sysadmin has created the below mentioned policy on an S3 bucket named demo. What does this policy define?<br/>
+    “Statement”: [{<br/>
+    “Sid”: “Stmt1388811069831”,<br/>
+    “Effect”: “Allow”,<br/>
+    “Principal”: { “AWS”: “*”},<br/>
+    “Action”: [ “s3:GetObjectAcl”, “s3:ListBucket”],<br/>
+    “Resource”: [ “arn:aws:s3:::demo]<br/>
+    }]</p>
   <ul>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
+    <li>It will make the demo bucket as well as all its objects as public</li>
+    <li class="correct">It will give an error as no object is defined as part of the policy while the action defines the rule about  the object</li>
+    <li>It will allow everyone to view the ACL of the bucket Incorrect</li>
+    <li>It will make the demo bucket as public</li>
   </ul>
-  <p class="more-info"><a href="" target="_blank">More Info</a></p>
+  <p class="more-info">It will give error ”Action does not apply to any resource(s) in statement – Action “s3:GetObjectAcl” in Statement “Stmt1388811069831”
+
+    s3:GetObjectAcl applies to the objects in the bucket so the Resource is incorrect and should be: "Resource": "arn:aws:s3:::demo/*".
+
+    s3:ListBucket applies to the Bucket itself and so the Resource is correct "Resource": "arn:aws:s3:::demo"</p>
 </div>
 <div class="question">
-  <p></p>
+  <p>A user has hosted an application on EC2 instances. The EC2 instances are configured with ELB and Auto Scaling. The application server session time out is 2 hours. The user wants to configure connection draining to ensure that all in-flight requests are supported by ELB even though the instance is being deregistered. What time out period should the user specify for connection draining?</p>
   <ul>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
+    <li>5 minutes</li>
+    <li class="correct">1 hour</li>
+    <li>30 minutes</li>
+    <li>2 hours Incorrect</li>
   </ul>
-  <p class="more-info"><a href="" target="_blank">More Info</a></p>
+  <p class="more-info">Maximum connection draining allowed is 1 hour</p>
 </div>
 <div class="question">
   <p></p>
