@@ -490,6 +490,176 @@
     "Resource": "*"</p>
 </div>
 <div class="question">
+  <p>A user has enabled session stickiness with ELB. The user does not want ELB to manage the cookie; instead he wants the application to manage the cookie. What will happen when the server instance, which is bound to a cookie, crashes?</p>
+  <ul>
+    <li>The response will have a cookie but stickiness will be deleted</li>
+    <li class="correct">The session will not be sticky until a new cookie is inserted</li>
+    <li>ELB will throw an error due to cookie unavailability</li>
+    <li>The session will be sticky and ELB will route requests to another server as ELB keeps replicating the Cookie</li>
+  </ul>
+  <p class="more-info"><a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html" target="_blank">More Info</a><br/>>If an instance fails or becomes unhealthy, the load balancer stops routing requests to that instance, and chooses a new healthy instance based on the exiting load balancing algorithm. The request is routed to the new instance as if there is no cookie, and the session is no longer sticky.</p>
+</div>
+<div class="question">
+  <p>A user has created an Auto Scaling group with default configurations from CLI. The user wants to setup the CloudWatch alarm on the EC2 instances, which are launched by the Auto Scaling group. The user has setup an alarm to monitor the CPU utilization every minute. Which of the below mentioned statements is true?</p>
+  <ul>
+    <liIt will fetch the data at every minute but the four data points [corresponding to 4 minutes] will not have value since the EC2 basic monitoring metrics are collected every five minutes Incorrect</li>
+    <li class="correct">It will fetch the data at every minute as detailed monitoring on EC2 will be enabled by the default launch configuration of Auto Scaling</li>
+    <li>The alarm creation will fail since the user has not enabled detailed monitoring on the EC2 instances</li>
+    <li>The user has to first enable detailed monitoring on the EC2 instances to support alarm monitoring at every minute</li>
+  </ul>
+  <p class="more-info">When creating an ASG via the CLI, by default detailed monitoring it turned on. This is different when done via the console, where basic monitoriing is turned on by default.</p>
+</div>
+<div class="question">
+  <p>A user has created a VPC with public and private subnets using the VPC wizard. Which of the below mentioned statements is not true in this scenario?</p>
+  <ul>
+    <li class="correct">The VPC will create a routing instance and attach it with a public subnet</li>
+    <li>The VPC will create two subnets Incorrect</li>
+    <li>The VPC will create one internet gateway and attach it to VPC</li>
+    <li>The VPC will launch one NAT instance with an elastic IP</li>
+  </ul>
+  <p class="more-info">It creates two subnets (public and private, so B is wrong. It creates an internet gateway and attaches it to the VPC and it creates a NAT instance in the public subnet. A is correct.</p>
+</div>
+<div class="question">
+  <p>A user is configuring a CloudWatch alarm on RDS to receive a notification when the CPU utilization of RDS is higher than 50%. The user has setup an alarm when there is some inactivity on RDS, such as RDS unavailability. How can the user configure this?</p>
+  <ul>
+    <li>Setup the notification when the CPU is more than 75% on RDS Incorrect</li>
+    <li class="correct">Setup the notification when the state is Insufficient Data</li>
+    <li>Setup the notification when the CPU utilization is less than 10%</li>
+    <li>It is not possible to setup the alarm on RDS</li>
+  </ul>
+  <p class="more-info">When the instance is inactive, the state will be Insufficient_Data.</p>
+</div>
+<div class="question">
+  <p>A user has created a VPC with a subnet and a security group. The user has launched an instance in that subnet and attached a public IP. The user is still unable to connect to the instance. The internet gateway has also been created. What can be the reason for the error?</p>
+  <ul>
+    <li class="correct">The internet gateway is not configured with the route table</li>
+    <li>The private IP is not present</li>
+    <li>The outbound traffic on the security group is disabled Incorrect</li>
+    <li>The internet gateway is not configured with the security group</li>
+  </ul>
+  <p class="more-info">B and C are created by default. Internet gateways don't need to be configured with SGs, so D is wrong.</p>
+</div>
+<div class="question">
+  <p>A user has configured ELB with Auto Scaling. The user suspended the Auto Scaling AlarmNotification which notifies Auto Scaling for CloudWatch alarms process for a while. What will Auto Scaling do during this period?</p>
+  <ul>
+    <li>AWS will not receive the alarms from CloudWatch Incorrect</li>
+    <li class="correct">AWS will receive the alarms but will not execute the Auto Scaling policy</li>
+    <li>Auto Scaling will execute the policy but it will not launch the instances until the process is resumed</li>
+    <li>It is not possible to suspend the AlarmNotification process</li>
+  </ul>
+  <p class="more-info">If you suspend AlarmNotification, Auto Scaling does not automatically execute policies that would be triggered by an alarm. If you suspend Launch or Terminate, Auto Scaling would not be able to execute scale out or scale in policies, respectively.</p>
+</div>
+<div class="question">
+  <p>A user had aggregated the CloudWatch metric data on the AMI ID. The user observed some abnormal behaviour of the CPU utilization metric while viewing the last 2 weeks of data. The user wants to share that data with his manager. How can the user achieve this easily with the AWS console?</p>
+  <ul>
+    <li class="correct">The user can use the copy URL functionality of CloudWatch to share the exact details</li>
+    <li>The user can use the export data option from the CloudWatch console to export the current data point Incorrect</li>
+    <li>The user has to find the period and data and provide all the aggregation information to the manager</li>
+    <li>The user can use the CloudWatch data copy functionality to copy the current data points</li>
+  </ul>
+  <p class="more-info">You can share the graph in CloudWatch from the Share Graph URL option in CloudWatch.</p>
+</div>
+<div class="question">
+  <p>A user wants to make so that whenever the CPU utilization of the AWS EC2 instance is above 90%, the redlight of his bedroom turns on. Which of the below mentioned AWS services is helpful for this purpose?</p>
+  <ul>
+    <li>AWS CloudWatch + AWS SES</li>
+    <li class="correct">AWS CloudWatch + AWS SNS</li>
+    <li>None. It is not possible to configure the light with the AWS infrastructure services Incorrect</li>
+    <li>AWS CloudWatch and a dedicated software turning on the light</li>
+  </ul>
+  <p class="more-info">When you create an ALARM, you have the option to add a notification as well. So the SNS service can be used to trigger a service which can then be used to trigger the bedroom light. So with this explanation Option C is wrong.</p>
+</div>
+<div class="question">
+  <p>A user has setup an EBS backed instance and a CloudWatch alarm when the CPU utilization is more than 65%. The user has setup the alarm to watch it for 5 periods of 5 minutes each. The CPU utilization is 60% between 9 AM to 6 PM. The user has stopped the EC2 instance for 15 minutes between 11 AM to 11:15 AM. What will be the status of the alarm at 11:30 AM?</p>
+  <ul>
+    <li>Alarm Incorrect</li>
+    <li class="correct">OK</li>
+    <li>Insufficient Data</li>
+    <li>Error</li>
+  </ul>
+  <p class="more-info">Since the alarm has been set for 5 periods of 5 minutes each, that means if there is no activity for 25 minutes then the state of the Alarm will change. Now since the CPU utilization was 60%, that means the alarm was not triggered and the state should be OK. And since the instance was just stopped for 15 minutes and did not exceed the threshold for 25 minutes that means the state of the alarm stays the same.</p>
+</div>
+<div class="question">
+  <p>A user has setup an RDS DB with Oracle. The user wants to get notifications when someone modifies the security group of that DB. How can the user configure that?</p>
+  <ul>
+    <li>It is not possible to get the notifications on a change in the security group Incorrect</li>
+    <li>Configure SNS to monitor security group changes</li>
+    <li class="correct">Configure event notification on the DB security group</li>
+    <li>Configure the CloudWatch alarm on the DB for a change in the security group</li>
+  </ul>
+  <p class="more-info">When you go to the Event dashboard in RDS, you can actually create event subscriptions based on Security groups.</p>
+</div>
+<div class="question">
+  <p></p>
+  <ul>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+  <p class="more-info"><a href="" target="_blank">More Info</a></p>
+</div>
+<div class="question">
+  <p></p>
+  <ul>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+  <p class="more-info"><a href="" target="_blank">More Info</a></p>
+</div>
+<div class="question">
+  <p></p>
+  <ul>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+  <p class="more-info"><a href="" target="_blank">More Info</a></p>
+</div>
+<div class="question">
+  <p></p>
+  <ul>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+  <p class="more-info"><a href="" target="_blank">More Info</a></p>
+</div>
+<div class="question">
+  <p></p>
+  <ul>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+  <p class="more-info"><a href="" target="_blank">More Info</a></p>
+</div>
+<div class="question">
+  <p></p>
+  <ul>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+  <p class="more-info"><a href="" target="_blank">More Info</a></p>
+</div>
+<div class="question">
+  <p></p>
+  <ul>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+  <p class="more-info"><a href="" target="_blank">More Info</a></p>
+</div>
+<div class="question">
   <p></p>
   <ul>
     <li></li>
