@@ -163,7 +163,7 @@
     <ul>
         <li>Change the thresholds set on the Auto Scaling group health check</li>
         <li class="correct">Add an Elastic Load Balancing health check to your Auto Scaling group</li>
-        <li>Increase the value for the Health check interval set on the Elastic Load Balancer Incorrect</li>
+        <li>Increase the value for the Health check interval set on the Elastic Load Balancer</li>
         <li>Change the health check set on the Elastic Load Balancer to use TCP rather than HTTP checks</li>
     </ul>
     <p class="more-info">When configuring auto scaling, you can choose either the option of EC2 or ELB health checks. Since EC2 instances are being marked unhealthy but not getting terminated, it means the health check from the auto scaling side is incorrectly configured.</p>
@@ -235,13 +235,12 @@
         <li>ELB cannot be deleted if it has running instances registered with it</li>
         <li class="correct">Instances will keep running</li>
     </ul>
-    <p class="more-info"><a href="" target="_blank">More Info</a></p>
 </div>
 <div class="question">
     <p>When assessing an organization's use of AWS API access credentials which of the following three credentials should be evaluated? Choose 3 answers from the options given below</p>
     <ul>
         <li class="correct">Key Pairs</li>
-        <li>Copnsole passwords</li>
+        <li>Console passwords</li>
         <li class="correct">Access keys</li>
         <li>Signed certificates</li>
         <li class="correct">Security Group memberships</li>
@@ -252,7 +251,7 @@
 <div class="question">
     <p>A user has launched an EC2 instance from an instance store backed AMI. The infrastructure team wants to create an AMI from the running instance. Which of the below mentioned steps will not be performed while creating the AMI?</p>
     <ul>
-        <li class="correct">Defined the AMI launch permissions</li>
+        <li class="correct">Define the AMI launch permissions</li>
         <li>Upload the bundled volume</li>
         <li>Register the AMI</li>
         <li>Bundle the volume</li>
@@ -275,7 +274,7 @@
     <li>Schedule the automated backup in non-working hours</li>
     <li>Use a larger size instance</li>
     <li>Use PIOPS</li>
-    <li>Take a snapshot from standby replica</li>
+    <li class="correct">Take a snapshot from standby replica</li>
   </ul>
   <p class="more-info">In a Multi-AZ deployment, Amazon RDS automatically provisions and maintains a synchronous standby replica in a different Availability Zone. The primary DB instance is synchronously replicated across Availability Zones to a standby replica to provide data redundancy, eliminate I/O freezes, and minimize latency spikes during system backups
     As per AWS the below are the best practices for multiAZ
@@ -288,7 +287,7 @@
     <li class="correct">http://sqs.us-east-1.amazonaws.com/123456123456/myqueue</li>
     <li>http://sqs.amazonaws.com/123456123456/myqueue</li>
     <li>http://sqs.123456123456.us-east-1.amazonaws.com/myqueue</li>
-    <li>http://123456123456.sqs. us-east-1.amazonaws.com/myqueue Incorrect</li>
+    <li>http://123456123456.sqs. us-east-1.amazonaws.com/myqueue</li>
   </ul>
   <p class="more-info">The SQS endpoint normally has the URL format of:
     https://sqs.AZ.amazonaws.com/ResourceID/Queuename</p>
@@ -298,7 +297,7 @@
   <ul>
     <li>It will delete the subnet and make the EC2 instance as a part of the default subnet</li>
     <li class="correct">It will not allow the user to delete the subnet until the instances are terminated</li>
-    <li>It will delete the subnet as well as terminate the instances Incorrect</li>
+    <li>It will delete the subnet as well as terminate the instances</li>
     <li>The subnet can never be deleted independently, but the user has to delete the VPC first</li>
   </ul>
   <p class="more-info"><a href="" target="_blank">More Info</a></p>
@@ -307,9 +306,9 @@
   <p>A user has setup an EBS backed instance and attached 2 EBS volumes to it. The user has setup a CloudWatch alarm on each volume for the disk data. The user has stopped the EC2 instance and detached the EBS volumes. What will be the status of the alarms on the EBS volume?</p>
   <ul>
     <li>OK</li>
-    <li class="correct5">Insufficient Data</li>
+    <li class="correct">Insufficient Data</li>
     <li>Alarm</li>
-    <li>The EBS cannot be detached until all the alarams are removed</li>
+    <li>The EBS cannot be detached until all the alarms are removed</li>
   </ul>
   <p class="more-info">An alarm has three possible states:
     <br/> - OK—The metric is within the defined threshold
@@ -321,7 +320,7 @@
   <p>A user has launched an EC2 instance from an instance store backed AMI. The infrastructure team wants to create an AMI from the running instance. Which of the below mentioned credentials is not required while creating the AMI?</p>
   <ul>
     <li>AWS account ID</li>
-    <li>X.509 certificate and private key Incorrect</li>
+    <li>X.509 certificate and private key</li>
     <li class="correct">AWS login ID to login to the console</li>
     <li>Access key and secret access key</li>
   </ul>
@@ -332,7 +331,7 @@
   <ul>
     <li> It will not allow to delete the VPC as it has subnets with route tables</li>
     <li>It will not allow to delete the VPC since it has a running route instance</li>
-    <li>It will terminate the VPC along with all the instances launched by the wizard Incorrect</li>
+    <li>It will terminate the VPC along with all the instances launched by the wizard</li>
     <li class="correct">It will not allow to delete the VPC since it has a running NAT instance</li>
   </ul>
   <p class="more-info">VPCs cannot be deleted if they have a running instance. The VPC wizard created a public and private subnet, which will contain a running NAT instance. That will prevent VPC deletion.</p>
@@ -353,7 +352,7 @@
   <p>A user has launched an EBS backed instance with EC2-Classic. The user stops and starts the instance. Which of the below mentioned statements is not true with respect to the stop/start action?</p>
   <ul>
     <li>The instance gets new private and public IP addresses</li>
-    <li>The volume is preserved Incorrect</li>
+    <li>The volume is preserved</li>
     <li class="correct">The Elastic IP remains associated with the instance</li>
     <li>The instance may run on a anew host computer</li>
   </ul>
@@ -365,10 +364,9 @@
     <li> It is not possible that the stack creation will wait until one service is created and launched</li>
     <li>The user can use the HoldCondition resource to wait for the creation of the other dependent
       resources</li>
-    <li>The user can use the DependentCondition resource to hold the creation of the other dependent resources Incorrect</li>
+    <li>The user can use the DependentCondition resource to hold the creation of the other dependent resources</li>
     <li class="correct">The user can use the WaitCondition resource to hold the creation of the other dependent resources</li>
   </ul>
-  <p class="more-info"><a href="" target="_blank">More Info</a></p>
 </div>
 <div class="question">
   <p>An organization has configured two single availability zones. The Auto Scaling groups are configured in separate zones. The user wants to merge the groups such that one group spans across multiple zones. How can the user configure this?</p>
@@ -392,7 +390,7 @@
   <ul>
     <li>It will make the demo bucket as well as all its objects as public</li>
     <li class="correct">It will give an error as no object is defined as part of the policy while the action defines the rule about  the object</li>
-    <li>It will allow everyone to view the ACL of the bucket Incorrect</li>
+    <li>It will allow everyone to view the ACL of the bucket</li>
     <li>It will make the demo bucket as public</li>
   </ul>
   <p class="more-info">It will give error ”Action does not apply to any resource(s) in statement – Action “s3:GetObjectAcl” in Statement “Stmt1388811069831”
@@ -407,7 +405,7 @@
     <li>5 minutes</li>
     <li class="correct">1 hour</li>
     <li>30 minutes</li>
-    <li>2 hours Incorrect</li>
+    <li>2 hours</li>
   </ul>
   <p class="more-info">Maximum connection draining allowed is 1 hour</p>
 </div>
@@ -415,7 +413,7 @@
   <p>A user is using the AWS EC2. The user wants to make so that when there is an issue in the EC2 server, such as instance status failed, it should start a new instance in the user’s private cloud. Which AWS service helps to achieve this automation?</p>
   <ul>
     <li>AWS CloudWatch + Cloudformation</li>
-    <li>AWS CloudWatch + AWS AutoScaling + AWS ELB Incorrect</li>
+    <li>AWS CloudWatch + AWS AutoScaling + AWS ELB</li>
     <li>AWS CloudWatch + AWS VPC</li>
     <li class="correct">AWS CloudWatch + AWS SNS</li>
   </ul>
@@ -426,7 +424,7 @@
   <ul>
     <li>Load Balancer IP</li>
     <li class="correct">EC2 instance IP</li>
-    <li>S3 bucket name Incorrect</li>
+    <li>S3 bucket name</li>
     <li>Random string</li>
   </ul>
   <p class="more-info">As per the AWS documentation below is format of the ELB access log file. In this format the only thing which is not there is the EC2 instance IP.<br/>
@@ -437,7 +435,7 @@
   <ul>
     <li>Create an IAM policy with the security group and use that security group for AWS console login</li>
     <li class="correct">Create an IAM policy with a condition which denies access when the IP address range is not from the organization</li>
-    <li>Configure the EC2 instance security group which allows traffic only from the organization’s IP range Incorrect</li>
+    <li>Configure the EC2 instance security group which allows traffic only from the organization’s IP range</li>
     <li>Create an IAM policy with VPC and allow a secure gateway between the organization and AWS Console</li>
   </ul>
   <p class="more-info">You can actually use a Deny condition which will not allow the person to log in from outside. The below example shows the Deny condition to ensure that any address specified in the source address is not allowed to access the resources in AWS.<br/>
@@ -479,7 +477,7 @@
     “Resource”: “*”<br/>
     }]}</p>
   <ul>
-    <li>The policy will allow the user to perform all read only activities on the EC2 services Incorrect</li>
+    <li>The policy will allow the user to perform all read only activities on the EC2 services</li>
     <li>The policy will allow the user to list all the EC2 resources except EBS</li>
     <li>The policy will allow the user to perform all read and write activities on the EC2 services</li>
     <li class="correct">The policy will allow the user to perform all read only activities on the EC2 services except load Balancing</li>
@@ -502,7 +500,7 @@
 <div class="question">
   <p>A user has created an Auto Scaling group with default configurations from CLI. The user wants to setup the CloudWatch alarm on the EC2 instances, which are launched by the Auto Scaling group. The user has setup an alarm to monitor the CPU utilization every minute. Which of the below mentioned statements is true?</p>
   <ul>
-    <liIt will fetch the data at every minute but the four data points [corresponding to 4 minutes] will not have value since the EC2 basic monitoring metrics are collected every five minutes Incorrect</li>
+    <liIt will fetch the data at every minute but the four data points [corresponding to 4 minutes] will not have value since the EC2 basic monitoring metrics are collected every five minutes</li>
     <li class="correct">It will fetch the data at every minute as detailed monitoring on EC2 will be enabled by the default launch configuration of Auto Scaling</li>
     <li>The alarm creation will fail since the user has not enabled detailed monitoring on the EC2 instances</li>
     <li>The user has to first enable detailed monitoring on the EC2 instances to support alarm monitoring at every minute</li>
@@ -513,7 +511,7 @@
   <p>A user has created a VPC with public and private subnets using the VPC wizard. Which of the below mentioned statements is not true in this scenario?</p>
   <ul>
     <li class="correct">The VPC will create a routing instance and attach it with a public subnet</li>
-    <li>The VPC will create two subnets Incorrect</li>
+    <li>The VPC will create two subnets</li>
     <li>The VPC will create one internet gateway and attach it to VPC</li>
     <li>The VPC will launch one NAT instance with an elastic IP</li>
   </ul>
@@ -522,7 +520,7 @@
 <div class="question">
   <p>A user is configuring a CloudWatch alarm on RDS to receive a notification when the CPU utilization of RDS is higher than 50%. The user has setup an alarm when there is some inactivity on RDS, such as RDS unavailability. How can the user configure this?</p>
   <ul>
-    <li>Setup the notification when the CPU is more than 75% on RDS Incorrect</li>
+    <li>Setup the notification when the CPU is more than 75% on RDS</li>
     <li class="correct">Setup the notification when the state is Insufficient Data</li>
     <li>Setup the notification when the CPU utilization is less than 10%</li>
     <li>It is not possible to setup the alarm on RDS</li>
@@ -534,7 +532,7 @@
   <ul>
     <li class="correct">The internet gateway is not configured with the route table</li>
     <li>The private IP is not present</li>
-    <li>The outbound traffic on the security group is disabled Incorrect</li>
+    <li>The outbound traffic on the security group is disabled</li>
     <li>The internet gateway is not configured with the security group</li>
   </ul>
   <p class="more-info">B and C are created by default. Internet gateways don't need to be configured with SGs, so D is wrong.</p>
@@ -542,7 +540,7 @@
 <div class="question">
   <p>A user has configured ELB with Auto Scaling. The user suspended the Auto Scaling AlarmNotification which notifies Auto Scaling for CloudWatch alarms process for a while. What will Auto Scaling do during this period?</p>
   <ul>
-    <li>AWS will not receive the alarms from CloudWatch Incorrect</li>
+    <li>AWS will not receive the alarms from CloudWatch</li>
     <li class="correct">AWS will receive the alarms but will not execute the Auto Scaling policy</li>
     <li>Auto Scaling will execute the policy but it will not launch the instances until the process is resumed</li>
     <li>It is not possible to suspend the AlarmNotification process</li>
@@ -553,7 +551,7 @@
   <p>A user had aggregated the CloudWatch metric data on the AMI ID. The user observed some abnormal behaviour of the CPU utilization metric while viewing the last 2 weeks of data. The user wants to share that data with his manager. How can the user achieve this easily with the AWS console?</p>
   <ul>
     <li class="correct">The user can use the copy URL functionality of CloudWatch to share the exact details</li>
-    <li>The user can use the export data option from the CloudWatch console to export the current data point Incorrect</li>
+    <li>The user can use the export data option from the CloudWatch console to export the current data point</li>
     <li>The user has to find the period and data and provide all the aggregation information to the manager</li>
     <li>The user can use the CloudWatch data copy functionality to copy the current data points</li>
   </ul>
@@ -564,7 +562,7 @@
   <ul>
     <li>AWS CloudWatch + AWS SES</li>
     <li class="correct">AWS CloudWatch + AWS SNS</li>
-    <li>None. It is not possible to configure the light with the AWS infrastructure services Incorrect</li>
+    <li>None. It is not possible to configure the light with the AWS infrastructure services</li>
     <li>AWS CloudWatch and a dedicated software turning on the light</li>
   </ul>
   <p class="more-info">When you create an ALARM, you have the option to add a notification as well. So the SNS service can be used to trigger a service which can then be used to trigger the bedroom light. So with this explanation Option C is wrong.</p>
@@ -572,7 +570,7 @@
 <div class="question">
   <p>A user has setup an EBS backed instance and a CloudWatch alarm when the CPU utilization is more than 65%. The user has setup the alarm to watch it for 5 periods of 5 minutes each. The CPU utilization is 60% between 9 AM to 6 PM. The user has stopped the EC2 instance for 15 minutes between 11 AM to 11:15 AM. What will be the status of the alarm at 11:30 AM?</p>
   <ul>
-    <li>Alarm Incorrect</li>
+    <li>Alarm</li>
     <li class="correct">OK</li>
     <li>Insufficient Data</li>
     <li>Error</li>
@@ -582,7 +580,7 @@
 <div class="question">
   <p>A user has setup an RDS DB with Oracle. The user wants to get notifications when someone modifies the security group of that DB. How can the user configure that?</p>
   <ul>
-    <li>It is not possible to get the notifications on a change in the security group Incorrect</li>
+    <li>It is not possible to get the notifications on a change in the security group</li>
     <li>Configure SNS to monitor security group changes</li>
     <li class="correct">Configure event notification on the DB security group</li>
     <li>Configure the CloudWatch alarm on the DB for a change in the security group</li>
